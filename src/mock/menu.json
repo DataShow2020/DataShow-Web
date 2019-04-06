@@ -5,7 +5,7 @@
       "menuGroup": [
         {
           "label": "货物管理系统",
-          "to":"/admin/helloWord"
+          "to":"/admin"
         }
       ]
     }
