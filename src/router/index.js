@@ -10,6 +10,21 @@ export default new Router({
       path: '/',
       name: 'HelloWorld',
       component: HelloWorld
-    }
+    },
+    {
+      path: '/register',
+      name: 'register',
+      component: () => import('../view/register/register')
+    },
+    {
+      path: '/404',
+      name: '404',
+      component: () => import('../packages/ui/errorPage/404.vue')
+    },
+    {
+      path: '*',
+      name: 'err',
+      redirect: '404',
+    },
   ]
 })

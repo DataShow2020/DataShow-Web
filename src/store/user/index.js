@@ -2,7 +2,7 @@
  * user
  */
 
-import {LoginApi} from '@/view/admin/login/login-api';
+import {LoginApi} from '@/view/login/login-api';
 import {Msg} from '../../tools/message';
 import {Auth} from './auth';
 
