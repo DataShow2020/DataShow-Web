@@ -17,7 +17,9 @@ export default {
     /** 用户登陆账户密码 */
     accountPwd: Auth.getAccountPwd() || defaultUser,
     /** 是否登陆 */
-    isLogin: Auth.getLogin() || false,
+    // isLogin: Auth.getLogin() || false,
+    isLogin: true
+
   },
   /** 计算属性 */
   getters: {

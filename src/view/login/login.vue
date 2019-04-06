@@ -130,25 +130,24 @@
       },
       submitForm() {
         this.$refs['ruleForm'].validate((valid) => {
-          if (valid) {
+          // if (valid) {
             this.loading = true;
-            this.$store.dispatch('accountLoginSubmit', this.ruleForm).then((res) => {
-              this.loading = false;
-              if(res.status){
+            // this.$store.dispatch('accountLoginSubmit', this.ruleForm).then((res) => {
+            //   this.loading = false;
+            //   if(res.status){
                 Msg.success('登录成功');
-                // this.$router.push({path: '/admin/overdueFile'})
-                this.$router.push({path: '/admin/mainIndex'});
-              }
-              else{
-                Msg.error("登陆失败");
-              }
+                this.$router.push({path: '/admin'});
+              // }
+              // else{
+              //   Msg.error("登陆失败");
+              // }
 
-            }).catch(() => {
-              this.loading = false
-            })
-          } else {
-            return false
-          }
+            // }).catch(() => {
+            //   this.loading = false
+            // })
+          // } else {
+          //   return false
+          // }
         })
       },
       registerAccount:function () {

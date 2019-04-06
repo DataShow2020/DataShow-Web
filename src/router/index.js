@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/packages/components/HelloWorld'
+import admin from './admin'
 
 Vue.use(Router)
 
@@ -21,6 +21,7 @@ export default new Router({
       name: '404',
       component: () => import('../packages/ui/errorPage/404.vue')
     },
+    ...admin,
     {
       path: '*',
       name: 'err',
