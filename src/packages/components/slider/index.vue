@@ -6,7 +6,7 @@
           <img style="margin-top:20%; margin-left: 55%; " src="../../../assets/images/logo.png">
         </el-col>
         <el-col :span="12" style="height: 100%">
-          <p style="color: white; margin-top: 20%;float: left; margin-left: 4%">政务可视化</p>
+          <p style="color: white; margin-top: 20%;float: left; margin-left: 4%">货物管理系统</p>
         </el-col>
       </el-row>
     </div>
