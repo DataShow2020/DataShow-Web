@@ -11,7 +11,7 @@
           <el-card  style="height: 484px;">
           <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-position="top" label-width="0px"
                    class="formClass" >
-            <h3 class="mh-login-title">政务可视化管理系统</h3>
+            <h3 class="mh-login-title">货物管理系统</h3>
             <h4 class="mh-login-title">-登录-</h4>
             <el-form-item prop="userName" label="用户名">
               <el-input
