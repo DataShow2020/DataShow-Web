@@ -12,8 +12,8 @@
 
   <el-breadcrumb separator="/">
     <el-breadcrumb-item><i class="el-icon-location-outline"><span>当前位置：</span></i>货物管理系统</el-breadcrumb-item>
-    <el-breadcrumb-item>{{firstMenuLabel}}</el-breadcrumb-item>
-    <el-breadcrumb-item><span style="font-weight: bold">{{menuLabel}}</span></el-breadcrumb-item>
+    <!--<el-breadcrumb-item>{{firstMenuLabel}}</el-breadcrumb-item>-->
+    <!--<el-breadcrumb-item><span style="font-weight: bold">{{menuLabel}}</span></el-breadcrumb-item>-->
 
   </el-breadcrumb>
 
