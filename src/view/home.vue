@@ -1,8 +1,10 @@
 <template>
-  <div style=" width: 100%;height: 460px">
-    <slide :slides="slides" :inv="inv" :style="styleObject"></slide>
-    <div class="butt">
-    <img src="../assets/images/logo_black.png" alt="logo">
+  <div style=" width: 100%;height: 100%" class="element">
+    <div style="width: 100%;height: 60%">
+      <slide :slides="slides" :inv="inv" :style="styleObject"></slide>
+      <div class="butt">
+        <img src="../assets/images/logo_black.png" alt="logo" style="width: 100%;height: 100%">
+      </div>
     </div>
     <div class="two-butt">
       <!--<el-button @click="login" class="left-butt">登录</el-button>-->
@@ -36,7 +38,7 @@
         inv: 2000,
         styleObject: {
           width: '100%',
-          height: '460px'
+          height: '100%'
         }
       }
     },
@@ -72,58 +74,67 @@
     position: absolute;
     top: 3%;
     left: 5%;
+    width: 10%;
+    height: 10%;
   }
   .two-butt {
-    display: inline-block;
     position: absolute;
-    top: 5%;
-    left: 70%;
+    top: 25px;
+    right: 100px;
+    width: 5%;
+    height: 5%;
   }
   .left-butt {
     background-color: burlywood;
     color: #ffffff;
-    width: 150px;
-    height: 40px;
+    width: 40%;
+    height: 40%;
     font-size: 18px;
   }
   .right-butt {
     background-color: #333333;
+    font-size: 1rem;
     color: #ffffff;
-    width: 150px;
-    height: 40px;
-    font-size: 18px;
-    margin-left: 250px;
   }
   .one {
     background-color: darkgoldenrod;
     color: #ffffff;
-    width: 360px;
-    height: 250px;
-    font-size: 25px;
+    width: 24%;
+    height: 100%;
+    font-size: 200%;
+    margin: 0;
+    padding: 0;
   }
   .two {
     background-color: lightpink;
     color: #ffffff;
-    width: 360px;
-    height: 250px;
-    font-size: 25px;
+    width: 24%;
+    height: 100%;
+    font-size: 200%;
+    margin: 0;
+    padding: 0;
   }
   .three {
     background-color: forestgreen;
     color: #ffffff;
-    width: 360px;
-    height: 250px;
-    font-size: 25px;
+    width: 24%;
+    height: 100%;
+    font-size: 200%;
+    margin: 0;
+    padding: 0;
   }
   .four {
     background-color: #999999;
     color: #ffffff;
-    width: 360px;
-    height: 250px;
-    font-size: 25px;
+    width: 24%;
+    height: 100%;
+    font-size: 200%;
+    margin: 0;
+    padding: 0;
   }
   .butt-position {
-    margin-top: 10px;
-    margin-left: 25px;
+    margin: 0 1.5% 0;
+    width: 100%;
+    height: 40%;
   }
 </style>
