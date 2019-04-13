@@ -3,7 +3,7 @@
     <div class="topDivStyle">
       <el-row style="height: 100%">
         <el-col :span="8" style="height: 100%">
-          <img style="margin-top:20%; margin-left: 55%; " src="../../../assets/images/logo.png">
+          <img style="margin-top:20%; margin-left: 5%;width: 75px;height: 30px " src="../../../assets/images/logo_black.png">
         </el-col>
         <el-col :span="12" style="height: 100%">
           <p style="color: white; margin-top: 20%;float: left; margin-left: 4%">物流系统</p>
