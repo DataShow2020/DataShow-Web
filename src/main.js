@@ -10,7 +10,9 @@ import './assets/icon/iconfont.css'
 import './assets/styles/index.scss'
 import './assets/icon/iconfont.js'
 import './permission'
+import echarts from 'echarts'
 
+Vue.prototype.$echarts = echarts
 
 Vue.use(ElementUI, {
   size: 'medium',

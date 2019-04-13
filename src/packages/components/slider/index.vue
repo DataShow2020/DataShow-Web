@@ -3,10 +3,10 @@
     <div class="topDivStyle">
       <el-row style="height: 100%">
         <el-col :span="8" style="height: 100%">
-          <img style="margin-top:20%; margin-left: 55%; " src="../../../assets/images/logo.png">
+          <img style="margin-top:20%; margin-left: 5%;width: 75px;height: 30px " src="../../../assets/images/logo_black.png">
         </el-col>
         <el-col :span="12" style="height: 100%">
-          <p style="color: white; margin-top: 20%;float: left; margin-left: 4%">货物管理系统</p>
+          <p style="color: white; margin-top: 20%;float: left; margin-left: 4%">物流系统</p>
         </el-col>
       </el-row>
     </div>
@@ -100,7 +100,7 @@
   }
 
   .el-menu-vertical-demo /deep/.el-submenu__title:hover {
-    background-color: #3448a1;
+    background-color: #F2B5A3;
     color: #ffffff;
   }
 
@@ -129,7 +129,7 @@
   .topDivStyle {
     width: 245px;
     height: 10%;
-    background-color: #3448a1;
+    background-color: #DE7A35;
   }
 
   .el-menu-item {
@@ -144,7 +144,7 @@
   }
 
   .el-menu-item.is-active > a {
-    color: #1890ff;
+    color: #F2B5A3;
   }
 
   .el-menu-item-group a {
@@ -166,7 +166,7 @@
 
   .el-menu-vertical-demo /deep/ .el-menu-item:hover, .el-menu-item:focus {
     outline: none;
-    background-color: #3448a1;
+    background-color: #F2B5A3;
     color: #ffffff;
   }
 

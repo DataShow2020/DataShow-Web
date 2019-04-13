@@ -68,6 +68,8 @@ const webpackConfig = merge(baseWebpackConfig, {
         : config.build.index,
       template: 'index.html',
       inject: true,
+      title: '物流系统',
+      favicon: path.resolve(__dirname, '../src/assets/images/favicon.ico'),
       minify: {
         removeComments: true,
         collapseWhitespace: true,
