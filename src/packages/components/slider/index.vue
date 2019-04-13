@@ -100,7 +100,7 @@
   }
 
   .el-menu-vertical-demo /deep/.el-submenu__title:hover {
-    background-color: #3448a1;
+    background-color: #F2B5A3;
     color: #ffffff;
   }
 
@@ -129,7 +129,7 @@
   .topDivStyle {
     width: 245px;
     height: 10%;
-    background-color: #3448a1;
+    background-color: #DE7A35;
   }
 
   .el-menu-item {
@@ -144,7 +144,7 @@
   }
 
   .el-menu-item.is-active > a {
-    color: #1890ff;
+    color: #F2B5A3;
   }
 
   .el-menu-item-group a {
@@ -166,7 +166,7 @@
 
   .el-menu-vertical-demo /deep/ .el-menu-item:hover, .el-menu-item:focus {
     outline: none;
-    background-color: #3448a1;
+    background-color: #F2B5A3;
     color: #ffffff;
   }
 
