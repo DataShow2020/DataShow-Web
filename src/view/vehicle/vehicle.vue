@@ -108,7 +108,7 @@ export default {
         stationName: '2016-05-02',
         status: '王小虎'
       }, {
-        vehicleName: '2016-05-04',
+        vehicleName: '2016-05-06',
         vehicleType: '王小虎',
         purchaseTime: '2016-05-02',
         distributionName: '王小虎',
