@@ -18,7 +18,7 @@
         <span> 跳转至：</span><el-input style="width: 50px;" v-model="pageInput"></el-input>
       </th>
       <th style="width: 5%;">
-        <button style="width: 40px;height:36px;background-color: #3448a1;font-size: 12px;color: white;border:none" @click="pageSubmit">跳转</button>
+        <button style="width: 40px;height:36px;background-color: #DE7A35;font-size: 12px;color: white;border:none" @click="pageSubmit">跳转</button>
       </th>
     </tr>
   </table>
@@ -90,7 +90,7 @@
 
 <style lang="scss">
   .el-pagination.is-background .el-pager li:not(.disabled).active {
-    background-color: #3448a1;
+    background-color: #DE7A35;
   }
 
   .el-pagination {

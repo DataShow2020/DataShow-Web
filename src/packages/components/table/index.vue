@@ -6,12 +6,24 @@
       :border="tableAttr.border"
       :default-sort="{prop: 'date', order: 'descending'}"
       :style="{width: defaWidth}"
+      :row-style="rowStyle"
+      :cell-style="cellStyle"
+      :header-cell-style="headerCellStyle"
       v-loading="loading">
       <el-table-column
-        v-if="tableAttr.noIndex"
+        v-if="tableAttr.rank"
+        label="名次"
         type="index"
-        width="50">
+        align="center"
+        width="200">
       </el-table-column>
+      <el-table-column
+        v-if="tableAttr.index"
+        label="序号"
+        type="index"
+        width="80"
+        align="center"
+      ></el-table-column>
       <el-table-column
         v-for="item in tableHeader"
         :key="item.prop"
@@ -23,14 +35,17 @@
       </el-table-column>
       <el-table-column
         v-if="tableAttr.other"
-        label="操作"
-        width="140">
+        label="操作">
         <template slot-scope="scope">
           <el-button
-            v-for="(list, index) in tableAttr.other"
-            @click="handleClick(scope.row, list.type, scope.$index)"
-            :key="index"
-            type="text" size="small">{{list.name}}
+            style="width: 80px;background-color: #DE7A35;color: #ffffff"
+            @click="editOrDelete(scope.$index,one)"
+          >编辑
+          </el-button>
+          <el-button
+            style="width: 80px;background-color: #aaaaaa;color: #ffffff"
+            @click="editOrDelete(scope.$index,two)"
+          >删除
           </el-button>
         </template>
       </el-table-column>
@@ -39,13 +54,21 @@
 </template>
 
 <script>
+  import Vue from 'vue'
   /**
    * 表格组件
    */
   export default {
     name: 'table-component',
     data() {
-      return {}
+      return {
+        isDisplay: [],
+        isTrue: true,
+        index: [],
+        onlyTrue: true,
+        one: 'edit',
+        two: 'delete'
+      }
     },
     props: {
       /**  class名称 */
@@ -67,16 +90,54 @@
           type: Boolean,
           default: true
         },
-        /** 是否带有序号 */
-        noIndex: {
-          type: Boolean,
-          default: false
+        /** 热点类型分时统计数量调整 */
+        hotspotIncrement: {
+          type: Number,
+          default:null
         },
-        /** 其他操作 */
-        other: {
-          type: Array,
-          default: null, // [{name: '查看'}]
-        }
+        /** 热点类型分时统计数量调整 */
+        hotspotRate: {
+          type: Number,
+          default:null
+        },
+        /** 政务中心 */
+        transaction: {
+          type: Number,
+          default:null
+        },
+        /** 公共资源分类 */
+        municipalTransaction: {
+          type: Number,
+          default:null
+        },
+        /** 领导进大厅 */
+        condition: {
+          type: Number,
+          default:null
+        },
+        /** 政务服务 */
+        service: {
+          type: Number,
+          default:null
+        },
+        display: {
+          type: Number,
+          default:null
+        },
+        /** 办件排名 */
+        rank: {
+          type: Number,
+          default:null
+        },
+        /** 序号 */
+        index: {
+          type: Number,
+          default: null
+        },
+        anotherDisplay: {
+          type: Number,
+          default:null
+        },
       },
       /** 表格数据 */
       tableData: {
@@ -123,14 +184,59 @@
     },
     computed: {
       defaWidth: function () {
-        const {width} = this.tableAttr
+        const {width} = this.tableAttr;
         return isNaN(width) ? width : width + 'px'
       }
     },
     methods: {
       handleClick(row, type, index) {
         this.$emit('tableOtherClick', row, type, index);
+      },
+      /** 斑马线 */
+      rowStyle({row, column, rowIndex, columnIndex}){
+        if(rowIndex % 2 === 0 ){ //指定坐标
+          return 'background:#f8f9fb'
+        }else{
+          return 'background:#ffffff'
+        }
+      },
+      cellStyle({row, column, rowIndex, columnIndex}){
+        return 'text-align:center'
+      },
+      headerCellStyle({row, column, rowIndex, columnIndex}){
+        return 'text-align:center;color:#333333'
+      },
+      change(index, data) {
+        if(data !== 0) {
+          Vue.set(this.isDisplay, index, true);
+          Vue.set(this.index, index, 1);
+        }
+        this.isTrue = true;
+        this.$emit('switchChange', index)
+      },
+      anotherChange(index, data, label) {
+        if(data !== 0) {
+          Vue.set(this.isDisplay, index, true);
+          Vue.set(this.index, index, 1);
+        }
+        this.isTrue = true;
+        this.$emit('switchChange', index, label)
+      },
+      edit(index, data) {
+        this.$emit('editDetail', index, data)
+      },
+      anotherEdit(index, data, label) {
+        this.$emit('editDetail', index, data, label)
+      },
+      editOrDelete(index, label) {
+        this.$emit('editDelete', index, label)
       }
     }
   }
 </script>
+
+<style scoped>
+  .editButton {
+    background: url("../../../assets/images/edit.png");
+  }
+</style>

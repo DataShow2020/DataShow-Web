@@ -11,7 +11,7 @@
           "to":"/admin/vehicle"
         },{
           "label":"订单管理",
-          "to":"/orderManage"
+          "to":"/admin/orderManage"
         }
       ]
     }

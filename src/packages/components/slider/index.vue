@@ -33,48 +33,47 @@
       </el-submenu>
     </el-menu>
 
-
   </div>
 </template>
 <script>
-  import mock from '@/mock/menu.json'
-  import {sliderApi} from './sliderApi';
+import mock from '@/mock/menu.json'
+// import {sliderApi} from './sliderApi';
 
-  export default {
-    name: 'slider',
-    data() {
-      return {
-        isCollapse: false,
-        menuList: mock.menu,
-      }
+export default {
+  name: 'slider',
+  data () {
+    return {
+      isCollapse: false,
+      menuList: mock.menu
+    }
+  },
+  mounted () {
+    // this.getData()
+  },
+  methods: {
+    getData () {
+      sliderApi.get().then(res => {
+        this.menuList = res.data.data
+      })
     },
-    mounted() {
-      // this.getData()
+    handSelect: function (key, path) {
     },
-    methods: {
-      getData() {
-        sliderApi.get().then(res => {
-          this.menuList = res.data.data;
-        })
-      },
-      handSelect: function (key, path) {
-      },
-      iconClass(icon) {
-        return `el-icon-${icon}`
-      },
-      collapse() {
-        this.isCollapse = !this.isCollapse
-      },
+    iconClass (icon) {
+      return `el-icon-${icon}`
     },
-    computed: {
-      menuToger: function () {
-        return !this.isCollapse ? 'el-icon-d-arrow-left' : 'el-icon-d-arrow-right'
-      },
-      menuTogerTitle: function () {
-        return this.isCollapse ? '展开' : '收起'
-      }
+    collapse () {
+      this.isCollapse = !this.isCollapse
+    }
+  },
+  computed: {
+    menuToger: function () {
+      return !this.isCollapse ? 'el-icon-d-arrow-left' : 'el-icon-d-arrow-right'
     },
+    menuTogerTitle: function () {
+      return this.isCollapse ? '展开' : '收起'
+    }
   }
+}
 </script>
 
 <style lang="scss" scoped>

@@ -54,10 +54,10 @@
 <script>
   import CompTable from '../../packages/components/table/index'
   import CompPage from '../../packages/components/pagination/index'
-  import {vehicleApi} from "@/view/vehicle/vehicleApi";
+  import {vehicleApi} from './vehicleApi'
 
   export default {
-    name: 'vehicle',
+    name: 'resources',
     components: {
       CompTable,
       CompPage
@@ -117,10 +117,10 @@
         tableHeader: [
           {
             prop: 'date',
-            label: '资源名称'
+            label: '角色名称'
           }, {
             prop: 'name',
-            label: '资源路径'
+            label: '资源名称'
           }
         ],
         tableAttr: {index: {}, other: {}},
@@ -139,7 +139,7 @@
       }
     },
     mounted() {
-      this.getTableData()
+      // this.getTableData()
     },
     methods: {
       handleCurrentChange(val) {
@@ -159,7 +159,7 @@
       addData() {
         this.dialogVisible = true;
         this.title = '新增资源';
-        // ResourcesApi.add().then(res => {
+        // vehicleApi.add().then(res => {
         //   if (res.data.code === 200) {
         //     this.$message({
         //       type: 'success',
@@ -174,7 +174,7 @@
         // })
       },
       editData() {
-        // vehicleApi.({}).then(res => {
+        vehicleApi.modify({}).then(res => {
           if (res.data.code === 200) {
             this.$message({
               type: 'success',
@@ -187,7 +187,7 @@
             })
           }
           this.getTableData();
-        // })
+        })
       },
       deleteResource() {
         vehicleApi.delete().then(res => {
