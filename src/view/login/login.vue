@@ -21,7 +21,7 @@
       <div class="login-box">
         <div class="login-box-top">
           <span>
-            <img src="../../assets/images/loginlogo.jpg" class="login-logo">
+            <img src="../../assets/images/loginlogo.jpg" class="login-logo" alt="">
             <emp class="font-login">会员登录</emp>
           </span>
           <el-button
