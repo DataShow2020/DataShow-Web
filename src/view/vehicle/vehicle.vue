@@ -1,6 +1,10 @@
 <template>
   <div>
     <el-card style="width: 96%;margin-left:2%;margin-top: 18px;border-radius: 0 !important;">
+      <div style="width: 130px;float: right">
+        <div v-if="!mouseOver" style="margin-top: 25px;float: left;font-size: 16px;">新增资源</div>
+        <el-button :class="buttClass" @mouseover.native="changeButt" @mouseout.native="recovery" @click="addData">+</el-button>
+      </div>
       <comp-table
         :tableData="tableData"
         :tableHeader="tableHeader"
@@ -15,10 +19,6 @@
           :totalCount="totalCount"
           style="margin-left: 18px;margin-top: 20px;float: left"
         ></comp-page>
-        <div style="width: 130px;float: right">
-          <div v-if="!mouseOver" style="margin-top: 25px;float: left;font-size: 16px;">新增资源</div>
-          <el-button :class="buttClass" @mouseover.native="changeButt" @mouseout.native="recovery" @click="addData">+</el-button>
-        </div>
       </div>
       <el-dialog
         :title="title"
@@ -234,7 +234,7 @@
     margin-top: 20px
   }
   .another {
-    background-color: #3448a1;
+    background-color: #DE7A35;
     float: right;
     margin-top: 20px;
     color: #ffffff;
