@@ -33,11 +33,48 @@
         :sortable="item.sort || false"
       >
       </el-table-column>
+
+
       <el-table-column
+        v-if="tableAttr.other"
+        :fixed="tableAttr.fixed || false"
+        label="操作"
+        align="center"
+        :width="tableAttr.operateColumnWidth || 140">
+        <template slot-scope="scope">
+          <el-button
+            v-for="(list, index) in tableAttr.other"
+            :icon="list.icon"
+            @click="handleClick(scope.row, list.type, scope.$index)"
+            :key="index"
+            :style="{color: list.color|| ''}"
+            type="text" size="small">{{list.name}}
+          </el-button>
+        </template>
+      </el-table-column>
+      <el-table-column
+        v-if="tableAttr.forbideOrOpen"
+        :fixed="tableAttr.fixed || false"
+        label="操作"
+        align="center"
+        :width="tableAttr.operateColumnWidth || 140">
+        <template slot-scope="scope">
+          <el-button @click="handleClick(scope.row, tableAttr.forbideOrOpen[0].type, scope.$index)" type="text">查看</el-button>
+          <el-button @click="handleClick(scope.row, tableAttr.forbideOrOpen[1].type, scope.$index)" type="text">编辑</el-button>
+          <el-button @click="handleClick(scope.row, tableAttr.forbideOrOpen[2].type, scope.$index)" type="text">删除</el-button>
+        </template>
+      </el-table-column>
+      <!--<el-table-column
         v-if="tableAttr.other"
         width="150px"
         label="操作">
         <template slot-scope="scope">
+          <el-button
+            style="background-color: #DE7A35;color: #ffffff"
+            size="mini"
+            @click="editOrDelete(scope.$index,three)"
+          >查看
+          </el-button>
           <el-button
             style="background-color: #DE7A35;color: #ffffff"
             size="mini"
@@ -51,7 +88,7 @@
           >删除
           </el-button>
         </template>
-      </el-table-column>
+      </el-table-column>-->
     </el-table>
   </div>
 </template>
@@ -70,7 +107,8 @@
         index: [],
         onlyTrue: true,
         one: 'edit',
-        two: 'delete'
+        two: 'delete',
+        three:'look'
       }
     },
     props: {

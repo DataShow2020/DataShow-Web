@@ -5,9 +5,9 @@
            v-for="(item, index) in listData"
            :style="{float:'left', width:colItem}"
            :key="index">
-        <label class="el-form-item__label" :style="{width: labelWidthPX}">{{item.label}} ：</label>
+        <label class="el-form-item__label" :style="{width: labelWidthPX,fontSize:'16px'}">{{item.label}} ：</label>
         <div class="el-form-item__content" :style="{marginLeft: labelWidthPX}">
-          <span>{{gshValue(item.prop)}}</span>
+          <span :style="{color: gsClass(item),fontSize:'16px'}">{{gshValue(item)}}</span>
         </div>
       </div>
     </form>
@@ -16,7 +16,8 @@
 
 <script>
   export default {
-    data() {
+    name: 'sc-view',
+    data () {
       return {}
     },
     props: {
@@ -43,8 +44,17 @@
       },
     },
     methods: {
-      gshValue: function (type) {
-        return this.listValue[type]
+      gsClass (item) {
+        if (item.status) {
+          return this.listValue[item.prop] ? null : 'red'
+        }
+        return null
+      },
+      gshValue (item) {
+        if (item.status) {
+          return this.listValue[item.prop] ? item.status.on : item.status.off
+        }
+        return this.listValue[item.prop]
       }
     }
   }
@@ -54,5 +64,14 @@
     .el-form {
       overflow: hidden;
     }
+  }
+
+  .el-form-item {
+    margin: 0;
+  }
+
+  .view_cont{
+    font-family: '微软雅黑';
+    font-size: 16px;
   }
 </style>
