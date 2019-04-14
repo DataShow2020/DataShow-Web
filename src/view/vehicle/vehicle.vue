@@ -75,7 +75,7 @@ export default {
     return {
       options: [{
         value: '选项1',
-        label: '黄金糕'
+        label: '黄金2糕'
       }, {
         value: '选项2',
         label: '双皮奶'
