@@ -21,51 +21,51 @@
 </template>
 
 <script>
-  import slide from '../packages/components/slide/slide'
+import slide from '../packages/components/slide/slide'
 
-  export default {
-    name: "index",
-    components: {
-      slide
-    },
-    data() {
-      return {
-        slides: [
-          {'src':require('../assets/images/logo1.jpg')},
-          {'src':require('../assets/images/logo2.jpg')},
-          {'src':require('../assets/images/logo3.jpg')}
-        ],
-        inv: 2000,
-        styleObject: {
-          width: '100%',
-          height: '100%'
-        }
-      }
-    },
-    methods: {
-      login() {
-
-      },
-      register() {
-
-      },
-      search() {
-
-      },
-      order() {
-
-      },
-      question() {
-
-      },
-      about() {
-
-      },
-      management() {
-        this.$router.push({name: 'login'})
+export default {
+  name: 'index',
+  components: {
+    slide
+  },
+  data () {
+    return {
+      slides: [
+        {'src': require('../assets/images/logo1.jpg')},
+        {'src': require('../assets/images/logo2.jpg')},
+        {'src': require('../assets/images/logo3.jpg')}
+      ],
+      inv: 2000,
+      styleObject: {
+        width: '100%',
+        height: '100%'
       }
     }
+  },
+  methods: {
+    login () {
+
+    },
+    register () {
+
+    },
+    search () {
+      this.$router.push({name: 'logisticsConsult'})
+    },
+    order () {
+      this.$router.push({name: 'onlineOrder'})
+    },
+    question () {
+
+    },
+    about () {
+
+    },
+    management () {
+      this.$router.push({name: 'login'})
+    }
   }
+}
 </script>
 
 <style scoped>

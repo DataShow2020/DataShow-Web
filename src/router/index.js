@@ -9,12 +9,12 @@ export default new Router({
     {
       path: '/',
       name: 'home',
-      component: () => import('../view/home'),
+      component: () => import('../view/home')
     },
     {
       path: '/login',
       name: 'login',
-      component: () => import('../view/login/login'),
+      component: () => import('../view/login/login')
     },
     {
       path: '/register',
@@ -26,11 +26,26 @@ export default new Router({
       name: '404',
       component: () => import('../packages/ui/errorPage/404.vue')
     },
+    {
+      path: '/logisticsConsult',
+      name: 'logisticsConsult',
+      component: () => import('../view/client/logisticsConsult/index')
+    },
+    {
+      path: '/searchResult',
+      name: 'searchResult',
+      component: () => import('../view/client/logisticsConsult/searchResult')
+    },
+    {
+      path: '/onlineOrder',
+      name: 'onlineOrder',
+      component: () => import('../view/client/onlineOrder/index')
+    },
     ...admin,
     {
       path: '*',
       name: 'err',
-      redirect: '404',
-    },
+      redirect: '404'
+    }
   ]
 })
