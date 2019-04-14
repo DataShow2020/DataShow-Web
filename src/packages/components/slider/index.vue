@@ -1,6 +1,6 @@
 <template>
   <div width="245px" style="background-color: rgb(238, 241, 246)">
-    <div class="topDivStyle">
+    <div class="topDivStyle" style="height: 70px;">
       <el-row style="height: 100%">
         <el-col :span="8" style="height: 100%">
           <img style="margin-top:20%; margin-left: 5%;width: 75px;height: 30px " src="../../../assets/images/logo_black.png">

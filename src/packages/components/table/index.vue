@@ -83,10 +83,12 @@
         type: Array,
         default: function () {
           return [{
-            date: '2016-05-02',
-            name: '当然感染',
-            address: '上海市普陀区金沙江路 1518 弄',
-            sex: '男',
+            orderId: '20160502',
+            startDistribution: '重庆两江新区',
+            endDistribution: '上海市普陀区金沙江路 1518 弄',
+            currentStation: '重庆中转站',
+            productName:'可口可乐',
+            kg:'6.9'
           }]
         }
       },
@@ -96,10 +98,25 @@
         default: function () {
           return [
             /** prop:字段名 label：名称    width： 列跨度 sort： 是否排序 */
-            {prop: 'date', label: '日期', width: 120, sort: true},
-            {prop: 'name', label: '姓名', width: 80},
-            {prop: 'address', label: '地址', width: 280},
-            {prop: 'sex', label: '性别', width: 80},
+            {
+              prop: 'orderId',
+              label: '订单号',
+            }, {
+              prop: 'startDistribution',
+              label: '起点',
+            }, {
+              prop: 'endDistribution',
+              label: '终点',
+            }, {
+              prop: 'currentStation',
+              label: '当前站点',
+            }, {
+              prop: 'productName',
+              label: '物品名称',
+            }, {
+              prop: 'kg',
+              label: '大致重量',
+            }
           ]
         }
       },

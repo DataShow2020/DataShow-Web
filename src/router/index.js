@@ -5,6 +5,7 @@ import admin from './admin'
 Vue.use(Router)
 
 export default new Router({
+  mode:'history',
   routes: [
     {
       path: '/',
@@ -21,6 +22,11 @@ export default new Router({
       name: 'register',
       component: () => import('../view/register/register')
     },
+    // {
+    //   path: '/orderManage',
+    //   name: 'orderManage',
+    //   component: () => import('../view/orderManage/orderManage')
+    // },
     {
       path: '/404',
       name: '404',
