@@ -38,14 +38,15 @@
         label="操作">
         <template slot-scope="scope">
           <el-button
-            style="width: 80px;background-color: #DE7A35;color: #ffffff"
+            style="width: 50px;background-color: #DE7A35;color: #ffffff;"
             @click="editOrDelete(scope.$index,one)"
-          >编辑
+          ><p style="margin-left: -10px">编辑</p>
           </el-button>
           <el-button
-            style="width: 80px;background-color: #aaaaaa;color: #ffffff"
+            style="width: 50px;color: #ffffff"
+            type="danger"
             @click="editOrDelete(scope.$index,two)"
-          >删除
+          ><p style="margin-left: -10px">删除</p>
           </el-button>
         </template>
       </el-table-column>
