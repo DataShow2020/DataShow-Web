@@ -35,15 +35,18 @@
       </el-table-column>
       <el-table-column
         v-if="tableAttr.other"
+        width="150px"
         label="操作">
         <template slot-scope="scope">
           <el-button
-            style="width: 80px;background-color: #DE7A35;color: #ffffff"
+            style="background-color: #DE7A35;color: #ffffff"
+            size="mini"
             @click="editOrDelete(scope.$index,one)"
           >编辑
           </el-button>
           <el-button
-            style="width: 80px;background-color: #aaaaaa;color: #ffffff"
+            style="background-color: #aaaaaa;color: #ffffff"
+            size="mini"
             @click="editOrDelete(scope.$index,two)"
           >删除
           </el-button>
