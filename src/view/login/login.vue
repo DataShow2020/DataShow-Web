@@ -120,7 +120,7 @@ export default {
     Enter () {
       document.onkeyup = (e) => {
         var currKey = 0
-        let event = e || window.event
+        let event = e || window.event;
         currKey = e.keyCode || e.which || e.charCode
         if (currKey === 13) {
           if (event) {
