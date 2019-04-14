@@ -5,7 +5,11 @@ export default [
     children: [{
       path: '/',
       name: 'admin',
-      component: () => import('../view/HelloWorld'),
+      component: () => import('../view/evaluate/evaluate'),
+    },{
+      path: 'vehicle',
+      name: 'vehicle',
+      component: () => import('../view/vehicle/vehicleApi'),
     }
     ]
   }

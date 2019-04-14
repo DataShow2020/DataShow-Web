@@ -1,11 +1,14 @@
 {
   "menu": [
     {
-      "submenu": "货物管理系统",
+      "submenu": "物流系统",
       "menuGroup": [
         {
-          "label": "货物管理系统",
+          "label": "订单评价",
           "to":"/admin"
+        },  {
+          "label": "车辆管理",
+          "to":"/admin/vehicle"
         }
       ]
     }
