@@ -11,9 +11,9 @@
   <!--</el-breadcrumb>-->
 
   <el-breadcrumb separator="/">
-    <el-breadcrumb-item><i class="el-icon-location-outline"><span>当前位置：</span></i>货物管理系统</el-breadcrumb-item>
-    <!--<el-breadcrumb-item>{{firstMenuLabel}}</el-breadcrumb-item>-->
-    <!--<el-breadcrumb-item><span style="font-weight: bold">{{menuLabel}}</span></el-breadcrumb-item>-->
+    <el-breadcrumb-item><i class="el-icon-location-outline"><span>当前位置：</span></i>物流系统</el-breadcrumb-item>
+    <el-breadcrumb-item>{{firstMenuLabel}}</el-breadcrumb-item>
+    <el-breadcrumb-item><span style="font-weight: bold">{{menuLabel}}</span></el-breadcrumb-item>
 
   </el-breadcrumb>
 
@@ -53,6 +53,10 @@
         for (let i = 0; i < this.menuList.length; i++){
            let o = this.menuList[i];
            o.menuGroup.forEach(v => {
+             if(v.label === '订单评价') {
+               this.menuLabel = '订单评价';
+               this.firstMenuLabel = o.submenu;
+             }
              if (v.to === matched) {
                this.menuLabel = v.label;
                this.firstMenuLabel = o.submenu;
