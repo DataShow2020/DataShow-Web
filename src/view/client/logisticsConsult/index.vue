@@ -1,5 +1,21 @@
 <template>
     <div class="outDiv">
+      <div style="width: 100%; height: 6%">
+        <el-menu
+          :default-active="activeIndex"
+          class="el-menu-demo"
+          mode="horizontal"
+          @select="handleSelect"
+          background-color="gray"
+          text-color="#fff"
+          active-text-color="#ffd04b"
+          active-text-fontSize="24px">
+          <el-menu-item index="1">物流查询</el-menu-item>
+          <el-menu-item index="2">在线下单</el-menu-item>
+          <el-menu-item index="3">客服中心</el-menu-item>
+          <el-menu-item index="4">关于我们</el-menu-item>
+        </el-menu>
+      </div>
       <div class="searchDiv">
         <el-form :model="ruleForm" :rules="rules" ref="ruleForm">
           <el-form-item :prop="orderNom">
@@ -19,6 +35,7 @@ export default {
   name: 'index',
   data () {
     return {
+      activeIndex:'1',
       ruleForm:{orderNom:''},
       rules:{
         orderNom:[{ required: true, message: '请输入物流单号', trigger: 'blur' },
@@ -28,6 +45,18 @@ export default {
     }
   },
   methods: {
+    /** 导航栏菜单 */
+    handleSelect (key, keyPath) {
+      console.info('key', key)
+      if (key == 1) {
+        this.$router.push({name:'logisticsConsult'})
+      }
+      if (key == 2) {
+        this.$router.push({name:'onlineOrder'}) ;
+      }
+    },
+
+    /** 查询 */
     searchOrder: function () {
       this.$refs['ruleForm'].validate((valid) => {
         if (valid) {
@@ -64,7 +93,7 @@ export default {
     width: 20%;
     height:10%;
     margin: 0 auto;
-    padding-top: 18%;
+    padding-top: 16%;
   }
 /*.el-input--medium .el-input__inner /deep/{*/
   /*height: 42px;*/
@@ -77,5 +106,9 @@ export default {
     position: absolute;
     top: 0%;
     left: 81.4%;
+  }
+  .el-menu-item is-active /deep/{
+    font-size: 22px;
+    color:red;
   }
 </style>
