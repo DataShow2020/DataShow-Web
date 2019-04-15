@@ -1,5 +1,20 @@
 <template>
   <div class="outDiv">
+    <div style="width: 100%; height: 6%">
+      <el-menu
+        :default-active="activeIndex"
+        class="el-menu-demo"
+        mode="horizontal"
+        @select="handleSelect"
+        background-color="#545c64"
+        text-color="#fff"
+        active-text-color="#ffd04b">
+        <el-menu-item index="1">物流查询</el-menu-item>
+        <el-menu-item index="2">在线下单</el-menu-item>
+        <el-menu-item index="3">客服中心</el-menu-item>
+        <el-menu-item index="4">关于我们</el-menu-item>
+      </el-menu>
+    </div>
     <div class="topDiv">
       <div class="searchDiv">
         <el-input prefix-icon="el-icon-search" v-model="ruleForm.orderNom">
@@ -20,7 +35,6 @@
         <p style="font-size: 16px; margin:-0.5% 0 1% 19%; font-weight: 200; color: #999999">
           _______________________________________________________________________________________________________________________________________
         </p>
-
       <div style="width: 80%;margin-left: 20%;">
         <p style="font-size: 16px;">fdoisafjdoiaujfdosapjfh</p>
 
@@ -46,9 +60,21 @@ export default {
     return {
       ruleForm: {orderNom: ''},
       evaluate:'',
+      activeIndex:'1',
     }
   },
   methods: {
+    /** 导航栏菜单 */
+    handleSelect (key, keyPath) {
+      console.info('key', key)
+      if (key == 1) {
+        this.$router.push({name:'logisticsConsult'})
+      }
+      if (key == 2) {
+        this.$router.push({name:'onlineOrder'}) ;
+      }
+    },
+
     /** 查询 */
     searchOrder: function () {
       this.$refs['ruleForm'].validate((valid) => {
