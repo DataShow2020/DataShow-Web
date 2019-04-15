@@ -51,6 +51,7 @@ export default {
     },
     search () {
       this.$router.push({name: 'logisticsConsult'})
+      // this.$router.push({name:'index'})
     },
     order () {
       this.$router.push({name: 'onlineOrder'})

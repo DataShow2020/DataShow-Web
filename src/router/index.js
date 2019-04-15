@@ -5,7 +5,7 @@ import admin from './admin'
 Vue.use(Router)
 
 export default new Router({
-  mode:'history',
+  mode: 'history',
   routes: [
     {
       path: '/',
@@ -42,6 +42,7 @@ export default new Router({
       name: 'searchResult',
       component: () => import('../view/client/logisticsConsult/searchResult')
     },
+
     {
       path: '/onlineOrder',
       name: 'onlineOrder',
@@ -52,6 +53,12 @@ export default new Router({
       path: '*',
       name: 'err',
       redirect: '404'
+    },
+    {
+      path: '/indexStation',
+      name: '/indexStation',
+      component: () => import('../view/station/indexStation')
+
     }
   ]
 })
