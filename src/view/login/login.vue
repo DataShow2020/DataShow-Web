@@ -21,7 +21,7 @@
       <div class="login-box">
         <div class="login-box-top">
           <span>
-            <img src="../../assets/images/loginlogo.jpg" class="login-logo">
+            <img src="../../assets/images/loginlogo.jpg" class="login-logo" alt="">
             <emp class="font-login">会员登录</emp>
           </span>
           <el-button
@@ -120,7 +120,7 @@ export default {
     Enter () {
       document.onkeyup = (e) => {
         var currKey = 0
-        let event = e || window.event
+        let event = e || window.event;
         currKey = e.keyCode || e.which || e.charCode
         if (currKey === 13) {
           if (event) {
@@ -142,7 +142,7 @@ export default {
         // this.$store.dispatch('accountLoginSubmit', this.ruleForm).then((res) => {
         //   this.loading = false
         //   if(res.status){
-        Msg.success('登录成功')
+        Msg.success('登录成功');
         this.$router.push({path: '/admin'})
         // }
         // else{

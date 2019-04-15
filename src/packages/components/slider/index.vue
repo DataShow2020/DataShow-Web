@@ -1,6 +1,6 @@
 <template>
   <div width="245px" style="background-color: rgb(238, 241, 246)">
-    <div class="topDivStyle">
+    <div class="topDivStyle" style="height: 70px;">
       <el-row style="height: 100%">
         <el-col :span="8" style="height: 100%">
           <img style="margin-top:20%; margin-left: 5%;width: 75px;height: 30px " src="../../../assets/images/logo_black.png">
@@ -33,48 +33,47 @@
       </el-submenu>
     </el-menu>
 
-
   </div>
 </template>
 <script>
-  import mock from '@/mock/menu.json'
-  import {sliderApi} from './sliderApi';
+import mock from '@/mock/menu.json'
+// import {sliderApi} from './sliderApi';
 
-  export default {
-    name: 'slider',
-    data() {
-      return {
-        isCollapse: false,
-        menuList: mock.menu,
-      }
+export default {
+  name: 'slider',
+  data () {
+    return {
+      isCollapse: false,
+      menuList: mock.menu
+    }
+  },
+  mounted () {
+    // this.getData()
+  },
+  methods: {
+    getData () {
+      sliderApi.get().then(res => {
+        this.menuList = res.data.data
+      })
     },
-    mounted() {
-      // this.getData()
+    handSelect: function (key, path) {
     },
-    methods: {
-      getData() {
-        sliderApi.get().then(res => {
-          this.menuList = res.data.data;
-        })
-      },
-      handSelect: function (key, path) {
-      },
-      iconClass(icon) {
-        return `el-icon-${icon}`
-      },
-      collapse() {
-        this.isCollapse = !this.isCollapse
-      },
+    iconClass (icon) {
+      return `el-icon-${icon}`
     },
-    computed: {
-      menuToger: function () {
-        return !this.isCollapse ? 'el-icon-d-arrow-left' : 'el-icon-d-arrow-right'
-      },
-      menuTogerTitle: function () {
-        return this.isCollapse ? '展开' : '收起'
-      }
+    collapse () {
+      this.isCollapse = !this.isCollapse
+    }
+  },
+  computed: {
+    menuToger: function () {
+      return !this.isCollapse ? 'el-icon-d-arrow-left' : 'el-icon-d-arrow-right'
     },
+    menuTogerTitle: function () {
+      return this.isCollapse ? '展开' : '收起'
+    }
   }
+}
 </script>
 
 <style lang="scss" scoped>

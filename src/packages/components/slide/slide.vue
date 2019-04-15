@@ -1,14 +1,14 @@
 <template>
   <div class="slide-show" @mouseover="clearInv" @mouseout="runInv">
     <transition-group tag="ul" class='slide-ul' :name="name">
-      <li v-for="(item , index) in slides" :key="item" v-show="index===nowIndex">
+      <li v-for="(item , index) in slides" :key="index + item" v-show="index===nowIndex">
         <a :href="item.href" :target="target">
           <img :src="item.src" alt="轮播图">
         </a>
       </li>
     </transition-group>
     <ul class="slide-pages">
-      <li v-for="(item , index ) in slides"
+      <li v-for="(index) in slides"
           @click="goto(index)"
           class="slide-page-point"
       >

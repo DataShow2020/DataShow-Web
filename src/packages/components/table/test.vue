@@ -83,10 +83,6 @@
           this.tableData = []
         }, 500)
       },
-      tableOtherClick(row, index) {
-        console.log(row);
-        console.log(index);
-      }
     }
   }
 </script>

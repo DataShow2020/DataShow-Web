@@ -13,10 +13,14 @@
       :key="item.prop"
       :label="item.label"
       :prop="item.prop"
-      :style="{float: isFloat, leftMargin: '10px'}"
+      :style="{float: 'left', leftMargin: '10px'}"
     >
       <template v-if="item.type === 'input'">
-        <el-input v-model="ruleForm[item.prop]" :placeholder="item.placeholder">
+        <el-input
+          v-model="ruleForm[item.prop]"
+          :placeholder="item.placeholder"
+          :class="input-style"
+        >
         </el-input>
       </template>
       <template v-else-if="item.type === 'select'">
@@ -119,7 +123,7 @@
       /** label 宽度 */
       labelWidth: {
         type: String,
-        default: '115'
+        default: '200'
       },
       /** 是否浮动 */
       float: String
@@ -131,9 +135,9 @@
       defaWidth: function () {
         return isNaN(this.labelWidth) ? this.labelWidth : this.labelWidth + 'px'
       },
-      isFloat: function () {
-        return /true/.test(this.float) ? 'left' : 'inherit'
-      }
+      // isFloat: function () {
+      //   return /true/.test(this.float) ? 'left' : 'inherit'
+      // }
     },
     methods: {
       submitForm() {
@@ -150,5 +154,13 @@
   }
 </script>
 <style lang="scss" scoped>
-
+  .input-style{
+    border-color: #878787;
+    border-style: solid;
+    border-width: 0  0 1px 0;
+    /*border-top-width: 0;*/
+    /*border-right-width: 0; */
+    /*border-bottom-width: 1px;*/
+    /*border-left-width: 0*/
+}
 </style>
