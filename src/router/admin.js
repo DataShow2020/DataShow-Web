@@ -11,6 +11,14 @@ export default [
       name: 'vehicle',
       component: () => import('../view/vehicle/vehicle'),
     },{
+      path: 'addVehicle',
+      name: 'addVehicle',
+      component: () => import('../view/vehicle/addVehicle'),
+    },{
+      path: 'editVehicle',
+      name: 'editVehicle',
+      component: () => import('../view/vehicle/editVehicle'),
+    },{
       path: 'orderManage',
       name: 'orderManage',
       component: () => import('../view/orderManage/OrderManage'),
