@@ -5,7 +5,7 @@
            v-for="(item, index) in listData"
            :style="{float:'left', width:colItem}"
            :key="index">
-        <label class="el-form-item__label" :style="{width: labelWidthPX,fontSize:'16px'}">{{item.label}} ：</label>
+        <label class="el-form-item__label" :style="{width: labelWidthPX,fontSize:'18px'}">{{item.label}} ：</label>
         <div class="el-form-item__content" :style="{marginLeft: labelWidthPX}">
           <span :style="{color: gsClass(item),fontSize:'16px'}">{{gshValue(item)}}</span>
         </div>

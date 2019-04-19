@@ -47,6 +47,10 @@
               <el-input v-model="form.receiveAddress" class="myInput" placeholder="省/市/区/详细地址"></el-input>
             </el-form-item>
           </el-col>
+
+          <el-form-item prop="shipTime" label="发件时间" :label-width="formLabelWidth">
+            <el-input v-model="form.shipTime" class="myInput"></el-input>
+          </el-form-item>
       </el-row>
       </el-form>
 
@@ -57,8 +61,9 @@
     </el-card>
 
       <div style="width: 100%;text-align: center;padding: 30px;">
-        <router-view :to="{path:'/orderManage'}"></router-view>
+        <router-link :to="{name:'orderManage'}">
         <el-button type="danger">返 回</el-button>
+        </router-link>
       </div>
 
 
@@ -83,7 +88,8 @@
             senderAddress:'',
             receiver:'',
             receiverPhone:'',
-            receiveAddress:''
+            receiveAddress:'',
+            shipTime:'',
           },
           rules:{
             name: [

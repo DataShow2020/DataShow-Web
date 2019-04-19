@@ -51,7 +51,6 @@ export default {
     },
     search () {
       this.$router.push({name: 'logisticsConsult'})
-      // this.$router.push({name:'index'})
     },
     order () {
       this.$router.push({name: 'onlineOrder'})
@@ -134,8 +133,8 @@ export default {
     padding: 0;
   }
   .butt-position {
-    margin: 0 1.5% 0;
-    width: 100%;
+    margin: 0 2.5% 0;
+    width: 97.5%;
     height: 40%;
   }
 </style>
