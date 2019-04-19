@@ -16,10 +16,10 @@
       </el-menu>
     </div>
     <div class="mainDiv">
-      <el-row style="height: 100%;">
-        <el-col :span="7" style="height: 100%">
+      <el-row style="height: 80%;">
+        <el-col :span="7" style="height: 100%;margin-left: 2.5%">
           <el-card>
-            <p style="text-align: center; font-size: 150%;font-weight: 600">寄件方</p>
+            <p style="text-align: center; font-size: 150%;font-weight: 600;color: #ff781d">寄件方</p>
             </br>
             <el-form :model="sendForm" :rules="sendRules" ref="sendForm" label-width="100px" label-position="top">
               <el-form-item label="真实姓名">
@@ -42,7 +42,7 @@
         </el-col>
         <el-col :span="7" style="height: 100%;margin-left: 4%">
           <el-card style="margin-bottom: 15%">
-            <p style="text-align: center; font-size: 150%;font-weight: 600">收件方</p>
+            <p style="text-align: center; font-size: 150%;font-weight: 600; color: #75c476">收件方</p>
             </br>
             <el-form :model="receiptForm" :rules="receiptRules" ref="receiptForm" label-width="100px" label-position="top">
               <el-form-item label="真实姓名">
@@ -65,7 +65,7 @@
         </el-col>
         <el-col :span="7" style="height: 100%;margin-left: 4%">
           <el-card>
-            <p style="text-align: center; font-size: 150%;font-weight: 600">物品信息</p>
+            <p style="text-align: center; font-size: 150%;font-weight: 600;color: #132542">物品信息</p>
             </br>
             <el-form :model="itemInformationForm" :rules="itemInformationRules" ref="itemInformationForm" label-width="100px" label-position="top">
               <el-form-item label="特殊备注">
@@ -84,7 +84,10 @@
           </el-card>
         </el-col>
       </el-row>
-      <!--<el-button>提交</el-button>-->
+      <div style="text-align: center;margin-top: 2%">
+              <el-button style="color: white;width: 18%;height:7%;background-color: #6291f1;font-size: 150%">提&nbsp;&nbsp;交</el-button>
+
+      </div>
     </div>
   </div>
 
@@ -126,15 +129,15 @@ export default {
   height: 100%;
 }
   .mainDiv{
-    width: 90%;
+    width: 86%;
     height: 83.7%;
     background-color: #f1f4f5;
-    padding-top: 5%;
+    padding-top: 6%;
     padding-left: 7%;
-    padding-right: 3%;
+    padding-right: 7%;
   }
 
   .el-card{
-    height:80%;
+    height:100%;
   }
 </style>
