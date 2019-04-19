@@ -15,7 +15,77 @@
         <el-menu-item index="4">关于我们</el-menu-item>
       </el-menu>
     </div>
-    <div class="mainDiv"></div>
+    <div class="mainDiv">
+      <el-row style="height: 100%;">
+        <el-col :span="7" style="height: 100%">
+          <el-card>
+            <p style="text-align: center; font-size: 150%;font-weight: 600">寄件方</p>
+            </br>
+            <el-form :model="sendForm" :rules="sendRules" ref="sendForm" label-width="100px" label-position="top">
+              <el-form-item label="真实姓名">
+                <el-input v-model="sendForm.name" placeholder="请输入姓名"></el-input>
+              </el-form-item>
+              <el-form-item label="省/市/区">
+                <el-input v-model="sendForm.city" placeholder="请输入省市区"></el-input>
+              </el-form-item>
+              <el-form-item label="地址">
+                <el-input v-model="sendForm.address" placeholder="请输入地址"></el-input>
+              </el-form-item>
+              <el-form-item label="手机">
+                <el-input v-model="sendForm.smartPthone" placeholder="手机或电话必填一项"></el-input>
+              </el-form-item>
+              <el-form-item label="电话">
+                <el-input v-model="sendForm.tel" placeholder="如：021-69777888"></el-input>
+              </el-form-item>
+            </el-form>
+          </el-card>
+        </el-col>
+        <el-col :span="7" style="height: 100%;margin-left: 4%">
+          <el-card style="margin-bottom: 15%">
+            <p style="text-align: center; font-size: 150%;font-weight: 600">收件方</p>
+            </br>
+            <el-form :model="receiptForm" :rules="receiptRules" ref="receiptForm" label-width="100px" label-position="top">
+              <el-form-item label="真实姓名">
+                <el-input v-model="receiptForm.name" placeholder="请输入姓名"></el-input>
+              </el-form-item>
+              <el-form-item label="省/市/区">
+                <el-input v-model="receiptForm.city" placeholder="请输入省市区"></el-input>
+              </el-form-item>
+              <el-form-item label="地址">
+                <el-input v-model="receiptForm.address" placeholder="请输入地址"></el-input>
+              </el-form-item>
+              <el-form-item label="手机">
+                <el-input v-model="receiptForm.smartPthone" placeholder="手机或电话必填一项"></el-input>
+              </el-form-item>
+              <el-form-item label="电话">
+                <el-input v-model="receiptForm.tel" placeholder="如：021-69777888"></el-input>
+              </el-form-item>
+            </el-form>
+          </el-card>
+        </el-col>
+        <el-col :span="7" style="height: 100%;margin-left: 4%">
+          <el-card>
+            <p style="text-align: center; font-size: 150%;font-weight: 600">物品信息</p>
+            </br>
+            <el-form :model="itemInformationForm" :rules="itemInformationRules" ref="itemInformationForm" label-width="100px" label-position="top">
+              <el-form-item label="特殊备注">
+                <el-input v-model="itemInformationForm.remarks"></el-input>
+              </el-form-item>
+              <el-form-item label="内件品名">
+                <el-input v-model="itemInformationForm.name" placeholder="请输入物品的名称"></el-input>
+              </el-form-item>
+              <el-form-item label="物品重量（kg）">
+                <el-input v-model="itemInformationForm.weight" placeholder="请输入物品大致重量"></el-input>
+              </el-form-item>
+              <el-form-item label="时效产品">
+                <el-input v-model="itemInformationForm.agingProduct" placeholder="标准快递"></el-input>
+              </el-form-item>
+            </el-form>
+          </el-card>
+        </el-col>
+      </el-row>
+      <!--<el-button>提交</el-button>-->
+    </div>
   </div>
 
 </template>
@@ -25,20 +95,26 @@ export default {
   name: 'index',
   data () {
     return {
-      activeIndex: '2'
+      activeIndex: '2',
+      sendRules: [],
+      sendForm: [],
+      receiptRules: [],
+      receiptForm: [],
+      itemInformationForm: [],
+      itemInformationRules: []
     }
   },
   methods: {
     /** 导航栏菜单 */
-    handleSelect(key, keyPath) {
+    handleSelect (key, keyPath) {
       console.info('key', key)
       if (key == 1) {
         this.$router.push({name: 'logisticsConsult'})
       }
       if (key == 2) {
-        this.$router.push({name: 'onlineOrder'});
+        this.$router.push({name: 'onlineOrder'})
       }
-    },
+    }
   }
 }
 
@@ -50,7 +126,15 @@ export default {
   height: 100%;
 }
   .mainDiv{
-    width: 100%;
-    height: 94%;
+    width: 90%;
+    height: 83.7%;
+    background-color: #f1f4f5;
+    padding-top: 5%;
+    padding-left: 7%;
+    padding-right: 3%;
+  }
+
+  .el-card{
+    height:80%;
   }
 </style>
