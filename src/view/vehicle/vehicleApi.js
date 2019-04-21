@@ -1,19 +1,23 @@
 import {server} from '../../tools/servers'
 
 export class vehicleApi {
-  static GetApi(data = {}) {
-    return server.connection('GET', '', data)
+  static GetApi (data) {
+    return server.connection('GET', '/Vehicle/getList', data)
   }
 
-  static EditHotspotApi(data = {}) {
-    return server.connection('POST', '/ZWHotlineHotspot/editHotspotItem', data)
+  static delete (data) {
+    return server.connection('POST', '/Vehicle/delete', data)
   }
 
-  static ConfirmSettingApi(data = {}) {
-    return server.connection('POST', '/ZWHotlineHotspot/editDistrictHandleSetting', data)
+  static modify (data) {
+    return server.connection('POST', '/Vehicle/modify', data)
   }
 
-  static ChangeStatusApi(data = {}) {
-    return server.connection('POST', '/ZWHotlineHotspot/changeHotspotStatus', data)
+  static AddApi(data) {
+    return server.connection('POST', '/Vehicle/add', data)
+  }
+
+  static getStationApi () {
+    return server.connection('GET', '/Vehicle/getStation')
   }
 }
