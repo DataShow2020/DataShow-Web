@@ -5,19 +5,19 @@ export default [
     children: [{
       path: '/',
       name: 'admin',
-      component: () => import('../view/evaluate/evaluate'),
+      component: () => import('../view/evaluate/evaluate')
     }, {
       path: 'vehicle',
       name: 'vehicle',
-      component: () => import('../view/vehicle/vehicle'),
+      component: () => import('../view/vehicle/vehicle')
     }, {
       path: 'orderManage',
       name: 'orderManage',
-      component: () => import('../view/orderManage/OrderManage'),
+      component: () => import('../view/orderManage/OrderManage')
     }, {
       path: 'addOrder',
       name: 'addOrder',
-      component: () => import('../view/orderManage/addOrder'),
+      component: () => import('../view/orderManage/addOrder')
     }, {
       path: 'station',
       name: '站点管理',
@@ -27,6 +27,14 @@ export default [
       name: '站点编辑',
       component: () => import('../view/station/editStation')
     }, {
+      path: 'detailStation',
+      name: '站点详情',
+      component: () => import('../view/station/detailStation')
+    }, {
+      path: 'plusStation',
+      name: '站点新增',
+      component: () => import('../view/station/plusStation')
+    }, {
       path: 'distribution',
       name: '配送点管理',
       component: () => import('../view/distribution/index')
@@ -35,13 +43,13 @@ export default [
       name: '配送点详情',
       component: () => import('../view/distribution/detailDistribution')
     }, {
-      path: 'detailStation',
-      name: '站点详情',
-      component: () => import('../view/station/detailStation')
+      path: 'plusDistribution',
+      name: '配送点新增',
+      component: () => import('../view/distribution/plusDistribution')
     }, {
-      path: 'plusStation',
-      name: '站点新增',
-      component: () => import('../view/station/plusStation')
+      path: 'editDistribution',
+      name: '配送点编辑',
+      component: () => import('../view/distribution/editDistribution')
     }
     ]
   }

@@ -13,36 +13,36 @@
 </template>
 
 <script>
-  import CompPagination from './'
+import CompPagination from './'
 
-  export default {
-    name: 'new2',
-    data() {
-      return {
-        /** 分页信息 */
-        page: 1,
-        /** 每页数量  默认50 */
-        pageSize: 50,
-        /** 总数  需要动态获取 */
-        totalCount: 200
-      }
+export default {
+  name: 'new2',
+  data () {
+    return {
+      /** 分页信息 */
+      page: 1,
+      /** 每页数量  默认50 */
+      pageSize: 50,
+      /** 总数  需要动态获取 */
+      totalCount: 2
+    }
+  },
+  components: {
+    CompPagination
+  },
+  methods: {
+    /** 改变每页显示数量 */
+    handleSizeChange: function (val) {
+      this.pageSize = val,
+      // 获取数据
     },
-    components: {
-      CompPagination
-    },
-    methods: {
-      /** 改变每页显示数量 */
-      handleSizeChange: function (val) {
-        this.pageSize = val;
-        // 获取数据
-      },
-      /** 改变页码 */
-      handleCurrentChange: function (val) {
-        this.page = val;
-        // 获取数据
-      },
+    /** 改变页码 */
+    handleCurrentChange: function (val) {
+      this.page = val
+      // 获取数据
     }
   }
+}
 </script>
 
 <style lang="scss" scoped>

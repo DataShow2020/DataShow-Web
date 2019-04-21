@@ -16,14 +16,13 @@ export default {
   data () {
     return {
       formLabelAlign: {
-        stationName: '',
-        userId: '',
+        distributionName: '',
         address: '',
+        distributionNumber: '',
         remark: '',
-        createdUnit: '',
-        stationNumber: ''
+        createdUnit: ''
       },
-      stationTitle: '站点新增'
+      stationTitle: '配送点新增'
     }
   },
   mounted () {
@@ -34,8 +33,7 @@ export default {
   },
   methods: {
     formSubClick: function (item) {
-      console.log(item);
-      NewApi.AddStationApi(item).then((res) => {
+      NewApi.AddDistributionApi(item).then((res) => {
         this.$router.push({name: '站点管理'})
         this.$message({
           message: '恭喜你，添加成功',
