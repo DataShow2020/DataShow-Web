@@ -6,18 +6,20 @@
     <div id="div2">
       <table border="none" cellpadding="20" >
         <tr >
-          <td>配送点名称：{{advertName}}</td>
-          <td>负责人：{{activityName}}</td>
-          <td>配送点地址：{{video}}</td>
+          <td>配送点名称：{{distributionName}}</td>
+          <td>配送点地址：{{address}}</td>
+          <td>负责人：{{userName}}</td>
+          <td>创建单位：{{createdUnit}}</td>
         </tr>
         <tr >
-          <td>运营商名称：{{operatorName}}</td>
+          <td>启用时间：2018-11-2</td>
+          <td>停用时间：2019-11-2</td>
           <td>备注：{{remark}}</td>
         </tr>
       </table>
     </div>
     <div id="button">
-      <router-link to="advertisement"><el-button id="button1" type="primary">返回</el-button></router-link>
+      <router-link to="distribution"><el-button id="button1" type="primary">返回</el-button></router-link>
     </div>
   </div>
 </template>
@@ -25,11 +27,11 @@
 export default {
   data () {
     return {
-      advertName: 'this.$route.params.advertName',
-      activityName: 'this.$route.params.activityName',
-      video: 'this.$route.params.video',
-      operatorName: 'this.$route.params.operatorName',
-      remark: 'this.$route.params.remark'
+      distributionName: this.$route.params.distributionName,
+      address: this.$route.params.address,
+      createdUnit: this.$route.params.createdUnit,
+      remark: this.$route.params.remark,
+      userName: this.$route.params.userName
     }
   }
 }

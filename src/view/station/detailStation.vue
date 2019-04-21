@@ -7,14 +7,14 @@
     <div id="div2">
       <table border="none" cellpadding="20" >
         <tr >
-          <td>站点名称：{{advertName}}</td>
-          <td>地址：{{activityName}}</td>
-          <td>创建单位：{{video}}</td>
+          <td>站点名称：{{stationName}}</td>
+          <td>地址：{{address}}</td>
+          <td>创建单位：{{createdUnit}}</td>
         </tr>
         <tr >
-          <td>启用时间：{{operatorName}}</td>
-          <td>停用时间：{{remark}}</td>
-          <td>备注： </td>
+          <td>启用时间：{{createdTime}}</td>
+          <td>停用时间：{{endTime}}</td>
+          <td>备注： {{remark}}</td>
         </tr>
       </table>
     </div>
@@ -27,11 +27,12 @@
 export default {
   data () {
     return {
-      advertName: 'this.$route.params.advertName',
-      activityName: 'this.$route.params.activityName',
-      video: 'this.$route.params.video',
-      operatorName: 'this.$route.params.operatorName',
-      remark: 'this.$route.params.remark'
+      stationName: this.$route.params.stationName,
+      address: this.$route.params.address,
+      createdUnit: this.$route.params.createdUnit,
+      createdTime: this.$route.params.createdTime,
+      endTime: this.$route.params.endTime,
+      remark: this.$route.params.remark
     }
   }
 }

@@ -1,110 +1,165 @@
 <template>
-  <div>
+  <div >
+    <el-card>
     <div class="start">
       <el-row :gutter="25">
         <el-col :span="6" >
-          <el-button type="primary" @click="searchCar"  icon="el-icon-plus">增加</el-button>
+          <router-link :to="{ path: './plusDistribution'}" class="active"><el-button type="primary" class="el-icon-plus">&nbsp;增加</el-button></router-link>
         </el-col>
         <div class="left">
-        <el-form :inline="true" v-model="searchFilter">
-        <el-col :span="25" class="right">
-          <el-form-item >
-          <el-input  v-model="searchFilter.stationName" style="width:200px" @keyup.enter.native="searchCar" placeholder="请输入配送点名称" clearable></el-input>
-        </el-form-item>
-        <el-form-item>
-          <el-input v-model="searchFilter.manager" style="width:170px" @keyup.enter.native="searchCar" placeholder="请输入负责人" clearable></el-input>
-        </el-form-item>
-        <el-form-item>
-          <el-button type="primary" @click="searchCar"  icon="el-icon-search">搜索</el-button>
-        </el-form-item>
-        </el-col>
-        </el-form>
-    </div>
+          <el-form :inline="true" >
+            <el-col :span="25">
+              <el-form-item >
+                <el-select v-model="status" placeholder="请选择当前配送点状态"  id="select" clearable>
+                  <el-option
+                    v-for="item in options"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value">
+                  </el-option>
+                </el-select>
+              </el-form-item>
+              <el-form-item>
+                <el-button type="primary"   icon="el-icon-search" @click="getTableData()">搜索</el-button>
+              </el-form-item>
+            </el-col>
+          </el-form>
+        </div>
       </el-row>
- </div>
-    <el-table
-      :data="stationInfo"
-      border
-      width="100%">
-      <el-table-column
-        :resizable="isResizable"
-        type="index"
-        label="序号"
-        width="100" >
-      </el-table-column>
-      <el-table-column
-        :resizable="isResizable"
-        prop="distributionName"
-        label="配送点名称"
-       >
-        <template slot-scope="scope">
-          <!--<p v-show="scope.row.plateNumber != null && (scope.row.holdType == '1' || scope.row.holdType == '2')" @click="vehiclePicture(scope.row)" style="cursor:pointer;color:#409EFF;">{{ scope.row.plateNumber }}</p>-->
-          <!--<span v-show="scope.row.plateNumber != null && (scope.row.holdType == '3' || scope.row.holdType == '4')">{{ scope.row.plateNumber }}</span>-->
-          <!--<span v-show="scope.row.plateNumber == null">&#45;&#45;</span>-->
-        </template>
-      </el-table-column>
-      <el-table-column
-        :resizable="isResizable"
-        prop="address"
-        label="配送点地址">
-        <template slot-scope="scope">
-          <!--<span v-show="scope.row.productModel != null">{{ scope.row.productModel }}</span>-->
-          <!--<span v-show="scope.row.productModel == null">&#45;&#45;</span>-->
-        </template>
-      </el-table-column>
-      <el-table-column
-        :resizable="isResizable"
-        prop="managerName"
-        label="所属负责人">
-        <template slot-scope="scope">
-          <!--<span v-show="scope.row.supplier != null">{{ scope.row.supplier }}</span>-->
-          <!--<span v-show="scope.row.supplier == null">&#45;&#45;</span>-->
-        </template>
-      </el-table-column>
-      <el-table-column
-        :resizable="isResizable"
-        prop="status"
-        label="状态">
-        <template slot-scope="scope">
-          <!--<span v-show="scope.row.supplier != null">{{ scope.row.supplier }}</span>-->
-          <!--<span v-show="scope.row.supplier == null">&#45;&#45;</span>-->
-        </template>
-      </el-table-column>
-      <el-table-column
-        :resizable="isResizable"
-        fixed="right"
-        label="操作"
-        width="250">        <template slot-scope="scope" >
-          <el-button type="text"  style="margin-left: 10px;" @click="searchCar(scope.row)" v-auth="{id:'VEHICLE_DETAIL'}">详情</el-button>
-          <el-button type="text"  style="margin-left: 10px;" @click="searchCar(scope.row)">修改</el-button>
-          <el-button type="text"  @click="searchCar(scope.row)">删除</el-button>
-        </template>
-      </el-table-column>
-    </el-table>
+    </div>
+    <comp-table
+      v-loading="loading"
+      :tableData="tableData"
+      :tableHeader="tableHeader"
+      :tableAttr="tableAttr"
+      className="tableClassName"
+      @tableOtherClick="tableOtherClick"
+    >
+    </comp-table>
+
+    <comp-pagination
+      @handleSizeChange="handleSizeChange"
+      @handleCurrentChange="handleCurrentChange"
+      :page="page"
+      :pageSize="pageSize"
+      :totalCount="totalCount"
+    >
+    </comp-pagination>
+    </el-card>
   </div>
 </template>
 
 <script>
+import {NewApi} from './Api'
+import CompTable from './table'
+import compPagination from '../../packages/components/pagination/index'
+import {Msg} from '../../tools/message'
 export default {
   data () {
     return {
-      isResizable: false, // 可缩放
-      searchFilter: {
-        stationName: '',
-        manager: ''
-
+      /** 分页信息 */
+      page: 1,
+      /** 每页数量  默认5 */
+      pageSize: 5,
+      /** 总数  需要动态获取 */
+      totalCount: 20,
+      status: '',
+      loading: false,
+      options: [{
+        value: '0',
+        label: '正常'
+      }, {
+        value: '1',
+        label: '废弃'
+      }],
+      note: {
+        height: '700px',
+        width: '100%'
       },
-      stationInfo: [{distributionName: 'ddd', address: 'dfff', managerName: 'dfjf', status: '0'}]
+      tableHeader: [
+        {prop: 'distributionNumber', label: '配送点编号'},
+        {prop: 'distributionName', label: '配送点名称'},
+        {prop: 'userName', label: '负责人'},
+        {prop: 'address', label: '地址'},
+        {prop: 'createdUnit', label: '创建单位'}
+      ],
+      tableData: [],
+      tableAttr: {
+        noIndex: false,
+        other: [
+          {name: '查看', type: 'look', color: 'orange'},
+          {name: '删除', type: 'del', color: 'red'},
+          {name: '编辑', type: 'edit', color: 'orange'}
+        ],
+        status: {}
+      }
     }
+  },
+  components: {
+    CompTable,
+    compPagination
   },
   mounted () {
-    this.searchCar()
+    this.getTableData()
   },
   methods: {
-    searchCar () {
-      console.info(this.stationInfo)
+    open2 (index) {
+      this.$confirm('此操作将永久删除配送点, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        NewApi.DeletedDistributionApi({distributionId: index}).then(res => {
+          this.getTableData();
+          Msg.success('删除成功')
+        })
+      }).catch(() => {
+      })
+    },
+    getTableData () {
+      this.loading = true;
+      this.data = {
+        page: this.page,
+        pageSize: this.pageSize,
+        status: this.status
+      };
+      console.log(this.data);
+      NewApi.GetDistributionApi(this.data).then(res => {
+        console.log(res.data.data);
+        this.tableData = res.data.data;
+        this.loading = false;
+        this.totalCount = res.data.totalCount;
+        console.log(this.tableData)
+      })
+    },
+    tableOtherClick (row, type, index) {
+      if (type === 'edit') {
+        NewApi.GetDistributionItemApi({id: row.distributionId}).then(res => {
+          this.$router.push({name: '配送点编辑', params: res.data.data})
+        })
+      }
+      if (type === 'look') {
+        let detail = this.tableData[index]
+        this.$router.push({name: '配送点详情', params: detail})
+      }
+      if (type === 'del') {
+        this.open2(row.distributionId)
+      }
+    },
+    /** 改变每页显示数量 */
+    handleSizeChange: function (val) {
+      this.pageSize = val;
+      this.getTableData()
+      // 获取数据
+    },
+    /** 改变页码 */
+    handleCurrentChange: function (val) {
+      this.page = val;
+      this.getTableData()
+      // 获取数据
     }
   }
+
 }
 </script>
 
@@ -117,5 +172,8 @@ export default {
   }
   .left{
     float:right;
+  }
+  .active{
+    text-decoration: none;
   }
 </style>
