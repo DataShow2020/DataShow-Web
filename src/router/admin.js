@@ -5,18 +5,37 @@ export default [
     children: [{
       path: '/',
       name: 'admin',
+      component: () => import('../view/evaluate/evaluate'),
+    },{
       component: () => import('../view/evaluate/evaluate')
     }, {
       path: 'vehicle',
       name: 'vehicle',
+      component: () => import('../view/vehicle/vehicle'),
+    },{
+      path: 'addVehicle',
+      name: 'addVehicle',
+      component: () => import('../view/vehicle/addVehicle'),
+    },{
       component: () => import('../view/vehicle/vehicle')
     }, {
       path: 'orderManage',
       name: 'orderManage',
+      component: () => import('../view/orderManage/OrderManage'),
+    },{
       component: () => import('../view/orderManage/OrderManage')
     }, {
       path: 'addOrder',
       name: 'addOrder',
+      component: () => import('../view/orderManage/addOrder'),
+    },{
+      path: 'editOrder',
+      name: 'editOrder',
+      component: () => import('../view/orderManage/editOrder'),
+    },{
+      path: 'lookOrder',
+      name: 'lookOrder',
+      component: () => import('../view/orderManage/lookOrder'),
       component: () => import('../view/orderManage/addOrder')
     }, {
       path: 'station',
@@ -34,6 +53,7 @@ export default [
       path: 'plusStation',
       name: '站点新增',
       component: () => import('../view/station/plusStation')
+    }]
     }, {
       path: 'distribution',
       name: '配送点管理',

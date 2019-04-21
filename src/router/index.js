@@ -42,6 +42,7 @@ export default new Router({
       name: 'searchResult',
       component: () => import('../view/client/logisticsConsult/searchResult')
     },
+
     {
       path: '/onlineOrder',
       name: 'onlineOrder',

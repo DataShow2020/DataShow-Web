@@ -2,6 +2,35 @@
   <div>
     <el-card style="width: 96%;margin-left:2%;margin-top: 18px;border-radius: 0 !important;">
       <el-button type="primary" class="el-icon-plus" style="margin: 20px;" @click="addData">新增车辆</el-button>
+      <div class="left">
+        <el-form :inline="true" >
+          <el-col :span="25">
+            <el-form-item >
+              <el-select placeholder="请选择车辆类型" value="" style="width:200px" clearable v-model="type">
+                <el-option
+                  v-for="item in options2"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value">
+                </el-option>
+              </el-select>
+            </el-form-item>
+            <el-form-item>
+              <el-select placeholder="请选择车辆状态" value="" style="width:200px" clearable v-model="status">
+                <el-option
+                  v-for="item in options3"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value">
+                </el-option>
+              </el-select>
+            </el-form-item>
+            <el-form-item>
+              <el-button type="primary" icon="el-icon-search" @click="getTableData">搜索</el-button>
+            </el-form-item>
+          </el-col>
+        </el-form>
+      </div>
       <comp-table
         :tableData="tableData"
         :tableHeader="tableHeader"
@@ -22,22 +51,15 @@
         :visible.sync="dialogVisible"
       >
         <div>
-          <el-form ref="formInputData" :model="formInputData" label-width="80px" :rules="rule">
-            <el-form-item label="模块名称" prop="model">
-              <el-input v-model.number="formInputData.model" autocomplete="off"></el-input>
-            </el-form-item>
-            <el-form-item label="数量调整" prop="amount">
-              <el-input v-model.number="formInputData.amount" autocomplete="off"></el-input>
-            </el-form-item>
-            <el-select v-model="value" placeholder="请选择" value="">
-              <el-option
-                v-for="item in options"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value">
-              </el-option>
-            </el-select>
-          </el-form>
+          <span v-if="dialogVisible">车牌号为{{tableData[index].vehicleName}}的车辆状态：</span>
+          <el-select v-model="value" placeholder="请选择车辆状态" value="">
+            <el-option
+              v-for="item in options"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value">
+            </el-option>
+          </el-select>
         </div>
         <span slot="footer" class="dialog-footer">
           <el-button @click="dialogVisible = false">取 消</el-button>
@@ -49,212 +71,187 @@
 </template>
 
 <script>
-  import CompTable from '../../packages/components/table/index'
-  import CompPage from '../../packages/components/pagination/index'
-  import {vehicleApi} from './vehicleApi'
+import CompTable from '../../packages/components/table/index'
+import CompPage from '../../packages/components/pagination/index'
+import {vehicleApi} from './vehicleApi'
 
-  export default {
-    name: 'resources',
-    components: {
-      CompTable,
-      CompPage
-    },
-    data () {
-      var validateAmount = (rule, value, callback) => {
-        if (value === '') {
-          callback(new Error('请输入调整数量'))
-        } else if (value < this.editMin) {
-          callback(new Error('调整数量不能小于' + this.editMin))
-        } else {
-          callback()
+export default {
+  name: 'resources',
+  components: {
+    CompTable,
+    CompPage
+  },
+  data () {
+    return {
+      date: '',
+      type: '',
+      options: [{
+        value: 0,
+        label: '在途'
+      }, {
+        value: 1,
+        label: '空闲'
+      }, {
+        value: 2,
+        label: '维修'
+      }],
+      options2: [{
+        value: 0,
+        label: '大型车'
+      }, {
+        value: 1,
+        label: '中型车'
+      }, {
+        value: 2,
+        label: '小型车'
+      }],
+      options3: [{
+        value: 0,
+        label: '在途'
+      }, {
+        value: 1,
+        label: '空闲'
+      }, {
+        value: 2,
+        label: '维修'
+      }],
+      status: '',
+      value: '',
+      tableData: [],
+      dialogVisible: false,
+      tableHeader: [
+        {
+          prop: 'vehicleName',
+          label: '车牌号'
+        }, {
+          prop: 'vehicleType',
+          label: '车辆类型'
+        }, {
+          prop: 'purchaseTime',
+          label: '购买时间'
+        }, {
+          prop: 'stationName',
+          label: '站点名称'
+        }, {
+          prop: 'status',
+          label: '车辆状态'
         }
-      }
-      return {
-        options: [{
-          value: '选项1',
-          label: '黄金2糕'
-        }, {
-          value: '选项2',
-          label: '双皮奶'
-        }, {
-          value: '选项3',
-          label: '蚵仔煎'
-        }, {
-          value: '选项4',
-          label: '龙须面'
-        }, {
-          value: '选项5',
-          label: '北京烤鸭'
-        }],
-        value: '',
-        formInputData: {
-          model: '',
-          amount: ''
-        },
-        rule: {
-          amount: [
-            {required: true, message: '请输入数量调整数额', trigger: 'blur'},
-            {type: 'number', message: '调整数额必须为数字', trigger: 'blur'},
-            { validator: validateAmount, trigger: 'blur' }]
-        },
-        tableData: [{
-          vehicleName: '2016-05-02',
-          vehicleType: '王小虎',
-          purchaseTime: '2016-05-02',
-          distributionName: '王小虎',
-          stationName: '2016-05-02',
-          status: '王小虎'
-        }, {
-          vehicleName: '2016-05-06',
-          vehicleType: '王小虎',
-          purchaseTime: '2016-05-02',
-          distributionName: '王小虎',
-          stationName: '2016-05-02',
-          status: '王小虎'
-        }, {
-          vehicleName: '2016-05-01',
-          vehicleType: '王小虎',
-          purchaseTime: '2016-05-02',
-          distributionName: '王小虎',
-          stationName: '2016-05-02',
-          status: '王小虎'
-        }, {
-          vehicleName: '2016-05-03',
-          vehicleType: '王小虎',
-          purchaseTime: '2016-05-02',
-          distributionName: '王小虎',
-          stationName: '2016-05-02',
-          status: '王小虎'
-        }],
-        dialogVisible: false,
-        tableHeader: [
-          {
-            prop: 'vehicleName',
-            label: '车牌号'
-          }, {
-            prop: 'vehicleType',
-            label: '车辆类型'
-          }, {
-            prop: 'purchaseTime',
-            label: '购买时间'
-          }, {
-            prop: 'distributionName',
-            label: '配送点名称'
-          }, {
-            prop: 'stationName',
-            label: '站点名称'
-          }, {
-            prop: 'status',
-            label: '车辆状态'
-          }
-        ],
-        tableAttr: {index: {},
-          other: [
-            {name: '编辑', type: 'edit'},
-            {name: '删除', type: 'del'}
-          ]},
-        page: 1,
-        totalCount: 100,
-        pageSize: 5,
-        mouseOver: true,
-        buttClass: 'white',
-        title: ''
-      }
+      ],
+      tableAttr: {index: {},
+        other: [
+          // {name: '查看', type: 'look'},
+          {name: '更改车辆状态', type: 'edit'},
+          {name: '删除', type: 'del', color: 'red'}
+        ]},
+      page: 1,
+      totalCount: 100,
+      pageSize: 5,
+      mouseOver: true,
+      buttClass: 'white',
+      title: '',
+      index: 0
+    }
+  },
+  watch: {
+    mouseOver (newVal) {
+      if (newVal === true) this.buttClass = 'white'
+      else this.buttClass = 'another'
+    }
+  },
+  mounted () {
+    this.getTableData()
+  },
+  methods: {
+    handleCurrentChange (val) {
+      this.page = val
+      this.getTableData()
     },
-    watch: {
-      mouseOver (newVal) {
-        if (newVal === true) this.buttClass = 'white'
-        else this.buttClass = 'another'
-      }
+    getTableData () {
+      vehicleApi.GetApi({page: this.page, pageSize: this.pageSize, vehicleType: this.type, status: this.status}).then(res => {
+        this.tableData = res.data.data.list
+        this.totalCount = res.data.data.total
+        for (let i = 0; i < this.tableData.length; i++) {
+          if (this.tableData[i].status === 0) this.tableData[i].status = '在途'
+          else if (this.tableData[i].status === 1) this.tableData[i].status = '空闲'
+          else this.tableData[i].status = '维修'
+          if (this.tableData[i].vehicleType === 0) this.tableData[i].vehicleType = '大型车'
+          else if (this.tableData[i].vehicleType === 1) this.tableData[i].vehicleType = '中型车'
+          else this.tableData[i].vehicleType = '小型车'
+        }
+      })
     },
-    mounted () {
-      // this.getTableData()
+    addData () {
+      this.$router.push({name: 'addVehicle'})
+      // vehicleApi.add().then(res => {
+      //   if (res.data.code === 200) {
+      //     this.$message({
+      //       type: 'success',
+      //       message: '修改成功'
+      //     })
+      //   } else {
+      //     this.$message({
+      //       type: 'failed',
+      //       message: '修改失败'
+      //     })
+      //   }
+      // })
     },
-    methods: {
-      handleCurrentChange (val) {
-        this.page = val
-      },
-      getTableData () {
-        vehicleApi.getData().then(res => {
-          this.tableData = res.data.data
-        })
-      },
-      recovery () {
-        this.mouseOver = true
-      },
-      changeButt () {
-        this.mouseOver = false
-      },
-      addData () {
-        this.dialogVisible = true
-        this.title = '新增资源'
-        // vehicleApi.add().then(res => {
-        //   if (res.data.code === 200) {
-        //     this.$message({
-        //       type: 'success',
-        //       message: '修改成功'
-        //     })
-        //   } else {
-        //     this.$message({
-        //       type: 'failed',
-        //       message: '修改失败'
-        //     })
-        //   }
-        // })
-      },
-      editData () {
-        vehicleApi.modify({}).then(res => {
-          if (res.data.code === 200) {
-            this.$message({
-              type: 'success',
-              message: '修改成功'
-            })
-          } else {
-            this.$message({
-              type: 'failed',
-              message: '修改失败'
-            })
-          }
-          this.getTableData()
-        })
-      },
-      deleteResource () {
-        vehicleApi.delete().then(res => {
-          if (res.data.code === 200) {
-            this.$message({
-              type: 'success',
-              message: '删除成功'
-            })
-          } else {
-            this.$message({
-              type: 'failed',
-              message: '删除失败'
-            })
-          }
-        })
-      },
-      editOrDelete (label, type, index) {
-        console.log(label, type, index)
-        if (type === 'edit') {
-          this.dialogVisible = true
-          this.title = '编辑资源'
+    editData () {
+      vehicleApi.modify({vehicleId: this.tableData[this.index].vehicleId, status: this.value}).then(res => {
+        if (res.data.code === 200) {
+          this.$message({
+            type: 'success',
+            message: '修改成功'
+          })
         } else {
-          this.$confirm('此操作将删除该车辆信息, 是否继续?', '提示', {
-            confirmButtonText: '确定',
-            cancelButtonText: '取消',
-            type: 'warning'
-          }).then(() => {
-            // this.deleteResource()
-          }).catch(() => {
-            this.$message({
-              type: 'info',
-              message: '已取消删除'
-            })
+          this.$message({
+            type: 'failed',
+            message: '修改失败'
           })
         }
+        this.dialogVisible = false;
+        this.getTableData()
+      })
+    },
+    deleteResource () {
+      vehicleApi.delete({vehicleId: this.tableData[this.index].vehicleId}).then(res => {
+        if (res.data.code === 200) {
+          this.$message({
+            type: 'success',
+            message: '删除成功'
+          })
+        } else {
+          this.$message({
+            type: 'failed',
+            message: '删除失败'
+          })
+        }
+        this.getTableData()
+      })
+    },
+    editOrDelete (label, type, index) {
+      this.index = index;
+      if (type === 'edit') {
+        this.value = this.tableData[this.index].status;
+        this.dialogVisible = true;
+        this.title = '编辑车辆状态';
+      } else {
+        this.$confirm('此操作将删除该车辆信息, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          this.deleteResource()
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消删除'
+          })
+        })
       }
     }
   }
+}
 </script>
 
 <style scoped>
@@ -268,5 +265,8 @@
     float: right;
     margin-top: 20px;
     color: #ffffff;
+  }
+  .left{
+    float:right;
   }
 </style>
