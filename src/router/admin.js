@@ -6,8 +6,6 @@ export default [
       path: '/',
       name: 'admin',
       component: () => import('../view/evaluate/evaluate'),
-    },{
-      component: () => import('../view/evaluate/evaluate')
     }, {
       path: 'vehicle',
       name: 'vehicle',
@@ -16,14 +14,10 @@ export default [
       path: 'addVehicle',
       name: 'addVehicle',
       component: () => import('../view/vehicle/addVehicle'),
-    },{
-      component: () => import('../view/vehicle/vehicle')
     }, {
       path: 'orderManage',
       name: 'orderManage',
       component: () => import('../view/orderManage/OrderManage'),
-    },{
-      component: () => import('../view/orderManage/OrderManage')
     }, {
       path: 'addOrder',
       name: 'addOrder',
@@ -36,7 +30,6 @@ export default [
       path: 'lookOrder',
       name: 'lookOrder',
       component: () => import('../view/orderManage/lookOrder'),
-      component: () => import('../view/orderManage/addOrder')
     }, {
       path: 'station',
       name: '站点管理',
@@ -53,7 +46,6 @@ export default [
       path: 'plusStation',
       name: '站点新增',
       component: () => import('../view/station/plusStation')
-    }]
     }, {
       path: 'distribution',
       name: '配送点管理',
