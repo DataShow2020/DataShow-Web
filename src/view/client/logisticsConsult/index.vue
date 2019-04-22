@@ -17,13 +17,17 @@
         </el-menu>
       </div>
       <div class="searchDiv">
-        <el-form :model="ruleForm" :rules="rules" ref="ruleForm">
-          <el-form-item :prop="orderNom">
-            <el-input prefix-icon="el-icon-search" v-model="ruleForm.orderNom">
-            </el-input>
-            <el-button round @click="searchOrder">查询</el-button>
-          </el-form-item>
-        </el-form>
+        <el-col :span="20">
+          <el-form :model="ruleForm">
+            <el-form-item prop="orderNom">
+              <el-input prefix-icon="el-icon-search" v-model="ruleForm.orderNom">
+              </el-input>
+            </el-form-item>
+          </el-form>
+        </el-col>
+        <el-col :span="4">
+          <el-button round @click="searchOrder">查询</el-button>
+        </el-col>
       </div>
     </div>
 </template>
@@ -36,41 +40,39 @@ export default {
   data () {
     return {
       activeIndex:'1',
-      ruleForm:{orderNom:''},
-      rules:{
-        orderNom:[{ required: true, message: '请输入物流单号', trigger: 'blur' },
-          { min: 8, max: 13, message: '长度在 8 到 13 个字符', trigger: 'blur' }
-        ]
-      }
+      ruleForm:{orderNom:''}
+      // rules:{
+      //   orderNom:[{ required: true, message: '请输入物流单号', trigger: 'blur' },
+      //     { min: 8, max: 13, message: '长度在 8 到 13 个字符', trigger: 'blur' }
+      //   ]
+      // }
     }
   },
   methods: {
     /** 导航栏菜单 */
     handleSelect (key, keyPath) {
-      console.info('key', key)
       if (key == 1) {
         this.$router.push({name:'logisticsConsult'})
       }
       if (key == 2) {
-        this.$router.push({name:'onlineOrder'}) ;
+        this.$router.push({name:'onlineOrder'})
       }
     },
 
     /** 查询 */
     searchOrder: function () {
-      this.$refs['ruleForm'].validate((valid) => {
-        if (valid) {
-          this.$router.push({name:'searchResult'})
-          this.resetForm()
-        } else {
-          this.$message({
-            showClose: true,
-            message: '操作失败',
-            type: 'error'
-          })
-          return false
-        }
-      })
+      if (this.ruleForm.orderNom !== '') {
+        console.info(this.ruleForm.orderNom)
+        this.$router.push({name:'searchResult', params:this.ruleForm})
+        this.resetForm()
+      } else {
+        this.$message({
+          showClose: true,
+          message: '请输入订单号',
+          type: 'error'
+        })
+        return false
+      }
     },
     resetForm () {
       this.$refs['ruleForm'].resetFields()
@@ -90,25 +92,19 @@ export default {
   background-size: cover;
 }
   .searchDiv{
-    width: 20%;
+    width: 22%;
     height:10%;
     margin: 0 auto;
-    padding-top: 16%;
+    padding-top: 18%;
   }
-/*.el-input--medium .el-input__inner /deep/{*/
-  /*height: 42px;*/
-  /*line-height: 36px;*/
-/*}*/
+
   .el-button{
     color: white;
     background-color: #46086b;
     border-color: #46086b;
-    position: absolute;
-    top: 0%;
-    left: 81.4%;
   }
-  .el-menu-item is-active /deep/{
-    font-size: 22px;
-    color:red;
-  }
+
+/*.el-input--medium /deep/.el-input__inner{*/
+    /*height: 300px;*/
+  /*}*/
 </style>
