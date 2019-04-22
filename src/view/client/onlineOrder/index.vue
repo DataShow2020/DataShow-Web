@@ -171,9 +171,9 @@ export default {
 
   .mainDiv {
     width: 86%;
-    height: 81.4%;
+    height: 85.4%;
     background-color: #f1f4f5;
-    padding-top: 6%;
+    padding-top: 4%;
     padding-left: 7%;
     padding-right: 7%;
   }
