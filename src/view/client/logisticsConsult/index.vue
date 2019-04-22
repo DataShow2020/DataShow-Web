@@ -78,6 +78,7 @@ export default {
       this.$refs['ruleForm'].resetFields()
     }
 
+
   }
 }
 </script>

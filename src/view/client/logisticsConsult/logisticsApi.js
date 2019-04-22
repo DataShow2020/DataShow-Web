@@ -13,6 +13,7 @@ export class logisticsApi {
     return server.connection('POST', '/logisticsConsult/evaluate', data)
   }
 
+
   /** 获取评价 */
   static getEvaluate(data) {
     return server.connection('GET', '/logisticsConsult/getEvaluate', data)
