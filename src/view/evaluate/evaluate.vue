@@ -20,7 +20,7 @@
         </el-date-picker>
         <el-button style="float: right; padding: 10px 0" type="text" @click="getChart2">查询</el-button>
       </div>
-      <div id="chart2" style="width: 100%;height: 100%"></div>
+      <div id="chart2" style="width: 100%;height: 100%;margin-top: -17px"></div>
     </el-card>
   </div>
 </template>
