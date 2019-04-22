@@ -1,52 +1,38 @@
 <template>
   <div>
     <div id="div1">
-      <span style="font-weight:bold;font-family: 微软雅黑;font-size:20px;margin-bottom: 2px" >{{stationTitle}}</span>
+    <span style="font-weight:bold;font-family: 微软雅黑;font-size:20px;margin-bottom: 2px" >{{stationTitle}}</span>
     </div>
     <el-card class="box-card">
       <el-form :label-position="labelPosition" ref="formLabelAlign" label-width="100px"  :model="formLabelAlign" class="demo-form-inline">
         <el-row :gutter="20">
           <el-col :span="7">
-            <el-form-item label="车牌号" :rules="[
-            { required: true, message: '请输入站点名称', trigger: 'blur' },
+            <el-form-item label="配送点名称" :rules="[
+            { required: true, message: '请输入配送站点名称', trigger: 'blur' },
             { min: 3, max: 12, message: '长度在 3 到 12 个字符', trigger: 'blur' }
-          ]" prop="stationName">
-              <el-input v-model="formLabelAlign.advertName" placeholder="请输入" clearable></el-input>
+          ]" prop="distributionName">
+              <el-input v-model="formLabelAlign.distributionName" placeholder="请输入" clearable></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="7">
-            <el-form-item label="车辆类型" :rules="[{required: true, message:'不能为空',trigger:'blur'}]" prop="manager">
-              <el-select  v-model="formLabelAlign.operatorId" clearable placeholder="请选择">
-                <el-option
-                  v-for="item in option"
-                  :key="item.value"
-                  :label="item.operatorName"
-                  :value=" item.operatorId ">
-                </el-option>
-              </el-select>
+            <el-form-item label="配送点编号" :rules="[{required: true, message:'不能为空',trigger:'blur'}]" prop="distributionNumber">
+              <el-input v-model="formLabelAlign.distributionNumber" placeholder="请输入" clearable></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="7">
-            <el-form-item label="购买时间" :rules="[{required: true, message:'不能为空',trigger:'blur'}]" prop="address">
-              <el-input v-model="formLabelAlign.video" placeholder="请输入" clearable></el-input>
+            <el-form-item label="地址" :rules="[{required: true, message:'不能为空',trigger:'blur'}]" prop="address">
+              <el-input v-model="formLabelAlign.address" placeholder="请输入" clearable></el-input>
             </el-form-item>
           </el-col>
         </el-row>
         <el-row :gutter="20">
           <el-col :span="7">
-            <el-form-item label="配送点名称" :rules="[{required: true, message:'不能为空',trigger:'blur'}]" prop="carName" clearable>
-              <el-select v-model="formLabelAlign.activityId"  placeholder="请选择" value="">
-                <el-option
-                  v-for="item in advertOption"
-                  :key="item.value"
-                  :label="item.activityName"
-                  :value="item.activityId">
-                </el-option>
-              </el-select>
+            <el-form-item label="创建单位" :rules="[{required: true, message:'不能为空',trigger:'blur'}]" prop="createdUnit" clearable>
+              <el-input v-model="formLabelAlign.createdUnit" placeholder="请输入" clearable></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="7">
-            <el-form-item label="站点名称" :rules="[{required: true, message:'不能为空',trigger:'blur'}]" prop="remark" clearable>
+            <el-form-item label="备注" :rules="[{required: true, message:'不能为空',trigger:'blur'}]" prop="remark" clearable>
               <el-input v-model="formLabelAlign.remark" placeholder="请输入" clearable></el-input>
             </el-form-item>
           </el-col>
@@ -61,25 +47,25 @@
 </template>
 
 <script>
-  import {vehicleApi} from './vehicleApi'
+import {NewApi} from './Api'
 export default {
   data () {
     return {
-      stationTitle: '车辆编辑',
+      stationTitle: '配送点编辑',
       advertOption: [],
       option: [],
       formLabelAlign: {
-        stationName: '',
-        manager: '',
+        distributionName: '',
+        userName: '',
+        userId: '',
         address: '',
-        carName: '',
         remark: '',
-        created: ''
+        distributionNumber: '',
+        createdUnit: ''
       }
     }
   },
   mounted () {
-    this.getOption()
   },
   props: {
     stationTitle: String,
@@ -87,16 +73,6 @@ export default {
 
   },
   methods: {
-    // 获取下拉框的值
-    getOption: function () {
-      vehicleApi.GetManagerOptionApi().then(res => {
-        this.advertOption = res.data.data
-      })
-
-      vehicleApi.GetCarNameOptionApi().then(res => {
-        this.option = res.data.data
-      })
-    },
     submitForm: function (formLabelAlign) {
       this.$refs[formLabelAlign].validate((valid) => {
         if (valid) {

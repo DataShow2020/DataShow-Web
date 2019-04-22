@@ -11,48 +11,41 @@
             { required: true, message: '请输入站点名称', trigger: 'blur' },
             { min: 3, max: 12, message: '长度在 3 到 12 个字符', trigger: 'blur' }
           ]" prop="stationName">
-              <el-input v-model="formLabelAlign.advertName" placeholder="请输入" clearable></el-input>
+              <el-input v-model="formLabelAlign.stationName" placeholder="请输入" clearable></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="7">
-            <el-form-item label="所属负责人" :rules="[{required: true, message:'不能为空',trigger:'blur'}]" prop="manager">
-              <el-select  v-model="formLabelAlign.operatorId" clearable placeholder="请选择">
+            <el-form-item label="所属负责人" :rules="[{required: true, message:'不能为空',trigger:'blur'}]" prop="userId">
+              <el-select  v-model="formLabelAlign.userId" clearable placeholder="请选择">
                 <el-option
                   v-for="item in option"
                   :key="item.value"
-                  :label="item.operatorName"
-                  :value=" item.operatorId ">
+                  :label="item.userName"
+                  :value=" item.userId ">
                 </el-option>
               </el-select>
             </el-form-item>
           </el-col>
           <el-col :span="7">
             <el-form-item label="地址" :rules="[{required: true, message:'不能为空',trigger:'blur'}]" prop="address">
-              <el-input v-model="formLabelAlign.video" placeholder="请输入" clearable></el-input>
+              <el-input v-model="formLabelAlign.address" placeholder="请输入" clearable></el-input>
             </el-form-item>
           </el-col>
         </el-row>
         <el-row :gutter="20">
-          <el-col :span="7">
-            <el-form-item label="车辆" :rules="[{required: true, message:'不能为空',trigger:'blur'}]" prop="carName" clearable>
-              <el-select v-model="formLabelAlign.activityId"  placeholder="请选择">
-                <el-option
-                  v-for="item in advertOption"
-                  :key="item.value"
-                  :label="item.activityName"
-                  :value="item.activityId">
-                </el-option>
-              </el-select>
-            </el-form-item>
-          </el-col>
           <el-col :span="7">
             <el-form-item label="备注" :rules="[{required: true, message:'不能为空',trigger:'blur'}]" prop="remark" clearable>
               <el-input v-model="formLabelAlign.remark" placeholder="请输入" clearable></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="7">
-            <el-form-item label="创建单位" :rules="[{required: true, message:'不能为空',trigger:'blur'}]" prop="created" clearable>
-              <el-input v-model="formLabelAlign.remark" placeholder="请输入" clearable></el-input>
+            <el-form-item label="创建单位" :rules="[{required: true, message:'不能为空',trigger:'blur'}]" prop="createdUnit" clearable>
+              <el-input v-model="formLabelAlign.createdUnit" placeholder="请输入" clearable></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="7">
+            <el-form-item label="订单编号" :rules="[{required: true, message:'不能为空',trigger:'blur'}]" prop="stationNumber" clearable>
+              <el-input v-model="formLabelAlign.stationNumber" placeholder="请输入" clearable></el-input>
             </el-form-item>
           </el-col>
         </el-row>
@@ -71,15 +64,15 @@ export default {
   data () {
     return {
       stationTitle: '站点编辑',
-      advertOption: [],
       option: [],
       formLabelAlign: {
         stationName: '',
-        manager: '',
+        userId: '',
         address: '',
-        carName: '',
         remark: '',
-        created: ''
+        createdUnit: '',
+        stationId: '',
+        stationNumber: ''
       }
     }
   },
@@ -95,10 +88,6 @@ export default {
     // 获取下拉框的值
     getOption: function () {
       NewApi.GetManagerOptionApi().then(res => {
-        this.advertOption = res.data.data
-      })
-
-      NewApi.GetCarNameOptionApi().then(res => {
         this.option = res.data.data
       })
     },

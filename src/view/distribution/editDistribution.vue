@@ -1,28 +1,28 @@
 <template>
-  <public
-    :formLabelAlign="formLabelAlign"
-    :stationTitle="stationTitle"
-    @formSubClick="formSubClick"
-  >
-  </public>
+  <div>
+    <public
+      :formLabelAlign="formLabelAlign"
+      :stationTitle="stationTitle"
+      @formSubClick="formSubClick"
+    >
+    </public>
+  </div>
 </template>
 
 <script>
-  import {vehicleApi} from './vehicleApi'
-  import Public from './public'
+import {NewApi} from './Api'
+import Public from './public'
 export default {
-  name: 'editVehicle',
   data () {
     return {
       formLabelAlign: {
-        stationName: '',
-        manager: '',
+        distributionName: '',
         address: '',
-        carName: '',
+        distributionNumber: '',
         remark: '',
-        created: ''
+        createdUnit: ''
       },
-      stationTitle: '站点编辑'
+      stationTitle: '配送点编辑'
     }
   },
   components: {
@@ -33,8 +33,8 @@ export default {
   },
   methods: {
     formSubClick: function (item) {
-      vehicleApi.EditStationApi(item).then(res => {
-        this.$router.push({name: 'vehicle'})
+      NewApi.EditDistributionApi(item).then(res => {
+        this.$router.push({name: '配送点管理'})
         this.$message({
           message: '恭喜你，编辑成功',
           type: 'success'
@@ -43,6 +43,7 @@ export default {
     }
   }
 }
+
 </script>
 
 <style scoped>

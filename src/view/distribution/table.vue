@@ -35,7 +35,7 @@
       </el-table-column>
       <el-table-column
         v-if="tableAttr.status"
-        label="站点状态"
+        label="配送点状态"
         prop="status"
         align="center">
         <template slot-scope="scope">

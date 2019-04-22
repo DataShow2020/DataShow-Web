@@ -17,11 +17,13 @@ export default {
     return {
       formLabelAlign: {
         stationName: '',
-        manager: '',
+        userId: '',
         address: '',
-        carName: '',
         remark: '',
-        created: ''
+        createdUnit: '',
+        stationId: '',
+        userName: '',
+        stationNumber: ''
       },
       stationTitle: '站点编辑'
     }
@@ -30,10 +32,13 @@ export default {
     Public
   },
   mounted () {
+    // this.$route.params.userId = this.$route.params.userName;
     this.formLabelAlign = this.$route.params
   },
   methods: {
     formSubClick: function (item) {
+      console.log("gggggggggggggg");
+      console.log(item);
       NewApi.EditStationApi(item).then(res => {
         this.$router.push({name: '站点管理'})
         this.$message({
