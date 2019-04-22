@@ -114,7 +114,8 @@ export default {
         sendAddress: {required: true, message: '请输入内容', trigger: 'blur'},
         sendSmartPhone: {required: true, message: '请输入内容', trigger: 'blur'},
         itemName: {required: true, message: '请输入内容', trigger: 'blur'},
-        itemWeight: {required: true, message: '请输入内容', trigger: 'blur'},
+        itemWeight: [{required: true, message: '请输入内容', trigger: 'blur'},
+          {pattern: /^[-|+]?[0-9]\d*$/, message: '请输入正确的数字格式', trigger: ['blur', 'change']},],
         receiptName: {required: true, message: '请输入内容', trigger: 'blur'},
         receiptCity: {required: true, message: '请输入内容', trigger: 'blur'},
         receiptAddress: {required: true, message: '请输入内容', trigger: 'blur'},
@@ -140,7 +141,8 @@ export default {
               this.$alert('下单成功', '信息', {
                 confirmButtonText: '确定'
               })
-              this.$refs['sendForm'].resetFields()
+              this.$router.push({name: 'logisticsConsult'})
+              // this.$refs['sendForm'].resetFields()
             } else {
               this.$alert('下单失败', '信息', {
                 confirmButtonText: '确定'
@@ -148,19 +150,16 @@ export default {
             }
           })
         } else {
-          this.$alert('下单失败', '信息', {
+          this.$alert('下单失败，请填写相关信息', '信息', {
             confirmButtonText: '确定'
           })
-          this.$refs['sendForm'].resetFields()
+          // this.$refs['sendForm'].resetFields()
           return false
         }
       })
     }
   }
 }
-
-
-
 </script>
 
 <style scoped>

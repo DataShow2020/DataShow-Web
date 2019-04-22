@@ -26,7 +26,12 @@ export default [
       path: 'editOrder',
       name: 'editOrder',
       component: () => import('../view/orderManage/editOrder'),
-    },{
+    },
+      {
+        path: 'addOrder',
+        name: 'addOrder',
+        component: () => import('../view/orderManage/addOrder')
+      },{
       path: 'lookOrder',
       name: 'lookOrder',
       component: () => import('../view/orderManage/lookOrder'),
