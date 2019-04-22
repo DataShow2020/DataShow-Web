@@ -1,7 +1,7 @@
 <template>
   <div>
-    <el-card style="width: 96%;margin-left:2%;margin-top: 18px;border-radius: 0 !important;">
-      <el-button type="primary" class="el-icon-plus" style="margin: 20px;" @click="addData">新增车辆</el-button>
+    <el-card>
+      <el-button type="primary" class="el-icon-plus" @click="addData">新增车辆</el-button>
       <div class="left">
         <el-form :inline="true" >
           <el-col :span="25">
