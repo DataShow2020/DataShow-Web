@@ -16,77 +16,71 @@
       </el-menu>
     </div>
     <div class="mainDiv">
-      <el-row style="height: 80%;">
-        <el-col :span="7" style="height: 100%;margin-left: 2.5%">
+      <el-row>
+        <el-col :span="7" style="margin-left: 2.5%">
           <el-card>
             <p style="text-align: center; font-size: 150%;font-weight: 600;color: #ff781d">寄件方</p>
             </br>
             <el-form :model="sendForm" :rules="sendRules" ref="sendForm" label-width="100px" label-position="top">
-              <el-form-item label="真实姓名">
-                <el-input v-model="sendForm.name" placeholder="请输入姓名"></el-input>
+              <el-form-item label="真实姓名" prop="sendName">
+                <el-input v-model="sendForm.sendName" placeholder="请输入姓名"></el-input>
               </el-form-item>
-              <el-form-item label="省/市/区">
-                <el-input v-model="sendForm.city" placeholder="请输入省市区"></el-input>
+              <el-form-item label="省/市/区" prop="sendCity">
+                <el-input v-model="sendForm.sendCity" placeholder="请输入省市区"></el-input>
               </el-form-item>
-              <el-form-item label="地址">
-                <el-input v-model="sendForm.address" placeholder="请输入地址"></el-input>
+              <el-form-item label="地址" prop="sendAddress">
+                <el-input v-model="sendForm.sendAddress" placeholder="请输入地址"></el-input>
               </el-form-item>
-              <el-form-item label="手机">
-                <el-input v-model="sendForm.smartPthone" placeholder="手机或电话必填一项"></el-input>
-              </el-form-item>
-              <el-form-item label="电话">
-                <el-input v-model="sendForm.tel" placeholder="如：021-69777888"></el-input>
+              <el-form-item label="手机" prop="sendSmartPhone">
+                <el-input v-model="sendForm.sendSmartPhone" placeholder="请输入手机号"></el-input>
               </el-form-item>
             </el-form>
           </el-card>
         </el-col>
-        <el-col :span="7" style="height: 100%;margin-left: 4%">
-          <el-card style="margin-bottom: 15%">
+        <el-col :span="7" style="margin-left: 4%">
+          <el-card>
             <p style="text-align: center; font-size: 150%;font-weight: 600; color: #75c476">收件方</p>
             </br>
-            <el-form :model="receiptForm" :rules="receiptRules" ref="receiptForm" label-width="100px" label-position="top">
-              <el-form-item label="真实姓名">
-                <el-input v-model="receiptForm.name" placeholder="请输入姓名"></el-input>
+            <el-form :model="sendForm" :rules="sendRules" ref="sendForm" label-width="100px"
+                     label-position="top">
+              <el-form-item label="真实姓名" prop="receiptName">
+                <el-input v-model="sendForm.receiptName" placeholder="请输入姓名"></el-input>
               </el-form-item>
-              <el-form-item label="省/市/区">
-                <el-input v-model="receiptForm.city" placeholder="请输入省市区"></el-input>
+              <el-form-item label="省/市/区" prop="receiptCity">
+                <el-input v-model="sendForm.receiptCity" placeholder="请输入省市区"></el-input>
               </el-form-item>
-              <el-form-item label="地址">
-                <el-input v-model="receiptForm.address" placeholder="请输入地址"></el-input>
+              <el-form-item label="地址" prop="receiptAddress">
+                <el-input v-model="sendForm.receiptAddress" placeholder="请输入地址"></el-input>
               </el-form-item>
-              <el-form-item label="手机">
-                <el-input v-model="receiptForm.smartPthone" placeholder="手机或电话必填一项"></el-input>
-              </el-form-item>
-              <el-form-item label="电话">
-                <el-input v-model="receiptForm.tel" placeholder="如：021-69777888"></el-input>
+              <el-form-item label="手机" prop="receiptSmartPhone">
+                <el-input v-model="sendForm.receiptSmartPhone" placeholder="手机或电话必填一项"></el-input>
               </el-form-item>
             </el-form>
           </el-card>
         </el-col>
-        <el-col :span="7" style="height: 100%;margin-left: 4%">
-          <el-card>
+        <el-col :span="7" style="margin-left: 4%">
+          <el-card style="height: 505px">
             <p style="text-align: center; font-size: 150%;font-weight: 600;color: #132542">物品信息</p>
             </br>
-            <el-form :model="itemInformationForm" :rules="itemInformationRules" ref="itemInformationForm" label-width="100px" label-position="top">
-              <el-form-item label="特殊备注">
-                <el-input v-model="itemInformationForm.remarks"></el-input>
+            <el-form :model="sendForm" :rules="sendRules" ref="sendForm"
+                     label-width="100px" label-position="top">
+              <el-form-item label="特殊备注" prop="itemRemarks">
+                <el-input v-model="sendForm.itemRemarks"></el-input>
               </el-form-item>
-              <el-form-item label="内件品名">
-                <el-input v-model="itemInformationForm.name" placeholder="请输入物品的名称"></el-input>
+              <el-form-item label="内件品名" prop="itemName">
+                <el-input v-model="sendForm.itemName" placeholder="请输入物品的名称"></el-input>
               </el-form-item>
-              <el-form-item label="物品重量（kg）">
-                <el-input v-model="itemInformationForm.weight" placeholder="请输入物品大致重量"></el-input>
-              </el-form-item>
-              <el-form-item label="时效产品">
-                <el-input v-model="itemInformationForm.agingProduct" placeholder="标准快递"></el-input>
+              <el-form-item label="物品重量（kg）" prop="itemWeight">
+                <el-input v-model="sendForm.itemWeight" placeholder="请输入物品大致重量"></el-input>
               </el-form-item>
             </el-form>
           </el-card>
         </el-col>
       </el-row>
       <div style="text-align: center;margin-top: 2%">
-              <el-button style="color: white;width: 18%;height:7%;background-color: #6291f1;font-size: 150%">提&nbsp;&nbsp;交</el-button>
-
+        <el-button style="color: white;width: 18%;height:7%;background-color: #6291f1;font-size: 150%" @click="submmit">
+          提&nbsp;&nbsp;交
+        </el-button>
       </div>
     </div>
   </div>
@@ -94,50 +88,92 @@
 </template>
 
 <script>
+import {onlineOrderApi} from './onlineOrderApi'
+
 export default {
   name: 'index',
   data () {
     return {
       activeIndex: '2',
-      sendRules: [],
-      sendForm: [],
-      receiptRules: [],
-      receiptForm: [],
-      itemInformationForm: [],
-      itemInformationRules: []
+      sendForm: {
+        sendName: '',
+        sendCity: '',
+        sendAddress: '',
+        sendSmartPhone: '',
+        itemRemarks: '',
+        itemName: '',
+        itemWeight: '',
+        receiptName: '',
+        receiptCity: '',
+        receiptAddress: '',
+        receiptSmartPhone: ''
+      },
+      sendRules: {
+        sendName: {required: true, message: '请输入内容', trigger: 'blur'},
+        sendCity: {required: true, message: '请输入内容', trigger: 'blur'},
+        sendAddress: {required: true, message: '请输入内容', trigger: 'blur'},
+        sendSmartPhone: {required: true, message: '请输入内容', trigger: 'blur'},
+        itemName: {required: true, message: '请输入内容', trigger: 'blur'},
+        itemWeight: [{required: true, message: '请输入内容', trigger: 'blur'},
+          {pattern: /^[-|+]?[0-9]\d*$/, message: '请输入正确的数字格式', trigger: ['blur', 'change']},],
+        receiptName: {required: true, message: '请输入内容', trigger: 'blur'},
+        receiptCity: {required: true, message: '请输入内容', trigger: 'blur'},
+        receiptAddress: {required: true, message: '请输入内容', trigger: 'blur'},
+        receiptSmartPhone: {required: true, message: '请输入内容', trigger: 'blur'}
+      }
     }
   },
   methods: {
     /** 导航栏菜单 */
     handleSelect (key, keyPath) {
-      console.info('key', key)
       if (key == 1) {
         this.$router.push({name: 'logisticsConsult'})
       }
       if (key == 2) {
         this.$router.push({name: 'onlineOrder'})
       }
+    },
+    submmit () {
+      this.$refs['sendForm'].validate((valid) => {
+        if (valid) {
+          onlineOrderApi.insert(this.sendForm).then(res => {
+            if (res.data.code === 200) {
+              this.$alert('下单成功', '信息', {
+                confirmButtonText: '确定'
+              })
+              this.$router.push({name: 'logisticsConsult'})
+              // this.$refs['sendForm'].resetFields()
+            } else {
+              this.$alert('下单失败', '信息', {
+                confirmButtonText: '确定'
+              })
+            }
+          })
+        } else {
+          this.$alert('下单失败，请填写相关信息', '信息', {
+            confirmButtonText: '确定'
+          })
+          // this.$refs['sendForm'].resetFields()
+          return false
+        }
+      })
     }
   }
 }
-
 </script>
 
 <style scoped>
-.outDiv{
-  width: 100%;
-  height: 100%;
-}
-  .mainDiv{
-    width: 86%;
-    height: 83.7%;
-    background-color: #f1f4f5;
-    padding-top: 6%;
-    padding-left: 7%;
-    padding-right: 7%;
+  .outDiv {
+    width: 100%;
+    height: 100%;
   }
 
-  .el-card{
-    height:100%;
+  .mainDiv {
+    width: 86%;
+    height: 85.4%;
+    background-color: #f1f4f5;
+    padding-top: 4%;
+    padding-left: 7%;
+    padding-right: 7%;
   }
 </style>
