@@ -1,13 +1,13 @@
 <template>
   <!--<el-breadcrumb separator-class="/" style="line-height: 50px; font-size: 16px">-->
-    <!--<transition-group name="breadcrumb">-->
-      <!--<el-breadcrumb-item-->
-        <!--v-for="(item, index)  in levelList"-->
-        <!--:key="item.name + index"-->
-        <!--:to="item.path">-->
-        <!--{{renderZhCN(item.name)}}-->
-      <!--</el-breadcrumb-item>-->
-    <!--</transition-group>-->
+  <!--<transition-group name="breadcrumb">-->
+  <!--<el-breadcrumb-item-->
+  <!--v-for="(item, index)  in levelList"-->
+  <!--:key="item.name + index"-->
+  <!--:to="item.path">-->
+  <!--{{renderZhCN(item.name)}}-->
+  <!--</el-breadcrumb-item>-->
+  <!--</transition-group>-->
   <!--</el-breadcrumb>-->
 
   <el-breadcrumb separator="/">
@@ -50,18 +50,31 @@
         //   matched = [{path: '/', name: '／'}].concat(matched)
         // }
         // this.levelList = matched
+
         for (let i = 0; i < this.menuList.length; i++){
-           let o = this.menuList[i];
-           o.menuGroup.forEach(v => {
-             if(v.label === '订单评价') {
-               this.menuLabel = '订单评价';
-               this.firstMenuLabel = o.submenu;
-             }
-             if (v.to === matched) {
-               this.menuLabel = v.label;
-               this.firstMenuLabel = o.submenu;
-             }
-           })
+          let o = this.menuList[i];
+          console.log(this.$route.matched[1].path);
+          if(this.$route.matched[1].path === '/admin/addOrder') {
+            this.menuLabel = '新增订单';
+            this.firstMenuLabel = '订单管理';
+          }else if(this.$route.matched[1].path === '/admin/lookOrder') {
+            this.menuLabel = '订单详情';
+            this.firstMenuLabel = '订单管理';
+          }else if(this.$route.matched[1].path === '/admin/editOrder') {
+            this.menuLabel = '修改订单';
+            this.firstMenuLabel = '订单管理';
+          }
+          o.menuGroup.forEach(v => {
+            // console.log(v.to)
+            if (v.to === matched) {
+              this.menuLabel = v.label;
+              this.firstMenuLabel = o.submenu;
+            } else if (v.to === '/admin' && this.menuLabel != '新增订单'){
+              this.menuLabel = '订单评价';
+              this.firstMenuLabel = o.submenu;
+            }
+
+          })
         }
       },
     },

@@ -3,36 +3,11 @@
 
 <div class="order">
   <el-card>
-  <el-row>
-    <el-col :span="12">
+  <!--<el-row>-->
+    <!--<el-col :span="12">-->
       <router-link :to="{ name: 'addOrder'}">
-        <el-button type="primary" class="el-icon-plus" style="margin: 10px;">新增订单</el-button>
+        <el-button type="primary" class="el-icon-plus">新增订单</el-button>
       </router-link>
-    </el-col>
-  <!--<el-button @click="add('新增')" type="primary" style="margin: 20px;">新增</el-button>-->
-  <!--搜索-->
-    <el-col :span="12">
-    <div class="top">
-
-        <el-form :model="selectForm">
-          <el-col :span="12">
-            <el-form-item
-              prop="orderId"
-              >
-              <el-input v-model="selectForm.orderId" style="width: 200px;" placeholder="请输入订单号"></el-input>
-            </el-form-item>
-
-            <!--<el-form-item prop="receiveAddress" label="收件地址" :label-width="formLabelWidth">-->
-              <!--<el-input v-model="form.receiveAddress" class="myInput" placeholder="省/市/区/详细地址"></el-input>-->
-            <!--</el-form-item>-->
-          </el-col>
-        </el-form>
-
-      <el-button type="primary" @click="getTableData(selectForm)">搜 索</el-button>
-    </div>
-
-  </el-col>
-  </el-row>
 
   <comp-table
     :tableData="tableData"
@@ -71,9 +46,9 @@
           /** 表格的数据 */
           tableData: [{
             orderId: '20160502',
-            productName:'可口可乐',
-            startDistribution: '重庆两江新区',
-            endDistribution: '上海市普陀区金沙江路 1518 弄',
+            itemName:'可口可乐',
+            sendAddress: '重庆两江新区',
+            receiveAddress: '上海市普陀区金沙江路 1518 弄',
             currentStation: '重庆中转站',
             nextStation:'上海站中转站',
             kg:'6.9'
@@ -81,17 +56,17 @@
           tableAttr: {
             index: {},
             other: [
-              {name: '查看',type:'look'},
-              {name: '编辑',type:'edit'},
-              {name: '删除',type:'del'}
+              {name: '详情',type:'look'},
+              {name: '修改',type:'edit'},
+              {name: '删除',type:'del',color:'red'}
             ]
           },
           /** 表头 */
           tableHeader: [
             {prop: 'orderId', label: '订单号'},
-            {prop: 'productName', label: '物品名称',},
-            {prop: 'startDistribution', label: '起点',},
-            {prop: 'endDistribution', label: '终点',},
+            {prop: 'itemName', label: '物品名称',},
+            {prop: 'sendAddress', label: '起点',},
+            {prop: 'receiveAddress', label: '终点',},
             {prop: 'currentStation', label: '已到达',},
             {prop: 'nextStation', label: '下一站',},
             {prop: 'kg', label: '大致重量',}
@@ -100,7 +75,7 @@
           /** 默认分页器的数据 */
           page:1,
           pageSize:5,
-          pageCount:100,
+          pageCount:100,//信息总条数
 
           /*搜索*/
           selectForm:{
@@ -112,17 +87,17 @@
         compTable,
         compPagination
       },
+      mounted(){
+        this.getTableData();
+      },
       methods:{
-        /** 新增订单 */
-        add: function(option){
-          console.log(option);
-          this.dialogTitle=option;
-          this.dialogFormVisible=true;
-        },
-        /** 搜索表格 */
+
+        /** 表格 */
        getTableData:function(){
-          orderManageApi.GetTableList({orderId: this.orderId}).then(res => {
+          orderManageApi.GetTableList({pageNum:this.page,pageSize:this.pageSize}).then(res => {
             this.tableData = res.data.data;
+            this.pageCount = res.data.totalCount;
+            console.log(res.data);
           });
         },
         /** 其他操作 */
@@ -140,7 +115,21 @@
               cancelButtonText: '取消',
               type: 'warning'
             }).then(() => {
-              // this.deleteResource()
+              orderManageApi.DeleteApi(row).then(res => {
+                console.log(res.data.message);
+                if (res.data.message === '订单删除成功') {
+                  this.getTableData();
+                  this.$message({
+                    type: 'success',
+                    message: '删除成功'
+                  })
+                } else {
+                  this.$message({
+                    type: 'success',
+                    message: '删除失败'
+                  })
+                }
+              })
             }).catch(() => {
               this.$message({
                 type: 'info',
