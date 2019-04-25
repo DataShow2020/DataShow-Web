@@ -51,7 +51,7 @@ export default {
   methods: {
     /** 导航栏菜单 */
     handleSelect (key, keyPath) {
-      if (key == 1) {
+      if (key ==   1) {
         this.$router.push({name:'logisticsConsult'})
       }
       if (key == 2) {

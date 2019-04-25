@@ -69,5 +69,8 @@ export default [
       component: () => import('../view/distribution/editDistribution')
     }
     ]
+  }, {
+    path: '/CustomerService',
+    component: () => import('../view/static/CustomerService')
   }
 ]

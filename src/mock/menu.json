@@ -18,6 +18,9 @@
         }, {
           "label": "配送点管理",
           "to":"/admin/distribution"
+        },{
+          "label": "客服中心",
+          "to":"/CustomerService"
         }
       ]
     }

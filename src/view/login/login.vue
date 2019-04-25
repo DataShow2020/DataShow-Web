@@ -8,7 +8,7 @@
             <a href="">首页</a>
             <a href="">物流查询</a>
             <a href="">在线下单</a>
-            <a href="">客服中心</a>
+            <a href="/CustomerService">客服中心</a>
             <a href="">关于我们</a>
           </div>
         </div>
@@ -137,24 +137,23 @@ export default {
     },
     submitForm () {
       this.$refs['ruleForm'].validate((valid) => {
-        // if (valid) {
+        if (valid) {
         this.loading = true
-        // this.$store.dispatch('accountLoginSubmit', this.ruleForm).then((res) => {
-        //   this.loading = false
-        //   if(res.status){
+        this.$store.dispatch('accountLoginSubmit', this.ruleForm).then((res) => {
+          this.loading = false
+          if(res.status){
         Msg.success('登录成功');
         this.$router.push({path: '/admin'})
-        // }
-        // else{
-        //   Msg.error("登陆失败");
-        // }
-
-        // }).catch(() => {
-        //   this.loading = false
-        // })
-        // } else {
-        //   return false
-        // }
+        }
+        else{
+          Msg.error("登陆失败");
+        }
+        }).catch(() => {
+          this.loading = false
+        })
+        } else {
+          return false
+        }
       })
     },
     registerAccount: function () {
