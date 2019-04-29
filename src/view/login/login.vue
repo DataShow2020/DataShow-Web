@@ -5,11 +5,10 @@
         <div>
           <img src="../../assets/images/logo_black.png" class="logo_black">
           <div class="slider">
-            <a href="">首页</a>
-            <a href="">物流查询</a>
-            <a href="">在线下单</a>
-            <a href="/CustomerService">客服中心</a>
-            <a href="">关于我们</a>
+            <a href="/">首页</a>
+            <a href="/logisticsConsult">物流查询</a>
+            <a href="/onlineOrder">在线下单</a>
+            <a href="/CustomerService">关于我们</a>
           </div>
         </div>
       </div>

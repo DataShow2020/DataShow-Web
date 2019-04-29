@@ -71,6 +71,7 @@ export default [
     ]
   }, {
     path: '/CustomerService',
+    name: 'CustomerService',
     component: () => import('../view/static/CustomerService')
   }
 ]

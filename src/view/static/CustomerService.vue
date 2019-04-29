@@ -1,17 +1,19 @@
 <template>
   <div class="service">
     <div class="service-top">
-      <div style="margin:0 160px">
-        <div>
-          <img src="../../assets/images/logo_black.png" class="logo_black">
-          <div class="slider">
-            <a href="/home">首页</a>
-            <a href="">物流查询</a>
-            <a href="">在线下单</a>
-            <a href="/CustomerService">客服中心</a>
-            <a href="/aboutUs">关于我们</a>
-          </div>
-        </div>
+      <div style="width: 100%; height: 6%">
+        <el-menu
+          :default-active="activeIndex"
+          class="el-menu-demo"
+          mode="horizontal"
+          @select="handleSelect"
+          background-color="#545c64"
+          text-color="#fff"
+          active-text-color="#ffd04b">
+          <el-menu-item index="1">物流查询</el-menu-item>
+          <el-menu-item index="2">在线下单</el-menu-item>
+          <el-menu-item index="3">关于我们</el-menu-item>
+        </el-menu>
       </div>
     </div>
     <div class="service-center">
@@ -55,7 +57,25 @@
 
 <script>
 export default {
-  name: "CustomerService"
+  name: 'CustomerService',
+  data () {
+    return {
+      activeIndex: 3
+    }
+  },
+  methods: {
+    handleSelect (key, keyPath) {
+      if (key == 1) {
+        this.$router.push({name: 'logisticsConsult'})
+      }
+      if (key == 2) {
+        this.$router.push({name: 'onlineOrder'})
+      }
+      if (key == 3) {
+        this.$router.push({name: 'CustomerService'})
+      }
+    }
+  }
 }
 </script>
 
@@ -66,7 +86,7 @@ export default {
   }
   .service-top{
     background-color: white;
-    height: 75px;
+    height: 60px;
     width: 100%;
   }
   .logo_black {

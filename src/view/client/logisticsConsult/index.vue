@@ -12,8 +12,7 @@
           active-text-fontSize="24px">
           <el-menu-item index="1">物流查询</el-menu-item>
           <el-menu-item index="2">在线下单</el-menu-item>
-          <el-menu-item index="3">客服中心</el-menu-item>
-          <el-menu-item index="4">关于我们</el-menu-item>
+          <el-menu-item index="3">关于我们</el-menu-item>
         </el-menu>
       </div>
       <div class="searchDiv">
@@ -51,12 +50,16 @@ export default {
   methods: {
     /** 导航栏菜单 */
     handleSelect (key, keyPath) {
-      if (key ==   1) {
+      if (key == 1) {
         this.$router.push({name:'logisticsConsult'})
       }
       if (key == 2) {
         this.$router.push({name:'onlineOrder'})
       }
+      if (key == 3) {
+        this.$router.push({name:'CustomerService'})
+      }
+
     },
 
     /** 查询 */
@@ -77,8 +80,6 @@ export default {
     resetForm () {
       this.$refs['ruleForm'].resetFields()
     }
-
-
   }
 }
 </script>
