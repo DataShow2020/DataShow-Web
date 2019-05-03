@@ -3,11 +3,31 @@
 
 <div class="order">
   <el-card>
-  <!--<el-row>-->
-    <!--<el-col :span="12">-->
+  <el-row>
+    <el-col :span="17">
       <router-link :to="{ name: 'addOrder'}">
         <el-button type="primary" class="el-icon-plus">新增订单</el-button>
       </router-link>
+    </el-col>
+    <el-form :inline="true">
+      <el-col :span="7">
+        <el-form-item>
+          <el-select v-model="currentStatus" placeholder="请选择当前订单状态"  id="select" clearable>
+            <el-option
+              v-for="item in optionsCurrentStatus"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value">
+            </el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item>
+          <el-button type="primary" icon="el-icon-search" @click="getTableData()">搜索</el-button>
+        </el-form-item>
+      </el-col>
+
+    </el-form>
+  </el-row>
 
   <comp-table
     :tableData="tableData"
@@ -80,7 +100,22 @@
           /*搜索*/
           selectForm:{
             orderId:'',
-          }
+          },
+          optionsCurrentStatus:[
+            {//1：已下单:2：运输中:3：已签收:4：已评论
+              value:1,
+              label:'已下单',
+            },{
+              value:2,
+              label:'运输中',
+            },{
+              value:3,
+              label:'已签收',
+            },{
+              value:4,
+              label:'已评论',
+            }],
+          currentStatus:'',
         }
       },
       components:{
@@ -94,7 +129,7 @@
 
         /** 表格 */
        getTableData:function(){
-          orderManageApi.GetTableList({pageNum:this.page,pageSize:this.pageSize}).then(res => {
+          orderManageApi.GetTableList({page:this.page,pageSize:this.pageSize,status:this.currentStatus}).then(res => {
             this.tableData = res.data.data;
             this.pageCount = res.data.totalCount;
             console.log(res.data);

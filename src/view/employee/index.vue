@@ -1,10 +1,45 @@
 <template>
 <div>
   <el-card>
+    <el-row :gutter="25">
+      <el-col :span="13">
+        <router-link :to="{ name: 'addEmployee'}">
+          <el-button type="primary" class="el-icon-plus">新增员工</el-button>
+        </router-link>
+      </el-col>
+      <div class="left">
+        <el-form :inline="true" >
+          <el-col :span="25">
+            <el-form-item>
+              <el-select v-model="workStationId" placeholder="请选择员工工作站点"  id="select" clearable>
+                <el-option
+                  v-for="item in optionsStation"
+                  :key="item.value"
+                  :label="item.stationName"
+                  :value="item.stationId">
+                </el-option>
+              </el-select>
+            </el-form-item>
+            <el-form-item>
+              <el-select v-model="workDistributionId" placeholder="请选择员工工作配送点"  id="select" clearable>
+                <el-option
+                  v-for="item in optionsDistribution"
+                  :key="item.value"
+                  :label="item.distributionName"
+                  :value="item.distributionId">
+                </el-option>
+              </el-select>
+            </el-form-item>
+            <el-form-item>
+              <el-button type="primary" icon="el-icon-search" @click="getTableData()">搜索</el-button>
+            </el-form-item>
+          </el-col>
 
-    <router-link :to="{ name: 'addEmployee'}">
-      <el-button type="primary" class="el-icon-plus">新增员工</el-button>
-    </router-link>
+        </el-form>
+      </div>
+    </el-row>
+
+
 
     <comp-table
       :tableData="tableData"
@@ -63,31 +98,19 @@
               // {prop:'workStart',label:'入职日期'},
               // {prop:'address',label:'家庭住址'}
             ],
-            tableData: [{
-                  employeeId:'123',
-                  employeeName: '张三',
-                  phone: '12345678901',
-                  sex:'男',
-                  workStation: '-',
-                  workDistribution:'重庆配送点',
-                  workStart: '2019-4-15',
-                  address:'重庆'
-                },{
-                  employeeId:'124',
-                  employeeName: '李四',
-                  sex:'女',
-                  phone: '12345678902',
-                  workStation: '重庆中转站',
-                  workDistribution:'-',
-                  workStart: '2019-4-15',
-                  address:'江北'
-                }]
+            tableData: [],
+            optionsStation:[],
+            workStationId:'',
+            optionsDistribution:[],
+            workDistributionId:'',
 
 
           }
       },
       mounted(){
         this.getTableData();
+        this.getDistributions();
+        this.getStations();
       },
       components:{
         compTable,
@@ -96,7 +119,7 @@
       methods:{
         /** 表格 */
         getTableData:function(){
-          EmployeeApi.GetTableList({pageNum:this.page,pageSize:this.pageSize}).then(res => {
+          EmployeeApi.GetTableList({page:this.page,pageSize:this.pageSize,stationId:this.workStationId,distributionId:this.workDistributionId}).then(res => {
             this.tableData = res.data.data;
             this.pageCount = res.data.totalCount;
             console.log(res.data);
@@ -105,10 +128,12 @@
           /** 改变每页显示数量 */
           handleSizeChange: function (val) {
             this.pageSize = val;
+            this.getTableData();
           },
           /** 改变页码 */
           handleCurrentChange: function (val) {
             this.page = val;
+            this.getTableData();
           },
           /** 其他操作 */
           tableOtherClick(row,type,index) {
@@ -167,6 +192,22 @@
             }
           })
         },
+        /*获取所有的配送点*/
+        getDistributions() {
+          EmployeeApi.getDistributions().then(res => {
+            this.optionsDistribution = res.data.data;
+            console.log("========distributions=========");
+            console.log(this.optionsDistribution);
+          })
+        },
+        /*获取所有的站点*/
+        getStations() {
+          EmployeeApi.getStations().then(res => {
+            this.optionsStation = res.data.data;
+            console.log("========stations=========");
+            console.log(this.optionsStation);
+          })
+        }
       }
 
     }
