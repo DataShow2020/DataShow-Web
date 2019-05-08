@@ -6,7 +6,7 @@ import {LoginApi} from '@/view/login/login-api';
 import {Msg} from '../../tools/message';
 import {Auth} from './auth';
 
-const defaultUser = {userName: '', passWord: '', remember: false};
+const defaultUser = {account: '', passWord: '', remember: false};
 
 export default {
   state: {
@@ -61,7 +61,7 @@ export default {
     /** 登录 */
     accountLoginSubmit({commit}, params) {
       return new Promise((resolve, reject) => {
-        LoginApi.login({userName: params.userName, passWord: params.passWord}).then((res) => {
+        LoginApi.login({account: params.account, passWord: params.passWord}).then((res) => {
           if(res.data.status) {
             console.log('%c 身份被服务器接受', 'color:#fa8c16');
             commit('ACCOUNT_AUTH_STATUS_CHANGED', {...res, params});

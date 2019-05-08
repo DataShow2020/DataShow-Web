@@ -1,7 +1,7 @@
-import {server} from '../../../tools/servers';
+import {server} from '../../../tools/servers'
 
 export class sliderApi {
-  static get() {
-    return server.connection('GET', '');
+  static get (account) {
+    return server.connection('GET', `/module/selectModuleList/${account}`)
   }
 }

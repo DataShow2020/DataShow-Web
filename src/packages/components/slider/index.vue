@@ -37,7 +37,7 @@
 </template>
 <script>
 import mock from '@/mock/menu.json'
-// import {sliderApi} from './sliderApi';
+import {sliderApi} from './sliderApi'
 
 export default {
   name: 'slider',
@@ -48,7 +48,7 @@ export default {
     }
   },
   mounted () {
-    // this.getData()
+    this.getData()
   },
   methods: {
     getData () {

@@ -73,7 +73,6 @@
 </template>
 
 <script>
-import {version} from '../../../package'
 import {Auth} from '../../store/user/auth'
 import {Msg} from '../../tools/message'
 
@@ -137,16 +136,16 @@ export default {
     submitForm () {
       this.$refs['ruleForm'].validate((valid) => {
         if (valid) {
-        this.loading = true
+        this.loading = true;
         this.$store.dispatch('accountLoginSubmit', this.ruleForm).then((res) => {
           this.loading = false
+          console.log(res);
           if(res.status){
-        Msg.success('登录成功');
-        this.$router.push({path: '/admin'})
-        }
-        else{
-          Msg.error("登陆失败");
-        }
+            Msg.success('登录成功');
+            this.$router.push({path: '/admin'})
+          } else{
+            Msg.error("登陆失败");
+          }
         }).catch(() => {
           this.loading = false
         })

@@ -5,7 +5,7 @@ import {server} from '@/tools/servers'
  */
 export class LoginApi {
   static login (param) {
-    return server.connection('POST', '/api/post')
+    return server.connection('POST', '/auth/login',param)
   }
 
   static logout () {
