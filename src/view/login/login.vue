@@ -139,7 +139,6 @@ export default {
         this.loading = true;
         this.$store.dispatch('accountLoginSubmit', this.ruleForm).then((res) => {
           this.loading = false
-          console.log(res);
           if(res.status){
             Msg.success('登录成功');
             this.$router.push({path: '/admin'})

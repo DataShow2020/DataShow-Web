@@ -52,7 +52,7 @@ export default {
   },
   methods: {
     getData () {
-      sliderApi.get().then(res => {
+      sliderApi.get(this.$store.getters.userInfo).then(res => {
         this.menuList = res.data.data
       })
     },

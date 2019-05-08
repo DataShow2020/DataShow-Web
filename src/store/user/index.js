@@ -32,7 +32,7 @@ export default {
       const param = data.params;
       if(res) {
         state.token = res.token;
-        state.userInfo = param.userName;
+        state.userInfo = param.account;
         state.isLogin = true;
         Auth.setUserInfo(state.userInfo);
         Auth.setLogin(state.isLogin);
