@@ -111,14 +111,19 @@ export default {
         sendName: {required: true, message: '请输入内容', trigger: 'blur'},
         sendCity: {required: true, message: '请输入内容', trigger: 'blur'},
         sendAddress: {required: true, message: '请输入内容', trigger: 'blur'},
-        sendSmartPhone: {required: true, message: '请输入内容', trigger: 'blur'},
+        sendSmartPhone: [
+          {required: true, message: '请输入内容', trigger: 'blur'},
+          {pattern: /^1[3|4|5|7|8]\d{9}$/, message: '请输入正确的数据格式', trigger: 'blur'}
+        ],
         itemName: {required: true, message: '请输入内容', trigger: 'blur'},
         itemWeight: [{required: true, message: '请输入内容', trigger: 'blur'},
           {pattern: /^[-|+]?[0-9]\d*$/, message: '请输入正确的数字格式', trigger: ['blur', 'change']},],
         receiptName: {required: true, message: '请输入内容', trigger: 'blur'},
         receiptCity: {required: true, message: '请输入内容', trigger: 'blur'},
         receiptAddress: {required: true, message: '请输入内容', trigger: 'blur'},
-        receiptSmartPhone: {required: true, message: '请输入内容', trigger: 'blur'}
+        receiptSmartPhone: [
+          {required: true, message: '请输入内容', trigger: 'blur'},
+          {pattern: /^1[3|4|5|7|8]\d{9}$/, message: '请输入正确的数据格式', trigger: 'blur'}]
       }
     }
   },
