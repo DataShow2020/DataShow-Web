@@ -2,7 +2,6 @@
     <div>
       <el-card>
         <h1>编辑员工</h1>
-        <!--<p>{{listValue}}</p>-->
 
         <el-form :model="form" :rules="rules" ref="form">
           <el-col :span="12">
