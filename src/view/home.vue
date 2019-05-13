@@ -56,10 +56,10 @@ export default {
       this.$router.push({name: 'onlineOrder'})
     },
     question () {
-
+      this.$router.push({name: 'CustomerService'})
     },
     about () {
-
+      this.$router.push({name: 'CustomerService'})
     },
     management () {
       this.$router.push({name: 'login'})
