@@ -34,7 +34,7 @@ export default {
   methods: {
     formSubClick: function (item) {
       NewApi.AddDistributionApi(item).then((res) => {
-        this.$router.push({name: '站点管理'})
+        this.$router.push({name: '配送点管理'})
         this.$message({
           message: '恭喜你，添加成功',
           type: 'success'
