@@ -52,6 +52,34 @@ export default [
       name: '站点新增',
       component: () => import('../view/station/plusStation')
     }, {
+      path: 'employee',
+      name: 'employee',
+      component: () => import('../view/employee/index')
+    }, {
+      path: 'addEmployee',
+      name: 'addEmployee',
+      component: () => import('../view/employee/addEmployee')
+    }, {
+      path: 'editEmployee',
+      name: 'editEmployee',
+      component: () => import('../view/employee/editEmployee')
+    }, {
+      path: 'employee',
+      name: 'employee',
+      component: () => import('../view/employee/index')
+    }, {
+      path: 'addEmployee',
+      name: 'addEmployee',
+      component: () => import('../view/employee/addEmployee')
+    }, {
+      path: 'editEmployee',
+      name: 'editEmployee',
+      component: () => import('../view/employee/editEmployee')
+    }, {
+      path: 'lookEmployee',
+      name: 'lookEmployee',
+      component: () => import('../view/employee/lookEmployee')
+    }, {
       path: 'distribution',
       name: '配送点管理',
       component: () => import('../view/distribution/index')
