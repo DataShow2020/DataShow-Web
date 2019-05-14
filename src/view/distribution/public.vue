@@ -41,7 +41,7 @@
     </el-card>
     <div id="button">
       <el-button id="button1" style="width: 80px;" type="primary" @click="submitForm('formLabelAlign')">提交</el-button>
-      <router-link to="station"><el-button id="button2" style="width: 80px;" type="info">取消</el-button></router-link>
+      <router-link to="distribution"><el-button id="button2" style="width: 80px;" type="info">取消</el-button></router-link>
     </div>
   </div>
 </template>
@@ -112,7 +112,6 @@ export default {
     margin-left:30px;
   }
   #button1{
-    background-color:red;
     font-family: 微软雅黑;
     margin-right:20px;
     font-weight:bold;

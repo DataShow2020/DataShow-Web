@@ -55,7 +55,6 @@ export default {
     margin-top:50px;
   }
   #button1{
-    background-color:red;
     font-family: 微软雅黑;
     font-weight:bold;
     font-size: 13px;

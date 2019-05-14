@@ -8,7 +8,7 @@
       </li>
     </transition-group>
     <ul class="slide-pages">
-      <li v-for="(index) in slides"
+      <li v-for="(item , index) in slides"
           @click="goto(index)"
           class="slide-page-point"
       >
@@ -23,64 +23,64 @@
 </template>
 
 <script>
-  export default {
-    name: "slide",
-    props: {
-      slides: {
-        type: Array,
-        default: []
-      },
-      inv: {
-        type: Number,
-        default: 1000
-      },
-      name: {
-        type: String,
-        default: 'move'
-      },
-      target: {
-        type: String,
-        default: '_blank'
-      }
+export default {
+  name: 'slide',
+  props: {
+    slides: {
+      type: Array,
+      default: []
     },
-    data () {
-      return {
-        nowIndex: 0
-      }
+    inv: {
+      type: Number,
+      default: 1000
     },
-    computed: {
-      prevIndex () {
-        if (this.nowIndex === 0) {
-          return this.slides.length - 1
-        } else {
-          return this.nowIndex - 1
-        }
-      },
-      nextIndex () {
-        if (this.nowIndex === this.slides.length - 1) {
-          return 0
-        } else {
-          return this.nowIndex + 1
-        }
-      }
+    name: {
+      type: String,
+      default: 'move'
     },
-    methods: {
-      goto (index) {
-        this.nowIndex = index
-      },
-      runInv () {
-        this.invId = setInterval(() => {
-          this.goto(this.nextIndex)
-        }, this.inv)
-      },
-      clearInv () {
-        clearInterval(this.invId)
-      }
-    },
-    mounted () {
-      this.runInv()
+    target: {
+      type: String,
+      default: '_blank'
     }
+  },
+  data () {
+    return {
+      nowIndex: 0
+    }
+  },
+  computed: {
+    prevIndex () {
+      if (this.nowIndex === 0) {
+        return this.slides.length - 1
+      } else {
+        return this.nowIndex - 1
+      }
+    },
+    nextIndex () {
+      if (this.nowIndex === this.slides.length - 1) {
+        return 0
+      } else {
+        return this.nowIndex + 1
+      }
+    }
+  },
+  methods: {
+    goto (index) {
+      this.nowIndex = index
+    },
+    runInv () {
+      this.invId = setInterval(() => {
+        this.goto(this.nextIndex)
+      }, this.inv)
+    },
+    clearInv () {
+      clearInterval(this.invId)
+    }
+  },
+  mounted () {
+    this.runInv()
   }
+}
 </script>
 
 <style lang="scss" rel="stylesheet/scss" scoped>
