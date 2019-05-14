@@ -130,6 +130,15 @@ export default {
           prop: 'purchaseTime',
           label: '购买时间'
         }, {
+          prop: 'driverName',
+          label: '司机姓名'
+        }, {
+          prop: 'driverPhone',
+          label: '司机电话'
+        }, {
+          prop: 'cardId',
+          label: '身份证号'
+        }, {
           prop: 'stationName',
           label: '站点名称'
         }, {
@@ -168,6 +177,7 @@ export default {
     },
     getTableData () {
       vehicleApi.GetApi({page: this.page, pageSize: this.pageSize, vehicleType: this.type, status: this.status}).then(res => {
+        console.log(9462,res.data)
         this.tableData = res.data.data.list
         this.totalCount = res.data.data.total
         for (let i = 0; i < this.tableData.length; i++) {

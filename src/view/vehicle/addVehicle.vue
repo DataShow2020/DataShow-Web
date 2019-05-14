@@ -52,12 +52,38 @@
               </el-select>
             </el-form-item>
           </el-col>
+          <el-col :span="7">
+            <el-form-item label="司机姓名" :rules="[
+            { required: true, message: '请输入司机姓名', trigger: 'blur' },
+            { min: 2, max: 5, message: '长度在 2 - 5 个字符', trigger: 'blur' }
+          ]" prop="driverName">
+              <el-input v-model="formLabelAlign.driverName" placeholder="请输入" clearable></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="7">
+            <el-form-item label="司机电话" :rules="[
+            { required: true, message: '请输入司机电话', trigger: 'blur' },
+            { min: 11, max: 11, message: '长度在 11 个字符', trigger: 'blur' }
+          ]" prop="driverPhone">
+              <el-input v-model="formLabelAlign.driverPhone" placeholder="请输入" clearable></el-input>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row :gutter="20">
+          <el-col :span="7">
+            <el-form-item label="身份证号" :rules="[
+            { required: true, message: '请输入身份证号', trigger: 'blur' },
+            { min: 18, max: 18, message: '长度在 18 个字符', trigger: 'blur' }
+          ]" prop="cardId">
+              <el-input v-model="formLabelAlign.cardId" placeholder="请输入" clearable></el-input>
+            </el-form-item>
+          </el-col>
         </el-row>
       </el-form>
     </el-card>
     <div id="button">
-      <el-button id="button1" style="width: 80px;" type="primary" @click="submitForm">提交</el-button>
-      <router-link to="vehicle"><el-button id="button2" style="width: 80px;" type="info">取消</el-button></router-link>
+      <el-button id="button1" style="width: 100px;background-color: #DE7A35" type="primary" @click="submitForm">提交</el-button>
+      <router-link to="vehicle"><el-button id="button2" style="width: 100px;" type="info">取消</el-button></router-link>
     </div>
   </div>
 </template>
@@ -67,7 +93,7 @@ import {vehicleApi} from './vehicleApi'
 export default {
   data () {
     return {
-      stationTitle: '车辆编辑',
+      stationTitle: '车辆新增',
       options2: [{
         value: 0,
         label: '大型车'
@@ -83,7 +109,10 @@ export default {
         purchaseTime: '',
         stationId: '',
         vehicleType: '',
-        vehicleName: ''
+        vehicleName: '',
+        driverPhone: '',
+        driverName: '',
+        cardId: ''
       },
       endDatePicker: this.processDate()
     }
@@ -129,6 +158,8 @@ export default {
     margin-left:30px;
     width:95%;
     height:250px;
+    margin-top: 20px;
+    padding-top: 20px;
 
   }
   .el-row {
