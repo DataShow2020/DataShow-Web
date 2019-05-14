@@ -1,3 +1,4 @@
+<!--
 <template xmlns="">
   <div id="add-order">
     <el-card>
@@ -10,7 +11,7 @@
           </el-col>
           <el-col :span="12">
             <el-form-item prop="totalCount" label="产品数量" :label-width="formLabelWidth">
-            <!--<el-input v-model="form.totalCount"></el-input>-->
+            &lt;!&ndash;<el-input v-model="form.totalCount"></el-input>&ndash;&gt;
               <el-input-number
                 v-model="form.totalCount"
                 @change="handleChangeCount"
@@ -138,3 +139,4 @@
   width: 300px;
 }
 </style>
+-->

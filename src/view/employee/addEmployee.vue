@@ -2,7 +2,7 @@
     <div>
       <el-card>
         <h1>新增员工</h1>
-        <el-form :model="form" :rules="rules" ref="form">
+        <el-form :model="form" :rules="rules" ref="form" style="float: right;">
           <el-col :span="12">
             <el-form-item prop="employeeName" label="员工姓名" :label-width="formLabelWidth">
               <el-input v-model="form.employeeName" class="myInput"></el-input>

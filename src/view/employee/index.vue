@@ -2,12 +2,12 @@
 <div>
   <el-card>
     <el-row :gutter="25">
-      <el-col :span="13">
+      <el-col :span="6">
         <router-link :to="{ name: 'addEmployee'}">
           <el-button type="primary" class="el-icon-plus">新增员工</el-button>
         </router-link>
       </el-col>
-      <div class="left">
+      <div class="top">
         <el-form :inline="true" >
           <el-col :span="25">
             <el-form-item>
@@ -214,5 +214,7 @@
 </script>
 
 <style scoped>
-
+.top{
+  float: right;
+}
 </style>
