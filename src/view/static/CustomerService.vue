@@ -12,7 +12,9 @@
         active-text-color="#ffd04b">
         <el-menu-item index="1">物流查询</el-menu-item>
         <el-menu-item index="2">在线下单</el-menu-item>
-        <el-menu-item index="3">关于我们</el-menu-item>
+        <el-menu-item index="3">客服中心</el-menu-item>
+        <el-menu-item index="4">关于我们</el-menu-item>
+        <el-menu-item index="5">返回</el-menu-item>
       </el-menu>
     </div>
     <div style="width: 100%;">
@@ -75,6 +77,12 @@ export default {
       }
       if (key == 3) {
         this.$router.push({name: 'CustomerService'})
+      }
+      if (key == 4) {
+        this.$router.push({name: 'aboutUs'})
+      }
+      if (key == 5) {
+        this.$router.push({name: 'home'})
       }
     }
   }

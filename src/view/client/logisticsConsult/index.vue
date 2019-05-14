@@ -12,7 +12,9 @@
           active-text-fontSize="24px">
           <el-menu-item index="1">物流查询</el-menu-item>
           <el-menu-item index="2">在线下单</el-menu-item>
-          <el-menu-item index="3">关于我们</el-menu-item>
+          <el-menu-item index="3">客服中心</el-menu-item>
+          <el-menu-item index="4">关于我们</el-menu-item>
+          <el-menu-item index="5">返回</el-menu-item>
         </el-menu>
       </div>
       <div class="searchDiv">
@@ -51,13 +53,19 @@ export default {
     /** 导航栏菜单 */
     handleSelect (key, keyPath) {
       if (key == 1) {
-        this.$router.push({name:'logisticsConsult'})
+        this.$router.push({name: 'logisticsConsult'})
       }
       if (key == 2) {
-        this.$router.push({name:'onlineOrder'})
+        this.$router.push({name: 'onlineOrder'})
       }
       if (key == 3) {
-        this.$router.push({name:'CustomerService'})
+        this.$router.push({name: 'CustomerService'})
+      }
+      if (key == 4) {
+        this.$router.push({name: 'aboutUs'})
+      }
+      if (key == 5) {
+        this.$router.push({name: 'home'})
       }
 
     },

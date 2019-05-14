@@ -59,7 +59,7 @@ export default {
       this.$router.push({name: 'CustomerService'})
     },
     about () {
-      this.$router.push({name: 'CustomerService'})
+      this.$router.push({name: 'aboutUs'})
     },
     management () {
       this.$router.push({name: 'login'})
