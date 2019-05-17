@@ -19,22 +19,17 @@ export class EmployeeApi {
   }
 
   static DeleteApi(data) {
-    console.log("删除Employee ");
-    console.log(data);
-    // return 2;
     return server.connection('POST', `Employee/A03`, data);
   }
 
   static EditorApi(data) {
-    console.log("编辑Employee");
-    console.log(data);
     return server.connection('POST', `Employee/A04`, data);
   }
-
+  //获取站点
   static getStations(){
     return server.connection('GET', `Employee/A06`)
   }
-
+  //获取配送点
   static getDistributions(){
     return server.connection('GET', `Employee/A07`)
   }

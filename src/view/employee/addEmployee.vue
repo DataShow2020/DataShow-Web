@@ -112,7 +112,6 @@
               ],
               phone:[
                 { required: true, message: '电话不能为空'},
-                // { type: 'number', message: '请正确填写格式'}
               ]
             },
 

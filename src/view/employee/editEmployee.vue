@@ -98,7 +98,18 @@
             },
             distributions:[],
             stations:[],
-            rules: {},
+            rules: {
+              employeeName:[
+                { required: true, message: '姓名'}
+              ],
+              age:[
+                { required: true, message: '年龄不能为空'},
+                { type: 'number', message: '年龄必须为数字值'}
+              ],
+              phone:[
+                { required: true, message: '电话不能为空'},
+              ]
+            },
 
           }
       },
