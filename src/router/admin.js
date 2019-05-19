@@ -18,20 +18,11 @@ export default [
       path: 'orderManage',
       name: 'orderManage',
       component: () => import('../view/orderManage/OrderManage'),
-    }, {
-      path: 'addOrder',
-      name: 'addOrder',
-      component: () => import('../view/orderManage/addOrder'),
     },{
       path: 'editOrder',
       name: 'editOrder',
       component: () => import('../view/orderManage/editOrder'),
-    },
-      {
-        path: 'addOrder',
-        name: 'addOrder',
-        component: () => import('../view/orderManage/addOrder')
-      },{
+    },{
       path: 'lookOrder',
       name: 'lookOrder',
       component: () => import('../view/orderManage/lookOrder'),
@@ -51,19 +42,7 @@ export default [
       path: 'plusStation',
       name: '站点新增',
       component: () => import('../view/station/plusStation')
-    }, {
-      path: 'employee',
-      name: 'employee',
-      component: () => import('../view/employee/index')
-    }, {
-      path: 'addEmployee',
-      name: 'addEmployee',
-      component: () => import('../view/employee/addEmployee')
-    }, {
-      path: 'editEmployee',
-      name: 'editEmployee',
-      component: () => import('../view/employee/editEmployee')
-    }, {
+    },{
       path: 'employee',
       name: 'employee',
       component: () => import('../view/employee/index')

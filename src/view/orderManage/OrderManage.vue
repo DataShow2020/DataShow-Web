@@ -3,9 +3,6 @@
 
 <div class="order">
   <el-card>
-      <!--<router-link :to="{ name: 'addOrder'}">-->
-        <!--<el-button type="primary" class="el-icon-plus" style="margin: 10px;">新增订单</el-button>-->
-      <!--</router-link>-->
     <div style="float: right;">
     <el-form :inline="true">
         <el-form-item>

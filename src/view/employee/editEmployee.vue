@@ -1,8 +1,8 @@
 <template>
     <div>
-      <el-card>
-        <h1>编辑员工</h1>
-        <!--<p>{{listValue}}</p>-->
+      <h1 style="margin: 20px;">员工编辑</h1>
+
+      <el-card style="margin:20px;">
 
         <el-form :model="form" :rules="rules" ref="form">
           <el-col :span="12">

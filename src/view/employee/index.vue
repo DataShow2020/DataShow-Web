@@ -1,6 +1,7 @@
 <template>
 <div>
-  <el-card>
+
+  <el-card style="margin:20px;">
     <el-row :gutter="25">
       <el-col :span="6">
         <router-link :to="{ name: 'addEmployee'}">

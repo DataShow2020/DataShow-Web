@@ -1,5 +1,8 @@
 <template>
-  <el-card>
+  <div>
+    <h1 style="margin: 20px;">员工详情 </h1>
+
+    <el-card style="margin:20px;">
 
     <view-cont
       :listData="listData"
@@ -16,6 +19,7 @@
       </router-link>
     </div>
   </el-card>
+  </div>
 </template>
 
 <script>
