@@ -74,7 +74,6 @@
           </router-link>
         </div>
 
-
         <div style="width: 100%;text-align: center;padding: 30px;">
 
         </div>
@@ -83,84 +82,84 @@
 </template>
 
 <script>
-  import {EmployeeApi} from "./api";
+import {EmployeeApi} from './api'
 
-  export default {
-        name: "add-employee",
-      data(){
-          return{
-            formLabelWidth:'120px',
-            form:{
-              employeeId:'',
-              employeeName:'',
-              workStartTime:'',
-              stationId:'',
-              distributionId:'',
-              age:'',
-              phone:'',
-              address:''
-            },
-            distributions:[],
-            stations:[],
-            rules: {
-              employeeName:[
-                { required: true, message: '姓名'}
-              ],
-              age:[
-                { required: true, message: '年龄不能为空'},
-                { type: 'number', message: '年龄必须为数字值'}
-              ],
-              phone:[
-                { required: true, message: '电话不能为空'},
-              ]
-            },
-
-          }
+export default {
+  name: 'add-employee',
+  data () {
+    return {
+      formLabelWidth: '120px',
+      form: {
+        employeeId: '',
+        employeeName: '',
+        workStartTime: '',
+        stationId: '',
+        distributionId: '',
+        age: '',
+        phone: '',
+        address: ''
       },
-      mounted(){
-          this.getDistributions();
-          this.getStations();
-      },
-      methods:{
-        /** 提交表单 */
-        submitForm(formName) {
-          this.$refs[formName].validate((valid) => {
-            if (valid) {
-              console.log(this.form);
-              EmployeeApi.AddEmployeeApi(this.form);
-              // this.resetForm(formName);
-              alert('提交成功!');
-            } else {
-              console.log('提交失败!');
-              return false;
-            }
-          });
-        },
-        /** 重置表单 */
-        resetForm(formName) {
-          console.log(formName);
-          this.$refs[formName].resetFields();
-        },
-        /*获取所有的配送点*/
-        getDistributions(){
-            EmployeeApi.getDistributions().then(res => {
-              this.distributions=res.data.data;
-              console.log("========distributions=========");
-              console.log(this.distributions);
-          })
-        },
-        /*获取所有的站点*/
-        getStations(){
-          EmployeeApi.getStations().then(res => {
-            this.stations=res.data.data;
-            console.log("========stations=========");
-            console.log(this.stations)
-          })
-
-
-        }
+      distributions: [],
+      stations: [],
+      rules: {
+        employeeName: [
+          { required: true, message: '姓名'}
+        ],
+        age: [
+          { required: true, message: '年龄不能为空'}
+          // { type: 'number', message: '年龄必须为数字值'}
+        ],
+        phone: [
+          { required: true, message: '电话不能为空'}
+        ]
       }
+
     }
+  },
+  mounted () {
+    this.getDistributions()
+    this.getStations()
+  },
+  methods: {
+    /** 提交表单 */
+    submitForm (formName) {
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          EmployeeApi.AddEmployeeApi(this.form).then(res => {
+            if (res.data === true)
+              this.$message({type: 'success', message: '新增成功'})
+            else
+              this.$message({type: 'error', message: '新增失败，请重试'})
+          })
+        } else {
+          this.$message({type: 'error', message: '新增失败，请检查输入数据'})
+          return false
+        }
+      })
+    },
+    /** 重置表单 */
+    resetForm (formName) {
+      console.log(formName)
+      this.$refs[formName].resetFields()
+    },
+    /* 获取所有的配送点 */
+    getDistributions () {
+      EmployeeApi.getDistributions().then(res => {
+        this.distributions = res.data.data
+        console.log('========distributions=========')
+        console.log(this.distributions)
+      })
+    },
+    /* 获取所有的站点 */
+    getStations () {
+      EmployeeApi.getStations().then(res => {
+        this.stations = res.data.data
+        console.log('========stations=========')
+        console.log(this.stations)
+      })
+    }
+  }
+}
 </script>
 
 <style scoped>

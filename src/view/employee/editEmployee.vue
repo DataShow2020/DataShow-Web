@@ -17,7 +17,6 @@
             </el-col>
           <el-col :span="12">
             <el-form-item prop="stationName" label="工作站点" :label-width="formLabelWidth">
-              <!--<el-input v-model="form.stationName" class="myInput"></el-input>-->
               <el-select v-model="form.stationId" filterable placeholder="请选择">
                 <el-option
                   v-for="item in stations"
@@ -148,7 +147,7 @@
           this.listValue = EmployeeApi.GetItemApi(employee).then(res => {
             this.listValue = res.data.data;
             console.log("=======listValue========");
-            console.log(this.listValue);
+            console.log(res);
             this.form = this.listValue;
           })
         },
@@ -165,8 +164,6 @@
         getStations() {
           EmployeeApi.getStations().then(res => {
             this.stations = res.data.data;
-            console.log("========stations=========");
-            console.log(this.stations);
           })
         }
       }
