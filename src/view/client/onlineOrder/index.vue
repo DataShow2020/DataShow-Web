@@ -167,7 +167,7 @@ export default {
         if (valid) {
           onlineOrderApi.insert(this.sendForm).then(res => {
             if (res.status === 200) {
-              this.$alert('下单成功,您的订单号为：' + res.data, '成功', {
+              this.$alert('下单成功,您的订单号为：' + res.data +'\n'+' 请妥善保存单号！', '成功', {
                 confirmButtonText: '确定'
               })
               this.$router.push({name: 'logisticsConsult'})
