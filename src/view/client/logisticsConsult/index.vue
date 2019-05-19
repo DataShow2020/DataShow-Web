@@ -19,13 +19,15 @@
         <el-col :span="20">
           <el-form :model="ruleForm">
             <el-form-item prop="orderNom">
-              <el-input prefix-icon="el-icon-search" v-model="ruleForm.orderNom">
+              <!--<el-input prefix-icon="el-icon-search" v-foucs @keyup.enter="searchOrder" v-model="ruleForm.orderNom" >-->
+              <!--</el-input>-->
+              <el-input prefix-icon="el-icon-search" v-model="ruleForm.orderNom" >
               </el-input>
             </el-form-item>
           </el-form>
         </el-col>
         <el-col :span="4">
-          <el-button round @click="searchOrder">查询</el-button>
+          <el-button round @click="searchOrder"   class="search">查询</el-button>
         </el-col>
       </div>
     </div>
@@ -47,7 +49,32 @@ export default {
       // }
     }
   },
+  // directives: {
+  //   focus: {
+  //     // 指令的定义
+  //     inserted: function (el) {
+  //       el.focus()
+  //     }
+  //   }
+  // },
+  // created(){
+  //   this.keyupEnter()
+  // },
   methods: {
+    //
+    // keyupEnter(){
+    //   console.info('11111111')
+    //   let that = this
+    //   document.onkeydown = e =>{
+    //     console.info('2222222222')
+    //     let body = document.getElementsByName('search')[0]
+    //     if(e.keyCode === 13 ){
+    //       console.info('enter')
+    //       that.searchOrder()
+    //     }
+    //   }
+    // },
+
     /** 导航栏菜单 */
     handleSelect (key, keyPath) {
       if (key == 1) {
@@ -65,7 +92,7 @@ export default {
     /** 查询 */
     searchOrder: function () {
       if (this.ruleForm.orderNom !== '') {
-        console.info(this.ruleForm.orderNom)
+        // console.info(this.ruleForm.orderNom)
         this.$router.push({name:'searchResult', params:this.ruleForm})
         this.resetForm()
       } else {
