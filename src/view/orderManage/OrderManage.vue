@@ -3,36 +3,27 @@
 
 <div class="order">
   <el-card>
-  <el-row>
-    <el-col :span="12">
-      <router-link :to="{ name: 'addOrder'}">
-        <el-button type="primary" class="el-icon-plus" style="margin: 10px;">新增订单</el-button>
-      </router-link>
-    </el-col>
-  <!--<el-button @click="add('新增')" type="primary" style="margin: 20px;">新增</el-button>-->
-  <!--搜索-->
-    <el-col :span="12">
-    <div class="top">
+      <!--<router-link :to="{ name: 'addOrder'}">-->
+        <!--<el-button type="primary" class="el-icon-plus" style="margin: 10px;">新增订单</el-button>-->
+      <!--</router-link>-->
+    <div style="float: right;">
+    <el-form :inline="true">
+        <el-form-item>
+          <el-select v-model="currentStatus" placeholder="请选择当前订单状态"  id="select" clearable>
+            <el-option
+              v-for="item in optionsCurrentStatus"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value">
+            </el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item>
+          <el-button type="primary" icon="el-icon-search" @click="getTableData()">搜索</el-button>
+        </el-form-item>
 
-        <el-form :model="selectForm">
-          <el-col :span="12">
-            <el-form-item
-              prop="orderId"
-              >
-              <el-input v-model="selectForm.orderId" style="width: 200px;" placeholder="请输入订单号"></el-input>
-            </el-form-item>
-
-            <!--<el-form-item prop="receiveAddress" label="收件地址" :label-width="formLabelWidth">-->
-              <!--<el-input v-model="form.receiveAddress" class="myInput" placeholder="省/市/区/详细地址"></el-input>-->
-            <!--</el-form-item>-->
-          </el-col>
-        </el-form>
-
-      <el-button type="primary" @click="getTableData(selectForm)">搜 索</el-button>
+    </el-form>
     </div>
-
-  </el-col>
-  </el-row>
 
   <comp-table
     :tableData="tableData"
@@ -83,15 +74,15 @@
             other: [
               {name: '查看',type:'look'},
               {name: '编辑',type:'edit'},
-              {name: '删除',type:'del'}
+              {name: '删除',type:'del',color:'red'}
             ]
           },
           /** 表头 */
           tableHeader: [
             {prop: 'orderId', label: '订单号'},
-            {prop: 'productName', label: '物品名称',},
-            {prop: 'startDistribution', label: '起点',},
-            {prop: 'endDistribution', label: '终点',},
+            {prop: 'itemName', label: '物品名称',},
+            {prop: 'sendAddress', label: '起点',},
+            {prop: 'receiveAddress', label: '终点',},
             {prop: 'currentStation', label: '已到达',},
             {prop: 'nextStation', label: '下一站',},
             {prop: 'kg', label: '大致重量',}
@@ -105,24 +96,39 @@
           /*搜索*/
           selectForm:{
             orderId:'',
-          }
+          },
+          optionsCurrentStatus:[
+            {//1：已下单:2：运输中:3：已签收:4：已评论
+              value:1,
+              label:'已下单',
+            },{
+              value:2,
+              label:'运输中',
+            },{
+              value:3,
+              label:'已签收',
+            },{
+              value:4,
+              label:'已评论',
+            }],
+          currentStatus:'',
         }
       },
       components:{
         compTable,
         compPagination
       },
+      mounted(){
+        this.getTableData();
+      },
       methods:{
-        /** 新增订单 */
-        add: function(option){
-          console.log(option);
-          this.dialogTitle=option;
-          this.dialogFormVisible=true;
-        },
-        /** 搜索表格 */
+
+        /** 表格 */
        getTableData:function(){
-          orderManageApi.GetTableList({orderId: this.orderId}).then(res => {
+          orderManageApi.GetTableList({page:this.page,pageSize:this.pageSize,status:this.currentStatus}).then(res => {
             this.tableData = res.data.data;
+            this.pageCount = res.data.totalCount;
+            console.log(res.data);
           });
         },
         /** 其他操作 */
@@ -140,7 +146,21 @@
               cancelButtonText: '取消',
               type: 'warning'
             }).then(() => {
-              // this.deleteResource()
+              orderManageApi.DeleteApi(row).then(res => {
+                console.log(res.data.message);
+                if (res.data.message === '订单删除成功') {
+                  this.getTableData();
+                  this.$message({
+                    type: 'success',
+                    message: '删除成功'
+                  })
+                } else {
+                  this.$message({
+                    type: 'success',
+                    message: '删除失败'
+                  })
+                }
+              })
             }).catch(() => {
               this.$message({
                 type: 'info',
@@ -184,9 +204,8 @@
 
 <style scoped>
 .top{
-  float:right;
-  margin: 10px;
-  width: 80%;
+  width: 300px;
+  float: right;
 }
 
 </style>

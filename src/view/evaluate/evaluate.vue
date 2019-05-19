@@ -47,10 +47,10 @@ export default {
     this.getChart2()
   },
   methods: {
-    chooseDate() {
+    chooseDate () {
       return {
-        disabledDate(time) {
-          return time.getTime() > Date.now();
+        disabledDate (time) {
+          return time.getTime() > Date.now()
         }
       }
     },
@@ -107,22 +107,42 @@ export default {
     },
     getChart2 () {
       evaluateApi.GetYearApi({countTime: this.countTime}).then(res => {
-        this.chart2 = res.data.data;
-        let good = [];
-        let other = [];
-        let total = [];
-        let type1 = ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'];
-        let type = [];
-        let date = new Date().getMonth() + 1;
+        this.chart2 = res.data.data
+        let good = []
+        let other = []
+        let total = []
+        let type1 = ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月']
+        let type = []
+        let date = new Date().getMonth() + 1
         if (parseInt(this.countTime, 10) < new Date().getFullYear()) {
-          date = 12;
+          date = 12
+        }
+        if (!this.chart2.good) {
+          good = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        } else {
+          for (let i = 1; i < date; i++) {
+            let info = 'month' + i
+            good.push(this.chart2.good[info])
+          }
+        }
+        if (!this.chart2.other) {
+          other = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        } else {
+          for (let i = 1; i < date; i++) {
+            let info = 'month' + i
+            other.push(this.chart2.other[info])
+          }
+        }
+        if (!this.chart2.total) {
+          total = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        } else {
+          for (let i = 1; i < date; i++) {
+            let info = 'month' + i
+            total.push(this.chart2.total[info])
+          }
         }
         for (let i = 1; i < date; i++) {
-          type.push(type1[i - 1]);
-          let info = 'month' + i;
-          good.push(this.chart2.good[info]);
-          other.push(this.chart2.other[info]);
-          total.push(this.chart2.total[info]);
+          type.push(type1[i - 1])
         }
         let chart = this.$echarts.init(document.getElementById('chart2'))
         let option = {

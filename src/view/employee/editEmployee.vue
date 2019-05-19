@@ -65,14 +65,15 @@
         </el-form>
 
         <div style="width: 100%;text-align: center;padding: 20px;">
-          <el-button type="danger" @click="resetForm('form')">重 置</el-button>
+          <!--<el-button type="danger" @click="resetForm('form')">重 置</el-button>-->
           <el-button type="primary" @click="submitForm('form')">提 交</el-button>
-        </div>
-        <div style="width: 100%;text-align: center;padding: 30px;">
           <router-link :to="{name:'employee'}">
-            <el-button type="danger">返 回</el-button>
+            <el-button type="info">返 回</el-button>
           </router-link>
         </div>
+        <!--<div style="width: 100%;text-align: center;padding: 30px;">-->
+          <!---->
+        <!--</div>-->
       </el-card>
     </div>
 </template>
@@ -97,15 +98,26 @@
             },
             distributions:[],
             stations:[],
-            rules: {},
+            rules: {
+              employeeName:[
+                { required: true, message: '姓名'}
+              ],
+              age:[
+                { required: true, message: '年龄不能为空'},
+                { type: 'number', message: '年龄必须为数字值'}
+              ],
+              phone:[
+                { required: true, message: '电话不能为空'},
+              ]
+            },
 
           }
       },
       mounted(){
         this.getRowList();
-        this.getEmployee(this.listValue);
         this.getDistributions();
         this.getStations();
+        this.getEmployee(this.listValue);
       },
       methods: {
         getRowList: function () {
@@ -119,11 +131,15 @@
             if (valid) {
               EmployeeApi.EditorApi(this.form);
               alert('提交成功!');
+              this.goToIndex();
             } else {
               console.log('提交失败!');
               return false;
             }
           });
+        },
+        goToIndex(){
+          this.$router.push({name:'employee'});
         },
         /** 重置表单 */
         resetForm(formName) {
@@ -134,6 +150,7 @@
         getEmployee(employee) {
           this.listValue = EmployeeApi.GetItemApi(employee).then(res => {
             this.listValue = res.data.data;
+            console.log("=======listValue========");
             console.log(this.listValue);
             this.form = this.listValue;
           })
@@ -163,4 +180,7 @@
 .myInput{
   width: 300px;
 }
+  .el-button{
+    width: 100px;
+  }
 </style>

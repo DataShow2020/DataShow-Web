@@ -7,7 +7,7 @@
     <!--</el-dropdown-menu>-->
   <!--</el-dropdown>-->
   <div  >
-<div style="float: left">某种用户名</div>
+<div style="float: left">用户</div>
     <el-button plain class="buttonStyle" @click="exitLogin"><img src="../../../assets/images/exitImg.png"></el-button></div>
 </template>
 

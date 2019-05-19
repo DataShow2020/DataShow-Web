@@ -127,6 +127,7 @@ export default {
       console.log(this.data);
       NewApi.GetStationApi(this.data).then(res => {
         this.tableData = res.data.data;
+        console.log(this.tableData);
         this.loading = false;
         this.totalCount = res.data.totalCount;
       })
