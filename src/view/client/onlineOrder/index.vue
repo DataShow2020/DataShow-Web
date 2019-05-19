@@ -66,13 +66,23 @@
             <el-form :model="sendForm" :rules="sendRules" ref="sendForm"
                      label-width="100px" label-position="top">
               <el-form-item label="特殊备注" prop="itemRemarks">
-                <el-input v-model="sendForm.itemRemarks"></el-input>
+                <el-input v-model="sendForm.itemRemarks" placeholder="如需带纸箱，胶带等"></el-input>
               </el-form-item>
               <el-form-item label="内件品名" prop="itemName">
-                <el-input v-model="sendForm.itemName" placeholder="请输入物品的名称"></el-input>
+                <el-input v-model="sendForm.itemName" placeholder="易燃易爆危险物品不接单"></el-input>
               </el-form-item>
               <el-form-item label="物品重量（kg）" prop="itemWeight">
                 <el-input v-model="sendForm.itemWeight" placeholder="请输入物品大致重量"></el-input>
+              </el-form-item>
+              <el-form-item label="物品类型" prop="itemWeight">
+                <el-select v-model="sendForm.type" placeholder="请选择">
+                  <el-option
+                    v-for="item in options"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value">
+                  </el-option>
+                </el-select>
               </el-form-item>
             </el-form>
           </el-card>
@@ -116,12 +126,21 @@ export default {
         sendSmartPhone: {required: true, message: '请输入内容', trigger: 'blur'},
         itemName: {required: true, message: '请输入内容', trigger: 'blur'},
         itemWeight: [{required: true, message: '请输入内容', trigger: 'blur'},
-          {pattern: /^[-|+]?[0-9]\d*$/, message: '请输入正确的数字格式', trigger: ['blur', 'change']},],
+          {pattern: /^[-|+]?[0-9]\d*$/, message: '请输入正确的数字格式', trigger: ['blur', 'change']}],
         receiptName: {required: true, message: '请输入内容', trigger: 'blur'},
         receiptCity: {required: true, message: '请输入内容', trigger: 'blur'},
         receiptAddress: {required: true, message: '请输入内容', trigger: 'blur'},
-        receiptSmartPhone: {required: true, message: '请输入内容', trigger: 'blur'}
-      }
+        receiptSmartPhone: {required: true, message: '请输入内容', trigger: 'blur'},
+        type: {required: true, message: '请输入选择', trigger: 'blur'}
+      },
+      options: [{value: 0, label: '文件'},
+        {value: 1, label: '书籍'},
+        {value: 2, label: '食品'},
+        {value: 3, label: '化妆品'},
+        {value: 4, label: '服饰'},
+        {value: 5, label: '医药类产品'},
+        {value: 6, label: '易碎品'},
+        {value: 7, label: '其他'}]
     }
   },
   methods: {
@@ -147,12 +166,11 @@ export default {
       this.$refs['sendForm'].validate((valid) => {
         if (valid) {
           onlineOrderApi.insert(this.sendForm).then(res => {
-            if (res.data.code === 200) {
-              this.$alert('下单成功', '信息', {
+            if (res.status === 200) {
+              this.$alert('下单成功,您的订单号为：' + res.data, '成功', {
                 confirmButtonText: '确定'
               })
               this.$router.push({name: 'logisticsConsult'})
-              // this.$refs['sendForm'].resetFields()
             } else {
               this.$alert('下单失败', '信息', {
                 confirmButtonText: '确定'
@@ -163,7 +181,6 @@ export default {
           this.$alert('下单失败，请填写相关信息', '信息', {
             confirmButtonText: '确定'
           })
-          // this.$refs['sendForm'].resetFields()
           return false
         }
       })

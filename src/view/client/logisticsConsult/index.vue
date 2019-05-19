@@ -44,38 +44,10 @@ export default {
     return {
       activeIndex:'1',
       ruleForm:{orderNom:''}
-      // rules:{
-      //   orderNom:[{ required: true, message: '请输入物流单号', trigger: 'blur' },
-      //     { min: 8, max: 13, message: '长度在 8 到 13 个字符', trigger: 'blur' }
-      //   ]
-      // }
     }
   },
-  // directives: {
-  //   focus: {
-  //     // 指令的定义
-  //     inserted: function (el) {
-  //       el.focus()
-  //     }
-  //   }
-  // },
-  // created(){
-  //   this.keyupEnter()
-  // },
+
   methods: {
-    //
-    // keyupEnter(){
-    //   console.info('11111111')
-    //   let that = this
-    //   document.onkeydown = e =>{
-    //     console.info('2222222222')
-    //     let body = document.getElementsByName('search')[0]
-    //     if(e.keyCode === 13 ){
-    //       console.info('enter')
-    //       that.searchOrder()
-    //     }
-    //   }
-    // },
 
     /** 导航栏菜单 */
     handleSelect (key, keyPath) {
@@ -100,7 +72,7 @@ export default {
     /** 查询 */
     searchOrder: function () {
       if (this.ruleForm.orderNom !== '') {
-        // console.info(this.ruleForm.orderNom)
+
         this.$router.push({name:'searchResult', params:this.ruleForm})
         this.resetForm()
       } else {
