@@ -53,7 +53,6 @@
       methods:{
         getRowList: function () {
           this.listValue = this.$route.query.rowList;
-
         },
         /** 后台获取内容 */
         getData() {

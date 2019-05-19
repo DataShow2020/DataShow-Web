@@ -65,15 +65,12 @@
         </el-form>
 
         <div style="width: 100%;text-align: center;padding: 20px;">
-          <!--<el-button type="danger" @click="resetForm('form')">重 置</el-button>-->
           <el-button type="primary" @click="submitForm('form')">提 交</el-button>
           <router-link :to="{name:'employee'}">
             <el-button type="info">返 回</el-button>
           </router-link>
         </div>
-        <!--<div style="width: 100%;text-align: center;padding: 30px;">-->
-          <!---->
-        <!--</div>-->
+
       </el-card>
     </div>
 </template>
