@@ -57,15 +57,7 @@
       data() {
         return {
           /** 表格的数据 */
-          tableData: [{
-            orderId: '20160502',
-            productName:'可口可乐',
-            startDistribution: '重庆两江新区',
-            endDistribution: '上海市普陀区金沙江路 1518 弄',
-            currentStation: '重庆中转站',
-            nextStation:'上海站中转站',
-            kg:'6.9'
-          }],
+          tableData: [],
           tableAttr: {
             index: {},
             other: [
@@ -125,7 +117,6 @@
           orderManageApi.GetTableList({page:this.page,pageSize:this.pageSize,status:this.currentStatus}).then(res => {
             this.tableData = res.data.data;
             this.pageCount = res.data.totalCount;
-            console.log(res.data);
           });
         },
         /** 其他操作 */
