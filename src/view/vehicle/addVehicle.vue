@@ -52,33 +52,33 @@
               </el-select>
             </el-form-item>
           </el-col>
-          <el-col :span="7">
-            <el-form-item label="司机姓名" :rules="[
-            { required: true, message: '请输入司机姓名', trigger: 'blur' },
-            { min: 2, max: 5, message: '长度在 2 - 5 个字符', trigger: 'blur' }
-          ]" prop="driverName">
-              <el-input v-model="formLabelAlign.driverName" placeholder="请输入" clearable></el-input>
-            </el-form-item>
-          </el-col>
-          <el-col :span="7">
-            <el-form-item label="司机电话" :rules="[
-            { required: true, message: '请输入司机电话', trigger: 'blur' },
-            { min: 11, max: 11, message: '长度在 11 个字符', trigger: 'blur' }
-          ]" prop="driverPhone">
-              <el-input v-model="formLabelAlign.driverPhone" placeholder="请输入" clearable></el-input>
-            </el-form-item>
-          </el-col>
+          <!--<el-col :span="7">-->
+            <!--<el-form-item label="司机姓名" :rules="[-->
+            <!--{ required: true, message: '请输入司机姓名', trigger: 'blur' },-->
+            <!--{ min: 2, max: 5, message: '长度在 2 - 5 个字符', trigger: 'blur' }-->
+          <!--]" prop="driverName">-->
+              <!--<el-input v-model="formLabelAlign.driverName" placeholder="请输入" clearable></el-input>-->
+            <!--</el-form-item>-->
+          <!--</el-col>-->
+          <!--<el-col :span="7">-->
+            <!--<el-form-item label="司机电话" :rules="[-->
+            <!--{ required: true, message: '请输入司机电话', trigger: 'blur' },-->
+            <!--{ min: 11, max: 11, message: '长度在 11 个字符', trigger: 'blur' }-->
+          <!--]" prop="driverPhone">-->
+              <!--<el-input v-model="formLabelAlign.driverPhone" placeholder="请输入" clearable></el-input>-->
+            <!--</el-form-item>-->
+          <!--</el-col>-->
         </el-row>
-        <el-row :gutter="20">
-          <el-col :span="7">
-            <el-form-item label="身份证号" :rules="[
-            { required: true, message: '请输入身份证号', trigger: 'blur' },
-            { min: 18, max: 18, message: '长度在 18 个字符', trigger: 'blur' }
-          ]" prop="cardId">
-              <el-input v-model="formLabelAlign.cardId" placeholder="请输入" clearable></el-input>
-            </el-form-item>
-          </el-col>
-        </el-row>
+        <!--<el-row :gutter="20">-->
+          <!--<el-col :span="7">-->
+            <!--<el-form-item label="身份证号" :rules="[-->
+            <!--{ required: true, message: '请输入身份证号', trigger: 'blur' },-->
+            <!--{ min: 18, max: 18, message: '长度在 18 个字符', trigger: 'blur' }-->
+          <!--]" prop="cardId">-->
+              <!--<el-input v-model="formLabelAlign.cardId" placeholder="请输入" clearable></el-input>-->
+            <!--</el-form-item>-->
+          <!--</el-col>-->
+        <!--</el-row>-->
       </el-form>
     </el-card>
     <div id="button">

@@ -75,99 +75,107 @@
 </template>
 
 <script>
-  import {EmployeeApi} from './api'
-    export default {
-        name: "edit-employee",
-      data(){
-          return{
-           listValue:{},
-            formLabelWidth:'120px',
-            form:{
-             employeeId:'',
-              employeeName:'',
-              workStartTime:'',
-              stationId:'',
-              distributionId:'',
-              age:'',
-              phone:'',
-              address:''
-            },
-            distributions:[],
-            stations:[],
-            rules: {
-              employeeName:[
-                { required: true, message: '姓名'}
-              ],
-              age:[
-                { required: true, message: '年龄不能为空'},
-                { type: 'number', message: '年龄必须为数字值'}
-              ],
-              phone:[
-                { required: true, message: '电话不能为空'},
-              ]
-            },
-
-          }
+import {EmployeeApi} from './api'
+export default {
+  name: 'edit-employee',
+  data () {
+    return {
+      listValue: {},
+      formLabelWidth: '120px',
+      form: {
+        employeeId: '',
+        employeeName: '',
+        workStartTime: '',
+        // stationId: '',
+        // distributionId: '',
+        age: '',
+        phone: '',
+        address: ''
       },
-      mounted(){
-        this.getRowList();
-        this.getDistributions();
-        this.getStations();
-        this.getEmployee(this.listValue);
-      },
-      methods: {
-        getRowList: function () {
-          this.listValue = this.$route.query.rowList;
-          // console.log(this.listValue.orderId);
-          this.form = this.listValue;
-        },
-        /** 提交表单 */
-        submitForm(formName) {
-          this.$refs[formName].validate((valid) => {
-            if (valid) {
-              EmployeeApi.EditorApi(this.form);
-              alert('提交成功!');
-              this.goToIndex();
-            } else {
-              console.log('提交失败!');
-              return false;
-            }
-          });
-        },
-        goToIndex(){
-          this.$router.push({name:'employee'});
-        },
-        /** 重置表单 */
-        resetForm(formName) {
-          console.log(formName);
-          this.$refs[formName].resetFields();
-        },
-        /*获取后台数据*/
-        getEmployee(employee) {
-          this.listValue = EmployeeApi.GetItemApi(employee).then(res => {
-            this.listValue = res.data.data;
-            console.log("=======listValue========");
-            console.log(res);
-            this.form = this.listValue;
-          })
-        },
-
-        /*获取所有的配送点*/
-        getDistributions() {
-          EmployeeApi.getDistributions().then(res => {
-            this.distributions = res.data.data;
-            console.log("========distributions=========");
-            console.log(this.distributions);
-          })
-        },
-        /*获取所有的站点*/
-        getStations() {
-          EmployeeApi.getStations().then(res => {
-            this.stations = res.data.data;
-          })
-        }
+      distributions: [],
+      stations: [],
+      rules: {
+        employeeName: [
+          { required: true, message: '姓名'}
+        ],
+        age: [
+          { required: true, message: '年龄不能为空'},
+          { type: 'number', message: '年龄必须为数字值'}
+        ],
+        phone: [
+          { required: true, message: '电话不能为空'}
+        ]
       }
+
     }
+  },
+  mounted () {
+    this.getRowList()
+    this.getDistributions()
+    this.getStations()
+    this.getEmployee(this.listValue)
+  },
+  methods: {
+    getRowList: function () {
+      this.listValue = this.$route.query.rowList
+      // console.log(this.listValue.orderId);
+      this.form = this.listValue
+    },
+    /** 提交表单 */
+    submitForm (formName) {
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          EmployeeApi.EditorApi(this.form)
+          alert('提交成功!')
+          this.goToIndex()
+        } else {
+          console.log('提交失败!')
+          return false
+        }
+      })
+    },
+    goToIndex () {
+      this.$router.push({name: 'employee'})
+    },
+    /** 重置表单 */
+    resetForm (formName) {
+      console.log(formName)
+      this.$refs[formName].resetFields()
+    },
+    /* 获取后台数据 */
+    getEmployee (employee) {
+      this.listValue = EmployeeApi.GetItemApi(employee).then(res => {
+        this.listValue = res.data.data
+        console.log('=======listValue========')
+        console.log(res)
+        this.form = this.listValue
+      })
+    },
+
+    /* 获取所有的配送点 */
+    getDistributions () {
+      EmployeeApi.getDistributions().then(res => {
+        this.distributions = res.data.data
+        console.log('========distributions=========')
+        console.log(this.distributions)
+      })
+    },
+    /* 获取所有的站点 */
+    getStations () {
+      EmployeeApi.getStations().then(res => {
+        console.info('44444', res.data.data)
+        // this.stations = res.data.data
+
+        for(var i = 0; i< res.data.data.length; i++){
+          console.info('00000000000000',res.data.data[i])
+          this.stations[i].stationId = res.data.data[i].stationId
+          this.stations[i].stationName = res.data.data[i].stationName
+        }
+        console.info('5555555555',this.stations)
+      })
+    }
+  }
+}
 </script>
 
 <style scoped>

@@ -21,6 +21,9 @@
         }, {
           "label": "员工管理",
           "to":"/admin/employee"
+        }, {
+          "label": "司机管理",
+          "to":"admin/driverIndex"
         },{
           "label": "客服中心",
           "to":"/CustomerService"

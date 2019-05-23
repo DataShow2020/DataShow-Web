@@ -74,6 +74,10 @@ export default [
       path: 'editDistribution',
       name: '配送点编辑',
       component: () => import('../view/distribution/editDistribution')
+    }, {
+      path: 'driverIndex',
+      name: '司机管理',
+      component: () => import('../view/driver/driverIndex')
     }
     ]
   }, {

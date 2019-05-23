@@ -130,15 +130,6 @@ export default {
           prop: 'purchaseTime',
           label: '购买时间'
         }, {
-          prop: 'driverName',
-          label: '司机姓名'
-        }, {
-          prop: 'driverPhone',
-          label: '司机电话'
-        }, {
-          prop: 'cardId',
-          label: '身份证号'
-        }, {
           prop: 'stationName',
           label: '站点名称'
         }, {
