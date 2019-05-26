@@ -8,6 +8,10 @@ export class LoginApi {
     return server.connection('POST', '/auth/login',param)
   }
 
+  static getRole(account){
+    return server.connection('GET',`/module/queryRoleInfo/${account}`)
+  }
+
   static logout () {
     return server.connection('POST', '')
   }

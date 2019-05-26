@@ -134,9 +134,9 @@ export default {
           this.loading = true
           RegisterApi.register(this.formData).then((res) => {
             this.loading = false
-            if (res.data.status) {
-              Msg.success('注册成功')
-              this.returnLogin()
+            if (res.data.data) {
+              Msg.success('注册成功');
+              this.returnLogin();
             } else {
               Msg.error('注册失败')
             }

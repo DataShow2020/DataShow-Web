@@ -101,7 +101,7 @@ export default {
     }
   },
   created () {
-    window.addEventListener ? window.addEventListener('keyup', this.Enter) : null;
+    window.addEventListener ? window.addEventListener('keyup', this.Enter) : null
     this.getUser()
   },
   /** 计算属性 */
@@ -118,7 +118,7 @@ export default {
     Enter () {
       document.onkeyup = (e) => {
         var currKey = 0
-        let event = e || window.event;
+        let event = e || window.event
         currKey = e.keyCode || e.which || e.charCode
         if (currKey === 13) {
           if (event) {
@@ -136,18 +136,18 @@ export default {
     submitForm () {
       this.$refs['ruleForm'].validate((valid) => {
         if (valid) {
-        this.loading = true;
-        this.$store.dispatch('accountLoginSubmit', this.ruleForm).then((res) => {
-          this.loading = false
-          if(res.status){
-            Msg.success('登录成功');
-            this.$router.push({path: '/admin'})
-          } else{
-            Msg.error("登陆失败");
-          }
-        }).catch(() => {
-          this.loading = false
-        })
+          this.loading = true
+          this.$store.dispatch('accountLoginSubmit', this.ruleForm).then((res) => {
+            this.loading = false
+            if (res) {
+              Msg.success('登录成功')
+              this.$router.push({path: '/admin'})
+            } else {
+              Msg.error('登陆失败')
+            }
+          }).catch(() => {
+            this.loading = false
+          })
         } else {
           return false
         }

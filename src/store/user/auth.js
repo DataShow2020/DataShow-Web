@@ -56,4 +56,16 @@ export class Auth {
     Auth.removeUserInfo();
     Auth.removeLogin();
   }
+
+  static setRole (value = {}) {
+    return sessionStorage.setItem('user.roleInfo', JSON.stringify(value))
+  }
+
+  static getRole() {
+    return JSON.parse(sessionStorage.getItem('user.roleInfo'))
+  }
+
+  static removeRole() {
+    return sessionStorage.removeItem('user.roleInfo')
+  }
 }

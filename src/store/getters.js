@@ -4,4 +4,5 @@ export const getters = {
   token: state => state.user.token,
   accountPwd: state => state.user.accountPwd,
   addRouters: state => state.permission.addRouters,
+  role: state => state.user.role
 };
