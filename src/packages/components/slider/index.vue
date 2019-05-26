@@ -19,19 +19,23 @@
       width="220px"
       :collapse="isCollapse"
     >
-      <el-submenu v-for="(menu, v) in menuList" :index="index.toString()" :key="index">
+      <el-submenu>
+      <template slot="title">
+          <span>物流系统</span>
+        </template>
+        <el-menu-item-group v-for="(menu, v) in menuList" :key="'-' + v" style="background-color: #eaecf5; " >
           <router-link class="head-link" :to="menu.to">
             <el-menu-item :index="index+ '-' + v" style="border:1px solid #d7dbec">
               <span slot="title">{{menu.label}}</span>
             </el-menu-item>
           </router-link>
+        </el-menu-item-group>
       </el-submenu>
     </el-menu>
 
   </div>
 </template>
 <script>
-import mock from '@/mock/menu.json'
 import {sliderApi} from './sliderApi'
 
 export default {
@@ -39,7 +43,7 @@ export default {
   data () {
     return {
       isCollapse: false,
-      menuList: mock.menu
+      menuList: {}
     }
   },
   mounted () {
@@ -47,10 +51,8 @@ export default {
   },
   methods: {
     getData () {
-      console.log(this.$store.getters.userInfo);
       sliderApi.get(this.$store.getters.userInfo).then(res => {
-        console.log(res);
-        this.menuList = res.data.data
+        this.menuList = res.data.data;
       })
     },
     handSelect: function (key, path) {

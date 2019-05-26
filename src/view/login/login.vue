@@ -136,11 +136,11 @@ export default {
     submitForm () {
       this.$refs['ruleForm'].validate((valid) => {
         if (valid) {
-          this.loading = true
+          this.loading = true;
           this.$store.dispatch('accountLoginSubmit', this.ruleForm).then((res) => {
-            this.loading = false
+            this.loading = false;
             if (res) {
-              Msg.success('登录成功')
+              Msg.success('登录成功');
               this.$router.push({path: '/admin'})
             } else {
               Msg.error('登陆失败')
