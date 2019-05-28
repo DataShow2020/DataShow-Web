@@ -114,7 +114,11 @@ export default {
 
     /** 表格 */
     getTableData: function () {
-      orderManageApi.GetTableList({page: this.page, pageSize: this.pageSize, status: this.currentStatus}).then(res => {
+      let userName = '';
+      if (this.$store.getters.role === '站点负责人') {
+        userName = this.$store.getters.userInfo;
+      }
+      orderManageApi.GetTableList({page: this.page, pageSize: this.pageSize, status: this.currentStatus, userName: userName}).then(res => {
         this.tableData = res.data.data
         this.pageCount = res.data.totalCount
       })
