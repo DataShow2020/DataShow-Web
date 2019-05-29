@@ -44,9 +44,9 @@
             </el-form-item>
           </el-col>
           <el-col :span="7">
-            <el-form-item label="订单编号" :rules="[{required: true, message:'不能为空',trigger:'blur'}]" prop="stationNumber" clearable>
-              <el-input v-model="formLabelAlign.stationNumber" placeholder="请输入" clearable></el-input>
-            </el-form-item>
+            <!--<el-form-item label="订单编号" :rules="[{required: true, message:'不能为空',trigger:'blur'}]" prop="stationNumber" clearable>-->
+              <!--<el-input v-model="formLabelAlign.stationNumber" placeholder="请输入" clearable></el-input>-->
+            <!--</el-form-item>-->
           </el-col>
         </el-row>
       </el-form>
