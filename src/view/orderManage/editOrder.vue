@@ -23,8 +23,8 @@
           </el-form-item>
         </el-col>
       <el-col :span="12" v-if="userRole==='总公司管理员'">
-        <el-form-item prop="distribution" label="配送点" :label-width="formLabelWidth">
-          <el-select v-model="form.distribution" placeholder="请选择">
+        <el-form-item prop="distributionId" label="配送点" :label-width="formLabelWidth">
+          <el-select v-model="form.distributionId" placeholder="请选择">
             <el-option
               v-for="item in distributions"
               :key="item.distributionId"
