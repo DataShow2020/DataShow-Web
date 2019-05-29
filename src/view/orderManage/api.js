@@ -20,7 +20,11 @@ export class orderManageApi {
   }
   //获取站点
   static getStations(){
-    return server.connection('GET', `Employee/A06`)
+    return server.connection('GET', `Order/A06`)
+  }
+  //获取配送点
+  static getDistributions(){
+    return server.connection('GET',`Order/A07`)
   }
 
 

@@ -12,7 +12,6 @@
         </el-col>
         <el-col :span="12">
           <el-form-item prop="status" label="订单状态" :label-width="formLabelWidth">
-            <!--<el-input v-model="form.status" class="myInput"></el-input>-->
             <el-select v-model="form.status" placeholder="请选择">
               <el-option
                 v-for="item in statusOptions"
@@ -23,11 +22,21 @@
             </el-select>
           </el-form-item>
         </el-col>
-
+      <el-col :span="12" v-if="userRole==='总公司管理员'">
+        <el-form-item prop="distribution" label="配送点" :label-width="formLabelWidth">
+          <el-select v-model="form.distribution" placeholder="请选择">
+            <el-option
+              v-for="item in distributions"
+              :key="item.distributionId"
+              :label="item.distributionName"
+              :value="item.distributionId">
+            </el-option>
+          </el-select>
+        </el-form-item>
+      </el-col>
 
         <el-col :span="12">
           <el-form-item prop="currentStation" label="已到达" :label-width="formLabelWidth">
-            <!--<el-input v-model="form.currentStation" class="myInput"></el-input>-->
             <el-select v-model="form.currentStation" placeholder="请选择">
               <el-option
                 v-for="item in stations"
@@ -40,7 +49,6 @@
         </el-col>
       <el-col :span="12">
       <el-form-item prop="nextStation" label="下一站" :label-width="formLabelWidth">
-            <!--<el-input v-model="form.nextStation" class="myInput"></el-input>-->
         <el-select v-model="form.nextStation" placeholder="请选择">
           <el-option
             v-for="item in stations"
@@ -96,23 +104,28 @@
               currentStation:'',
               nextStation:'',
               arriveTime:'',
+              distributionId:''
             },
             rules:{
 
             },
+            userRole:'',
             statusOptions:[
               {value:1,label:'已下单'},
               {value:2,label:'运输中'},
               {value:3,label:'已签收'},
               {value:4,label:'已评价'},
             ],
-            stations:[]
+            stations:[],
+            distributions:[]
           }
         },
         mounted(){
+          this.userRole=this.$store.getters.role;
           this.getRowList();
           this.getOrder(this.listValue);
           this.getStations();
+          this.getDistributions();
         },
         components:{
 
@@ -121,7 +134,8 @@
           getRowList: function () {
             this.listValue = this.$route.query.rowList;
             this.form=this.listValue;
-            // console.log(this.listValue.orderId);
+            console.log("当前用户");
+            console.log(this.$store.getters)
           },
           /** 改变计数器的值 */
           handleChangeCount(value) {
@@ -160,6 +174,13 @@
               this.stations = res.data.data
               console.log("======stations=========")
               console.log(this.stations)
+            })
+          },
+          getDistributions(){
+            orderManageApi.getDistributions().then(res=>{
+              this.distributions=res.data.data;
+              console.log("=======配送点=======");
+              console.log(this.distributions);
             })
           }
         }
