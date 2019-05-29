@@ -37,8 +37,7 @@
               {prop: 'employeeName', label: '姓名',},
               {prop: 'age', label: '年龄',},
               {prop: 'phone', label: '电话',},
-              {prop: 'stationName', label: '工作站点',},
-              {prop: 'distributionName', label: '工作配送点',},
+              {prop: 'employeeType', label:'员工类型'},
               {prop: 'workStartTime', label: '入职时间',},
             ],
           }

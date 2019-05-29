@@ -13,34 +13,18 @@
               <el-input v-model="form.age" class="myInput"></el-input>
             </el-form-item>
           </el-col>
-
           <el-col :span="12">
-            <el-form-item prop="stationName" label="工作站点" :label-width="formLabelWidth">
-              <!--<el-input v-model="form.stationName" class="myInput"></el-input>-->
-              <el-select v-model="form.stationId" filterable placeholder="请选择">
+            <el-form-item prop="employeeType" label="员工类型" :label-width="formLabelWidth">
+              <el-select v-model="form.employeeType" filterable placeholder="请选择">
                 <el-option
-                  v-for="item in stations"
+                  v-for="item in employeeTypes"
                   :key="item.value"
-                  :label="item.stationName"
-                  :value="item.stationId">
+                  :label="item.label"
+                  :value="item.value">
                 </el-option>
               </el-select>
             </el-form-item>
           </el-col>
-          <el-col :span="12">
-            <el-form-item prop="distributionName" label="工作配送点" :label-width="formLabelWidth">
-              <!--<el-input v-model="form.distributionName" class="myInput"></el-input>-->
-              <el-select v-model="form.distributionId" filterable placeholder="请选择">
-                <el-option
-                  v-for="item in distributions"
-                  :key="item.value"
-                  :label="item.distributionName"
-                  :value="item.distributionId">
-                </el-option>
-              </el-select>
-            </el-form-item>
-          </el-col>
-
           <el-col :span="12">
             <el-form-item prop="phone" label="员工电话" :label-width="formLabelWidth">
               <el-input v-model="form.phone" class="myInput"></el-input>
@@ -54,7 +38,6 @@
 
           <el-col :span="12">
             <el-form-item prop="workStartTime" label="入职时间" :label-width="formLabelWidth">
-              <!--<el-input v-model="form.workStartTime" class="myInput"></el-input>-->
               <el-date-picker
                 v-model="form.workStartTime"
                 type="datetime"
@@ -93,12 +76,18 @@ export default {
         employeeId: '',
         employeeName: '',
         workStartTime: '',
-        stationId: '',
-        distributionId: '',
+        employeeType:'',
         age: '',
         phone: '',
         address: ''
       },
+      employeeTypes:[{
+          value: '配送点管理员',
+          label: '配送点管理员'
+        }, {
+          value: '站点管理员',
+          label: '站点管理员'
+        }],
       distributions: [],
       stations: [],
       rules: {
@@ -117,23 +106,28 @@ export default {
     }
   },
   mounted () {
-    this.getDistributions()
+    this.getDistributions();
     this.getStations()
   },
   methods: {
     /** 提交表单 */
     submitForm (formName) {
       this.$refs[formName].validate((valid) => {
+        console.log("=======form========");
+        console.log(this.form);
         if (valid) {
           EmployeeApi.AddEmployeeApi(this.form).then(res => {
-            if (res.data === true)
-              this.$message({type: 'success', message: '新增成功'})
-            else
+            if (res.data === true){
+              this.$message({type: 'success', message: '新增成功'});
+              this.$router.push({name:'employee'});
+            }
+            else{
               this.$message({type: 'error', message: '新增失败，请重试'})
+            }
           })
         } else {
           this.$message({type: 'error', message: '新增失败，请检查输入数据'})
-          return false
+          return false;
         }
       })
     },

@@ -16,32 +16,19 @@
               </el-form-item>
             </el-col>
           <el-col :span="12">
-            <el-form-item prop="stationName" label="工作站点" :label-width="formLabelWidth">
-              <el-select v-model="form.stationId" filterable placeholder="请选择">
+            <el-form-item prop="employeeType" label="员工类型" :label-width="formLabelWidth">
+              <el-select v-model="form.employeeType" filterable placeholder="请选择">
                 <el-option
-                  v-for="item in stations"
+                  v-for="item in employeeTypes"
                   :key="item.value"
-                  :label="item.stationName"
-                  :value="item.stationId">
-                </el-option>
-              </el-select>
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item prop="distributionName" label="工作配送点" :label-width="formLabelWidth">
-              <!--<el-input v-model="form.distributionName" class="myInput"></el-input>-->
-              <el-select v-model="form.distributionId" filterable placeholder="请选择">
-                <el-option
-                  v-for="item in distributions"
-                  :key="item.value"
-                  :label="item.distributionName"
-                  :value="item.distributionId">
+                  :label="item.label"
+                  :value="item.value">
                 </el-option>
               </el-select>
             </el-form-item>
           </el-col>
             <el-col :span="12">
-              <el-form-item prop="age" label="年龄" :label-width="formLabelWidth">
+              <el-form-item prop="age" label="年龄" :label-width="formLabelWidth" type="number">
                 <el-input v-model="form.age" class="myInput"></el-input>
               </el-form-item>
             </el-col>
@@ -79,6 +66,17 @@ import {EmployeeApi} from './api'
 export default {
   name: 'edit-employee',
   data () {
+    var validateRank = (rule, value, callback) => {
+      var reg = /^[1-9]\d*$/;
+      if (value === '') {
+        callback(new Error('请输入年龄!'));
+      } else if (!reg.test(value)) {
+        callback(new Error('请输入正整数!'));
+      } else {
+        callback();
+      }
+    };
+
     return {
       listValue: {},
       formLabelWidth: '120px',
@@ -86,21 +84,25 @@ export default {
         employeeId: '',
         employeeName: '',
         workStartTime: '',
-        // stationId: '',
-        // distributionId: '',
+        employeeType:'',
         age: '',
         phone: '',
         address: ''
       },
-      distributions: [],
-      stations: [],
+      employeeTypes:[{
+        value: '配送点管理员',
+        label: '配送点管理员'
+      }, {
+        value: '站点管理员',
+        label: '站点管理员'
+      }],
       rules: {
         employeeName: [
           { required: true, message: '姓名'}
         ],
         age: [
           { required: true, message: '年龄不能为空'},
-          { type: 'number', message: '年龄必须为数字值'}
+          {required: true, validator: validateRank, trigger: 'blur'}
         ],
         phone: [
           { required: true, message: '电话不能为空'}
@@ -110,14 +112,12 @@ export default {
     }
   },
   mounted () {
-    this.getRowList()
-    this.getDistributions()
-    this.getStations()
+    this.getRowList();
     this.getEmployee(this.listValue)
   },
   methods: {
     getRowList: function () {
-      this.listValue = this.$route.query.rowList
+      this.listValue = this.$route.query.rowList;
       // console.log(this.listValue.orderId);
       this.form = this.listValue
     },
@@ -125,17 +125,20 @@ export default {
     submitForm (formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          EmployeeApi.EditorApi(this.form)
-          alert('提交成功!')
-          this.goToIndex()
+          EmployeeApi.EditorApi(this.form).then(res=>{
+            console.log("=====biaji=======");
+            if (res.data.data === true){
+              this.$message({type: 'success', message: '修改成功！'});
+              this.$router.push({name:'employee'});
+            }
+            else{
+              this.$message({type: 'error', message: '修改失败，请重试'})
+            }
+          })
         } else {
-          console.log('提交失败!')
-          return false
+          this.$message({type: 'error', message: '修改失败，请重试'})
         }
       })
-    },
-    goToIndex () {
-      this.$router.push({name: 'employee'})
     },
     /** 重置表单 */
     resetForm (formName) {
@@ -145,35 +148,14 @@ export default {
     /* 获取后台数据 */
     getEmployee (employee) {
       this.listValue = EmployeeApi.GetItemApi(employee).then(res => {
-        this.listValue = res.data.data
-        console.log('=======listValue========')
-        console.log(res)
+        this.listValue = res.data.data;
+        console.log('=======listValue========');
+        console.log(res);
         this.form = this.listValue
       })
     },
 
-    /* 获取所有的配送点 */
-    getDistributions () {
-      EmployeeApi.getDistributions().then(res => {
-        this.distributions = res.data.data
-        console.log('========distributions=========')
-        console.log(this.distributions)
-      })
-    },
-    /* 获取所有的站点 */
-    getStations () {
-      EmployeeApi.getStations().then(res => {
-        console.info('44444', res.data.data)
-        // this.stations = res.data.data
 
-        for(var i = 0; i< res.data.data.length; i++){
-          console.info('00000000000000',res.data.data[i])
-          this.stations[i].stationId = res.data.data[i].stationId
-          this.stations[i].stationName = res.data.data[i].stationName
-        }
-        console.info('5555555555',this.stations)
-      })
-    }
   }
 }
 </script>
