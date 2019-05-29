@@ -20,8 +20,7 @@ export default {
         userId: '',
         address: '',
         remark: '',
-        createdUnit: '',
-        stationNumber: ''
+        createdUnit: ''
       },
       stationTitle: '站点新增'
     }

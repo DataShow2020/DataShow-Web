@@ -18,6 +18,10 @@ export class orderManageApi {
   static EditorApi(data) {
     return server.connection('POST', `Order/A04`, data);
   }
+  //获取站点
+  static getStations(){
+    return server.connection('GET', `Employee/A06`)
+  }
 
 
 }

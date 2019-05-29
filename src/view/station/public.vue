@@ -44,9 +44,13 @@
             </el-form-item>
           </el-col>
           <el-col :span="7">
-            <!--<el-form-item label="订单编号" :rules="[{required: true, message:'不能为空',trigger:'blur'}]" prop="stationNumber" clearable>-->
-              <!--<el-input v-model="formLabelAlign.stationNumber" placeholder="请输入" clearable></el-input>-->
-            <!--</el-form-item>-->
+            <el-form-item label="关闭时间" prop="createdUnit" clearable>
+              <el-date-picker
+                v-model="formLabelAlign.endTime"
+                type="date"
+                placeholder="选择日期">
+              </el-date-picker>
+            </el-form-item>
           </el-col>
         </el-row>
       </el-form>
@@ -72,7 +76,8 @@ export default {
         remark: '',
         createdUnit: '',
         stationId: '',
-        stationNumber: ''
+        stationNumber: '',
+        endTime:''//结束时间
       }
     }
   },

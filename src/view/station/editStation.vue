@@ -23,7 +23,7 @@ export default {
         createdUnit: '',
         stationId: '',
         userName: '',
-        stationNumber: ''
+        endTime:''
       },
       stationTitle: '站点编辑'
     }

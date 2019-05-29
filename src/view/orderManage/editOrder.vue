@@ -21,25 +21,34 @@
                 :value="item.value">
               </el-option>
             </el-select>
-            <!--<el-input-number
-              v-model="form.totalCount"
-              @change="handleChangeCount"
-              :min="1"
-              :max="1000"
-              label="产品数量">
-            </el-input-number>-->
           </el-form-item>
         </el-col>
 
 
         <el-col :span="12">
           <el-form-item prop="currentStation" label="已到达" :label-width="formLabelWidth">
-            <el-input v-model="form.currentStation" class="myInput"></el-input>
+            <!--<el-input v-model="form.currentStation" class="myInput"></el-input>-->
+            <el-select v-model="form.currentStation" placeholder="请选择">
+              <el-option
+                v-for="item in stations"
+                :key="item.stationId"
+                :label="item.stationName"
+                :value="item.stationId">
+              </el-option>
+            </el-select>
           </el-form-item>
         </el-col>
       <el-col :span="12">
       <el-form-item prop="nextStation" label="下一站" :label-width="formLabelWidth">
-            <el-input v-model="form.nextStation" class="myInput"></el-input>
+            <!--<el-input v-model="form.nextStation" class="myInput"></el-input>-->
+        <el-select v-model="form.nextStation" placeholder="请选择">
+          <el-option
+            v-for="item in stations"
+            :key="item.stationId"
+            :label="item.stationName"
+            :value="item.stationId">
+          </el-option>
+        </el-select>
           </el-form-item>
       </el-col>
 
@@ -67,9 +76,6 @@
       </router-link>
     </div>
 
-    <!--<div style="width: 100%;text-align: center;padding: 30px;">-->
-     <!---->
-    <!--</div>-->
     </el-card>
   </div>
 
@@ -92,9 +98,7 @@
               arriveTime:'',
             },
             rules:{
-             /* receiveAddress: [
-                { required: true, message: '收件地址不能为空', trigger: 'blur' }
-              ],*/
+
             },
             statusOptions:[
               {value:1,label:'已下单'},
@@ -102,11 +106,13 @@
               {value:3,label:'已签收'},
               {value:4,label:'已评价'},
             ],
+            stations:[]
           }
         },
         mounted(){
           this.getRowList();
           this.getOrder(this.listValue);
+          this.getStations();
         },
         components:{
 
@@ -121,20 +127,23 @@
           handleChangeCount(value) {
             console.log(value);
           },
-          /** 重置表单 */
-          resetForm(formName) {
-            console.log(formName);
-            this.$refs[formName].resetFields();
-          },
+
           /** 提交表单 */
           submitForm(formName) {
             this.$refs[formName].validate((valid) => {
               if (valid) {
-                orderManageApi.EditorApi(this.form);
-                alert('提交成功!');
+                orderManageApi.EditorApi(this.form).then(res=>{
+                  console.log("========编辑========");
+                  console.log(res.data);
+                  if(res.data.data){
+                    this.$message({type:'success',message:'提交成功！'})
+                    this.$router.push({name:'orderManage'});
+                  }else{
+                    this.$message({type:'error',message:'提交失败！'})
+                  }
+                  })
               } else {
-                console.log('提交失败!');
-                return false;
+                this.$message({type:'error',message:'提交失败！'})
               }
             });
           },
@@ -143,6 +152,14 @@
                 this.listValue = res.data.data;
                 console.log(this.listValue);
                 this.form=this.listValue;
+            })
+          },
+          /* 获取所有的站点 */
+          getStations () {
+            orderManageApi.getStations().then(res => {
+              this.stations = res.data.data
+              console.log("======stations=========")
+              console.log(this.stations)
             })
           }
         }
