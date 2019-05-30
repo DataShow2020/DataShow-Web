@@ -98,7 +98,7 @@ export default {
           value: 4,
           label: '已评论'
         }],
-      currentStatus: ''
+      currentStatus: '',
     }
   },
   components: {
@@ -116,10 +116,12 @@ export default {
       if (this.$store.getters.role === '站点负责人') {
         userName = this.$store.getters.userInfo;
       }
+      console.log("=======当前用户===========");
+      console.log(this.$store.getters);
       orderManageApi.GetTableList({page: this.page, pageSize: this.pageSize, status: this.currentStatus, userName: userName}).then(res => {
         this.tableData = res.data.data;
         this.pageCount = res.data.totalCount;
-        console.log("=====dingda=======")
+        console.log("=====dingda=======");
         console.log(res.data)
       })
     },
