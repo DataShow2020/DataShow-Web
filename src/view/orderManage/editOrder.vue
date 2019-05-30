@@ -60,7 +60,6 @@
           </el-form-item>
       </el-col>
 
-
        <el-col :span="12">
           <el-form-item prop="arriveTime" label="到达时间" :label-width="formLabelWidth">
             <!--<el-input v-model="form.arriveTime" class="myInput"></el-input>-->
@@ -90,106 +89,106 @@
 </template>
 
 <script>
-  import {orderManageApi} from "./api";
+import {orderManageApi} from './api'
 
-  export default {
-        name: "edit-order",
-        data(){
-          return{
-            listValue:{},
-            formLabelWidth:'120px',
-            form:{
-              orderId:'',
-              status:'',
-              stationName:'',
-              nextStationName:'',
-              arriveTime:'',
-              distributionId:''
-            },
-            rules:{
-              orderId: {required: true, message: '不能为空', trigger: 'blur'},
-              status: {required: true, message: '不能为空', trigger: 'blur'},
-              currentStation: {required: true, message: '不能为空', trigger: 'blur'},
-              nextStation: {required: true, message: '不能为空', trigger: 'blur'},
-              arriveTime: {required: true, message: '不能为空', trigger: 'blur'},
-              distributionId: {required: true, message: '不能为空', trigger: 'blur'}
-            },
-            userRole:'',
-            statusOptions:[
-              {value:1,label:'已下单'},
-              {value:2,label:'运输中'},
-              {value:3,label:'已签收'},
-              {value:4,label:'已评价'},
-            ],
-            stations:[],
-            distributions:[]
-          }
-        },
-        mounted(){
-          this.userRole=this.$store.getters.role;
-          this.getRowList();
-          this.getOrder(this.listValue);
-          this.getStations();
-          this.getDistributions();
-        },
-        components:{
+export default {
+  name: 'edit-order',
+  data () {
+    return {
+      listValue: {},
+      formLabelWidth: '120px',
+      form: {
+        orderId: '',
+        status: '',
+        stationName: '',
+        nextStationName: '',
+        arriveTime: '',
+        distributionId: ''
+      },
+      rules: {
+        orderId: {required: true, message: '不能为空', trigger: 'blur'},
+        status: {required: true, message: '不能为空', trigger: 'blur'},
+        stationName: {required: true, message: '不能为空', trigger: 'blur'},
+        nextStationName: {required: true, message: '不能为空', trigger: 'blur'},
+        arriveTime: {required: true, message: '不能为空', trigger: 'blur'},
+        distributionId: {required: true, message: '不能为空', trigger: 'blur'}
+      },
+      userRole: '',
+      statusOptions: [
+        {value: 1, label: '已下单'},
+        {value: 2, label: '运输中'},
+        {value: 3, label: '已签收'},
+        {value: 4, label: '已评价'}
+      ],
+      stations: [],
+      distributions: []
+    }
+  },
+  mounted () {
+    this.userRole = this.$store.getters.role
+    this.getRowList()
+    this.getOrder(this.listValue)
+    this.getStations()
+    this.getDistributions()
+  },
+  components: {
 
-        },
-        methods:{
-          getRowList: function () {
-            this.listValue = this.$route.query.rowList;
-            this.form=this.listValue;
-            console.log("当前用户");
-            console.log(this.$store.getters)
-          },
-          /** 改变计数器的值 */
-          handleChangeCount(value) {
-            console.log(value);
-          },
+  },
+  methods: {
+    getRowList: function () {
+      this.listValue = this.$route.query.rowList
+      this.form = this.listValue
+      console.log('当前用户')
+      console.log(this.$store.getters)
+    },
+    /** 改变计数器的值 */
+    handleChangeCount (value) {
+      console.log(value)
+    },
 
-          /** 提交表单 */
-          submitForm(formName) {
-            this.$refs[formName].validate((valid) => {
-              if (valid) {
-                orderManageApi.EditorApi(this.form).then(res=>{
-                  console.log("========编辑========");
-                  console.log(res.data);
-                  if(res.data.data){
-                    this.$message({type:'success',message:'提交成功！'})
-                    this.$router.push({name:'orderManage'});
-                  }else{
-                    this.$message({type:'error',message:'提交失败！'})
-                  }
-                  })
-              } else {
-                this.$message({type:'error',message:'提交失败！'})
-              }
-            });
-          },
-          getOrder(order){
-              this.listValue=orderManageApi.GetItemApi(order).then(res => {
-                this.listValue = res.data.data;
-                console.log(this.listValue);
-                this.form=this.listValue;
-            })
-          },
-          /* 获取所有的站点 */
-          getStations () {
-            orderManageApi.getStations().then(res => {
-              this.stations = res.data.data
-              console.log("======stations=========")
-              console.log(this.stations)
-            })
-          },
-          getDistributions(){
-            orderManageApi.getDistributions().then(res=>{
-              this.distributions=res.data.data;
-              console.log("=======配送点=======");
-              console.log(this.distributions);
-            })
-          }
+    /** 提交表单 */
+    submitForm (formName) {
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          orderManageApi.EditorApi(this.form).then(res => {
+            console.log('========编辑========')
+            console.log(res.data)
+            if (res.data.data) {
+              this.$message({type: 'success', message: '提交成功！'})
+              this.$router.push({name: 'orderManage'})
+            } else {
+              this.$message({type: 'error', message: '提交失败！'})
+            }
+          })
+        } else {
+          this.$message({type: 'error', message: '提交失败！'})
         }
+      })
+    },
+    getOrder (order) {
+      this.listValue = orderManageApi.GetItemApi(order).then(res => {
+        this.listValue = res.data.data
+        console.log(this.listValue)
+        this.form = this.listValue
+      })
+    },
+    /* 获取所有的站点 */
+    getStations () {
+      orderManageApi.getStations().then(res => {
+        this.stations = res.data.data
+        console.log('======stations=========')
+        console.log(this.stations)
+      })
+    },
+    getDistributions () {
+      orderManageApi.getDistributions().then(res => {
+        this.distributions = res.data.data
+        console.log('=======配送点=======')
+        console.log(this.distributions)
+      })
+    }
   }
+}
 </script>
 
 <style scoped>
