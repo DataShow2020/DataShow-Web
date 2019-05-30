@@ -121,7 +121,7 @@ export default {
       this.data = {
         page: this.page,
         pageSize: this.pageSize,
-        status: this.status
+        status: this.status,
       };
       console.log(this.data);
       NewApi.GetDistributionApi(this.data).then(res => {

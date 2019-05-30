@@ -26,7 +26,7 @@ export default {
     }
   },
   mounted () {
-    // this.getOption()
+    //this.getOption()
   },
   components: {
     Public

@@ -20,7 +20,9 @@ export default {
         address: '',
         distributionNumber: '',
         remark: '',
-        createdUnit: ''
+        createdUnit: '',
+        userId:'',
+        userName:''
       },
       stationTitle: '配送点编辑'
     }
