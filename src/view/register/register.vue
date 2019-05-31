@@ -24,7 +24,7 @@
           <el-form-item prop="userName">
             <el-input
               v-model="formData.userName"
-              placeholder="请设置手机号">
+              placeholder="请设置账号">
             </el-input>
           </el-form-item>
           <el-form-item prop="password">

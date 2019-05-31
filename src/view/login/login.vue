@@ -90,7 +90,7 @@ export default {
       },
       rules: {
         account: [
-          {required: true, message: '请输入注册手机号', trigger: 'blur'},
+          {required: true, message: '请输入账号', trigger: 'blur'},
           {min: 5, max: 12, message: '长度在 5 到 12 个字符', trigger: 'blur'}
         ],
         passWord: [
@@ -143,7 +143,7 @@ export default {
               Msg.success('登录成功');
               this.$router.push({path: '/admin'})
             } else {
-              Msg.error('登陆失败')
+              Msg.error('账号或密码错误');
             }
           }).catch(() => {
             this.loading = false
