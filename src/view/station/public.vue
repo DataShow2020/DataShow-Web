@@ -34,8 +34,8 @@
         </el-row>
         <el-row :gutter="20">
           <el-col :span="7">
-            <el-form-item label="备注" :rules="[{required: true, message:'不能为空',trigger:'blur'}]" prop="remark" clearable>
-              <el-input v-model="formLabelAlign.remark" placeholder="请输入" clearable></el-input>
+            <el-form-item label="站点编号" :rules="[{required: true, message:'不能为空',trigger:'blur'}]" prop="stationNumber" clearable>
+              <el-input v-model="formLabelAlign.stationNumber" placeholder="请输入" clearable></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="7">
@@ -44,8 +44,32 @@
             </el-form-item>
           </el-col>
           <el-col :span="7">
-            <el-form-item label="订单编号" :rules="[{required: true, message:'不能为空',trigger:'blur'}]" prop="stationNumber" clearable>
-              <el-input v-model="formLabelAlign.stationNumber" placeholder="请输入" clearable></el-input>
+            <el-form-item label="站点状态" :rules="[{required: true, message:'不能为空',trigger:'blur'}]" prop="status" clearable>
+              <el-select  v-model="formLabelAlign.status" clearable placeholder="请选择">
+                <el-option
+                  v-for="item in options"
+                  :key="item.value"
+                  :label="item.label"
+                  :value=" item.value ">
+                </el-option>
+              </el-select>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="7">
+            <el-form-item label="备注" :rules="[{required: true, message:'不能为空',trigger:'blur'}]" prop="remark" clearable>
+              <el-input v-model="formLabelAlign.remark" placeholder="请输入" clearable></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item prop="arriveTime" label="有效期至" :label-width="formLabelWidth">
+              <el-date-picker
+                v-model="formLabelAlign.endTime"
+                type="datetime"
+                value-format="yyyy-MM-dd HH:mm:ss"
+                placeholder="选择日期时间">
+              </el-date-picker>
             </el-form-item>
           </el-col>
         </el-row>
@@ -64,6 +88,13 @@ export default {
   data () {
     return {
       stationTitle: '站点编辑',
+      options: [{
+        value: '0',
+        label: '正常'
+      }, {
+        value: '1',
+        label: '废弃'
+      }],
       option: [],
       formLabelAlign: {
         stationName: '',
@@ -72,7 +103,9 @@ export default {
         remark: '',
         createdUnit: '',
         stationId: '',
-        stationNumber: ''
+        stationNumber: '',
+        status:''
+      //  endTime: ''
       }
     }
   },

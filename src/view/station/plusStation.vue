@@ -20,8 +20,7 @@ export default {
         userId: '',
         address: '',
         remark: '',
-        createdUnit: '',
-        stationNumber: ''
+        createdUnit: ''
       },
       stationTitle: '站点新增'
     }
@@ -34,6 +33,7 @@ export default {
   },
   methods: {
     formSubClick: function (item) {
+      console.log("111111111111111");
       console.log(item);
       NewApi.AddStationApi(item).then((res) => {
         this.$router.push({name: '站点管理'})

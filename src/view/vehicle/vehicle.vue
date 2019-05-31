@@ -167,8 +167,11 @@ export default {
       this.getTableData()
     },
     getTableData () {
-      vehicleApi.GetApi({page: this.page, pageSize: this.pageSize, vehicleType: this.type, status: this.status}).then(res => {
-        console.log(9462,res.data)
+      let userName = '';
+      if (this.$store.getters.role === '站点负责人') {
+        userName = this.$store.getters.userInfo;
+      }
+      vehicleApi.GetApi({page: this.page, pageSize: this.pageSize, vehicleType: this.type, status: this.status, userName: userName}).then(res => {
         this.tableData = res.data.data.list
         this.totalCount = res.data.data.total
         for (let i = 0; i < this.tableData.length; i++) {

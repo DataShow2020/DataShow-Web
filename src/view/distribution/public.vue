@@ -36,6 +36,32 @@
               <el-input v-model="formLabelAlign.remark" placeholder="请输入" clearable></el-input>
             </el-form-item>
           </el-col>
+          <el-col :span="7">
+            <el-form-item label="所属负责人" style="width: 700px" :rules="[{required: true, message:'不能为空',trigger:'blur'}]" prop="userId">
+              <el-select  v-model="formLabelAlign.userId" clearable placeholder="请选择">
+                <el-option
+                  v-for="item in option"
+                  :key="item.value"
+                  :label="item.userName"
+                  :value=" item.userId ">
+                </el-option>
+              </el-select>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col>
+            <el-form-item label="配送点状态" :rules="[{required: true, message:'不能为空',trigger:'blur'}]" prop="status" clearable>
+              <el-select  v-model="formLabelAlign.status" clearable placeholder="请选择">
+                <el-option
+                  v-for="item in options"
+                  :key="item.value"
+                  :label="item.label"
+                  :value=" item.value ">
+                </el-option>
+              </el-select>
+            </el-form-item>
+          </el-col>
         </el-row>
       </el-form>
     </el-card>
@@ -54,6 +80,13 @@ export default {
       stationTitle: '配送点编辑',
       advertOption: [],
       option: [],
+      options: [{
+        value: '0',
+        label: '正常'
+      }, {
+        value: '1',
+        label: '废弃'
+      }],
       formLabelAlign: {
         distributionName: '',
         userName: '',
@@ -61,11 +94,13 @@ export default {
         address: '',
         remark: '',
         distributionNumber: '',
-        createdUnit: ''
+        createdUnit: '',
+        status:''
       }
     }
   },
   mounted () {
+    this.getOption()
   },
   props: {
     stationTitle: String,
@@ -73,6 +108,13 @@ export default {
 
   },
   methods: {
+    getOption: function () {
+
+      NewApi.GetOptionApi().then(res => {
+        this.option = res.data.data;
+        console.log(this.option);
+      })
+    },
     submitForm: function (formLabelAlign) {
       this.$refs[formLabelAlign].validate((valid) => {
         if (valid) {

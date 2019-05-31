@@ -9,27 +9,21 @@
         </router-link>
       </el-col>
       <div class="top">
-        <el-form :inline="true" >
+        <el-form :inline="true">
           <el-col :span="25">
             <el-form-item>
-              <el-select v-model="workStationId" placeholder="请选择员工工作站点"  id="select" clearable>
+              <el-select v-model="employeeType" placeholder="请选择员工工作配送点"  id="select" clearable>
                 <el-option
-                  v-for="item in optionsStation"
+                  v-for="item in employeeTypes"
                   :key="item.value"
-                  :label="item.stationName"
-                  :value="item.stationId">
+                  :label="item.label"
+                  :value="item.value">
                 </el-option>
               </el-select>
             </el-form-item>
             <el-form-item>
-              <el-select v-model="workDistributionId" placeholder="请选择员工工作配送点"  id="select" clearable>
-                <el-option
-                  v-for="item in optionsDistribution"
-                  :key="item.value"
-                  :label="item.distributionName"
-                  :value="item.distributionId">
-                </el-option>
-              </el-select>
+              <el-input v-model="employeePhone" placeholder="输入员工电话" clearable>
+              </el-input>
             </el-form-item>
             <el-form-item>
               <el-button type="primary" icon="el-icon-search" @click="getTableData()">搜索</el-button>
@@ -94,11 +88,21 @@
               {prop:'employeeName',label:'姓名'},
               // {prop:'sex',label:'性别'},
               {prop:'phone',label:'电话'},
-              {prop:'stationName',label:'工作站点'},
-              {prop:'distributionName',label:'工作配送点'},
+              {prop:'employeeType',label:'员工类型'},
+              // {prop:'stationName',label:'工作站点'},
+              // {prop:'distributionName',label:'工作配送点'},
               // {prop:'workStart',label:'入职日期'},
               // {prop:'address',label:'家庭住址'}
             ],
+            employeeTypes:[{
+              value: '配送点管理员',
+              label: '配送点管理员'
+            }, {
+              value: '站点管理员',
+              label: '站点管理员'
+            }],
+            employeePhone:'',
+            employeeType:'',
             tableData: [],
             optionsStation:[],
             workStationId:'',
@@ -120,9 +124,10 @@
       methods:{
         /** 表格 */
         getTableData:function(){
-          EmployeeApi.GetTableList({page:this.page,pageSize:this.pageSize,stationId:this.workStationId,distributionId:this.workDistributionId}).then(res => {
+          EmployeeApi.GetTableList({page:this.page,pageSize:this.pageSize,phone:this.employeePhone,employeeType:this.employeeType}).then(res => {
             this.tableData = res.data.data;
             this.pageCount = res.data.totalCount;
+            console.log("==========yuangong ============");
             console.log(res.data);
           });
         },

@@ -127,6 +127,7 @@ export default {
       console.log(this.data);
       NewApi.GetStationApi(this.data).then(res => {
         this.tableData = res.data.data;
+        console.log("获取数据");
         console.log(this.tableData);
         this.loading = false;
         this.totalCount = res.data.totalCount;
@@ -139,7 +140,7 @@ export default {
         })
       }
       if (type === 'look') {
-        let detail = this.tableData[index]
+        let detail = this.tableData[index];
         this.$router.push({name: '站点详情', params: detail})
       }
       if (type === 'del') {

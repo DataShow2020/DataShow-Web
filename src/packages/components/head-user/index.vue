@@ -7,7 +7,7 @@
     <!--</el-dropdown-menu>-->
   <!--</el-dropdown>-->
   <div  >
-<div style="float: left">用户</div>
+<div style="float: left">{{user}}</div>
     <el-button plain class="buttonStyle" @click="exitLogin"><img src="../../../assets/images/exitImg.png"></el-button></div>
 </template>
 
@@ -15,7 +15,9 @@
   export default {
     name: 'comp-bread',
     data() {
-      return {}
+      return {
+        user: this.$store.getters.role
+      }
     },
     props: {},
     methods: {

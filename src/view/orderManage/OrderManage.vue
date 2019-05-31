@@ -1,6 +1,5 @@
 <template>
   <!--订购单管理-->
-
 <div class="order">
   <el-card>
     <div style="float: right;">
@@ -18,7 +17,6 @@
         <el-form-item>
           <el-button type="primary" icon="el-icon-search" @click="getTableData()">搜索</el-button>
         </el-form-item>
-
     </el-form>
     </div>
 
@@ -46,7 +44,7 @@
 </template>
 
 <script>
-// import myForm from './form'
+
 import {orderManageApi} from './api'
 import compTable from '../../packages/components/table/index'
 import myForm from '../../packages/components/form/index'
@@ -72,8 +70,8 @@ export default {
         {prop: 'itemName', label: '物品名称'},
         {prop: 'sendAddress', label: '起点'},
         {prop: 'receiveAddress', label: '终点'},
-        {prop: 'currentStation', label: '已到达'},
-        {prop: 'nextStation', label: '下一站'},
+        {prop: 'stationName', label: '已到达'},
+        {prop: 'nextStationName', label: '下一站'},
         {prop: 'kg', label: '大致重量'}
       ],
 
@@ -100,7 +98,7 @@ export default {
           value: 4,
           label: '已评论'
         }],
-      currentStatus: ''
+      currentStatus: '',
     }
   },
   components: {
@@ -114,9 +112,17 @@ export default {
 
     /** 表格 */
     getTableData: function () {
-      orderManageApi.GetTableList({page: this.page, pageSize: this.pageSize, status: this.currentStatus}).then(res => {
-        this.tableData = res.data.data
-        this.pageCount = res.data.totalCount
+      let userName = '';
+      if (this.$store.getters.role === '站点负责人') {
+        userName = this.$store.getters.userInfo;
+      }
+      console.log("=======当前用户===========");
+      console.log(this.$store.getters);
+      orderManageApi.GetTableList({page: this.page, pageSize: this.pageSize, status: this.currentStatus, userName: userName}).then(res => {
+        this.tableData = res.data.data;
+        this.pageCount = res.data.totalCount;
+        console.log("=====dingda=======");
+        console.log(res.data)
       })
     },
     /** 其他操作 */

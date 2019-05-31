@@ -6,7 +6,7 @@ export class NewApi {
   }
   // 删除
   static DeletedDistributionApi (id) {
-    console.log(id);
+    console.log(id)
     return server.connection('POST', `/Distribution/A05`, id)
   }
   // 编辑提交
@@ -20,5 +20,9 @@ export class NewApi {
   // 新增
   static AddDistributionApi (data) {
     return server.connection('POST', `/Distribution/A02`, data)
+  }
+  // 下拉框的值获取
+  static GetOptionApi () {
+    return server.connection('GET', `/Distribution/A06`)
   }
 }
