@@ -23,7 +23,7 @@
     methods: {
       exitLogin:function () {
         this.$store.dispatch('accountLogoutSubmit').then((res) => {
-          this.$router.push({path: '/login'})
+          this.$router.push({path: '/home'})
         }).catch(() => {
         })
       }

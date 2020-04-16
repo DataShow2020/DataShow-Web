@@ -9,22 +9,21 @@ import * as filters from './tools/filter'
 import './assets/icon/iconfont.css'
 import './assets/styles/index.scss'
 import './assets/icon/iconfont.js'
-import './permission'
+// import './permission'
 import echarts from 'echarts'
 
 Vue.prototype.$echarts = echarts
 
 Vue.use(ElementUI, {
-  size: 'medium',
-});
-
+  size: 'medium'
+})
 
 /** 注册管道 */
 Object.keys(filters).forEach(key => {
   Vue.filter(key, filters[key])
-});
+})
 
-Vue.config.productionTip = false; // 生产提示关闭
+Vue.config.productionTip = false // 生产提示关闭
 
 new Vue({
   el: '#app',
@@ -32,4 +31,4 @@ new Vue({
   store,
   template: '<App/>',
   components: {App}
-});
+})

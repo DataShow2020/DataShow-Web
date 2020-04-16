@@ -1,24 +1,11 @@
 <template>
   <div class="mh-register">
-    <div class="register-top">
-      <div style="margin:0 160px">
-        <div>
-          <img src="../../assets/images/logo_black.png" class="logo_black">
-          <div class="slider">
-            <a href="/">首页</a>
-            <a href="/logisticsConsult">物流查询</a>
-            <a href="/onlineOrder">在线下单</a>
-            <a href="/CustomerService">关于我们</a>
-          </div>
-        </div>
-      </div>
-    </div>
     <div class="register-center">
       <div class="register-box">
         <div class="register-box-top">
-          <img src="../../assets/images/register_tit.png" style="margin-top:30px;margin-bottom: 30px">
+          <img src="../../assets/images/register_tit.png">
         </div>
-          <a class="register-go-login" href="/login">登录</a>
+          <a class="register-go-login" href="./home">登录</a>
         <div class="form">
         <el-form :model="formData" :rules="rules" ref="formData">
           <el-form-item prop="userName">
@@ -53,9 +40,6 @@
         </el-form>
         </div>
       </div>
-    </div>
-    <div class="register-bottom">
-        <span>@copyRight</span>
     </div>
   </div>
 </template>
@@ -158,35 +142,27 @@ export default {
   .mh-register {
     width: 100%;
     height: 100%;
-    background-color: #eef1f4;
+    background: url("../../assets/images/loginBackground.png");
+    background-size: cover;
+    margin-top: -20px;
   }
-
-  .register-top {
-    background-color: white;
-    height: 75px;
-    width: 100%;
-    a {
-      margin-right: 55px;
-      text-decoration: none;
-      color: #202027
-    }
-  }
-
   .register-center {
     height: 700px;
-    margin: 0 auto;
-    background-color: #eef1f4;
-
+    margin: 20px auto;
+  }
     .register-box {
       border-radius: 10px;
       width: 661px;
       height: 510px;
-      margin: 60px auto;
+      margin-top: 100px;
+      margin-left: 400px;
       padding: 0 28px 25px;
       background: #fff;
       border: 1px solid #fff;
-      box-shadow: 0 15px 40px rgba(51, 162, 247, .2);
-      position: relative;
+      -webkit-box-shadow: 0 15px 40px rgba(51, 162, 247, 0.2);
+      box-shadow: 0 15px 40px rgba(51, 162, 247, 0.2);
+      position: absolute;
+    }
       .title {
         text-align: center;
         color: #505458;
@@ -198,14 +174,13 @@ export default {
           margin-top: 15px;
           margin-bottom: 10px;
       }
-    }
 
     .el-form-item {
       .el-form-item__label {
         color: #3D3D3D;
       }
     }
-  }
+
 
   .register-go-login {
     background: url("../../assets/images/go-login.png");
@@ -218,6 +193,7 @@ export default {
     left: 638px;
     line-height: 54px;
     letter-spacing: 2px;
+    text-decoration:none;
     text-indent: 33px;
   }
 
@@ -235,20 +211,6 @@ export default {
   .register-box-top {
     text-align: center;
   }
-
-  .register-box-bottom {
-    text-align: center;
-  }
-
-  .register-bottom {
-    text-align: center;
-    background: #B3B3B3;
-    font-size: 12px;
-    color: white;
-    height: 29.7px;
-    line-height: 30px;
-  }
-
   .form{
     text-align: center;
     .el-form-item__error{
@@ -263,16 +225,5 @@ export default {
     border: none;
     font-size: 16px;
     margin-top: 20px;
-  }
-  .logo_black{
-    width: 172px;
-    height: 50px;
-    margin-top: 10px;
-    float: left;
-  }
-  .slider{
-    margin-left: 65px;
-    float: left;
-    margin-top: 30px;
   }
 </style>

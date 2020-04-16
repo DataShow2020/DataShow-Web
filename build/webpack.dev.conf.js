@@ -56,8 +56,8 @@ const devWebpackConfig = merge(baseWebpackConfig, {
       filename: 'index.html',
       template: 'index.html',
       inject: true,
-      title: '物流系统',
-      favicon: path.resolve(__dirname, '../src/assets/images/favicon.ico')
+      title: '用户画像可视化',
+      favicon: path.resolve(__dirname, '../src/assets/images/smiley.ico')
     }),
     // copy custom static assets
     new CopyWebpackPlugin([

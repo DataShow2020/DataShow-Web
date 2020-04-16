@@ -77,20 +77,23 @@ export default {
             resolve(res.data)
           }
         }).catch(err => {
-          console.log('%c 身份被服务器拒绝', 'color:#fa8c16');
+          console.log('%c 身份被服务器拒绝', 'color:red');
           Msg.error(err);
           commit('ACCOUNT_LOGOUT_FAILURE')
         })
-      }).then(function (data) {
-        return new Promise((resolve, reject) => {
-          LoginApi.getRole(params.account).then((res) => {
-            if (res.data.data !== null && res.data.data !== undefined && res.data.data !== '') {
-              commit('saveRole', {...data, res});
-              resolve('true');
-            }
-          })
-        })
       })
+        // .then(
+      //   function (data) {
+      //   return new Promise((resolve, reject) => {
+      //     LoginApi.getRole(params.account).then((res) => {
+      //       if (res.data.data !== null && res.data.data !== undefined && res.data.data !== '') {
+      //         commit('saveRole', {...data, res});
+      //         resolve('true');
+      //       }
+      //     })
+      //   })
+      // }
+      // )
     },
     /** 登出 */
     accountLogoutSubmit ({commit}) {

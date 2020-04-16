@@ -8,7 +8,7 @@ export class RegisterApi {
     return server.connection('POST', '/auth/register', params)
   }
 
-  static checkAccount(param){
-    return server.connection('POST','/auth/checkAccount',param);
+  static checkAccount (param) {
+    return server.connection('POST', '/auth/checkAccount', param)
   }
 }

@@ -1,5 +1,5 @@
 <template>
-  <div class="slide-show" @mouseover="clearInv" @mouseout="runInv">
+  <div class="slide-show">
     <transition-group tag="ul" class='slide-ul' :name="name">
       <li v-for="(item , index) in slides" :key="index + item" v-show="index===nowIndex">
         <a :href="item.href" :target="target">
@@ -73,9 +73,9 @@ export default {
         this.goto(this.nextIndex)
       }, this.inv)
     },
-    clearInv () {
-      clearInterval(this.invId)
-    }
+    // clearInv () {
+    //   // clearInterval(this.invId)
+    // }
   },
   mounted () {
     this.runInv()

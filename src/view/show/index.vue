@@ -1,10 +1,12 @@
 <template>
-
+  <div>
+    <h1>开始表演⑧</h1>
+  </div>
 </template>
 
 <script>
     export default {
-        name: "driver-index"
+        name: "index"
     }
 </script>
 
