@@ -110,7 +110,7 @@ export default {
   methods: {
     returnLogin: function () {
       this.$router.push({path: '/home'})
-
+      
     },
     registerAccount: function () {
       this.$refs['formData'].validate((valid) => {
@@ -134,8 +134,6 @@ export default {
       })
     }
   },
-
-  
   /** 监听函数 */
   watch: {}
 }

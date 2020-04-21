@@ -55,7 +55,9 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: 'index.html',
-      inject: true
+      inject: true,
+      title: '用户画像可视化',
+      favicon: path.resolve(__dirname, '../src/assets/images/smiley.ico')
     }),
     // copy custom static assets
     new CopyWebpackPlugin([
