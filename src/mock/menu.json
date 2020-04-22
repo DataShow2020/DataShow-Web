@@ -1,0 +1,13 @@
+{
+  "menu": [
+    {
+      "submenu": "用户画像系统",
+      "menuGroup": [
+        {
+          "label": "首页",
+          "to":"/admin"
+        }
+      ]
+    }
+  ]
+}

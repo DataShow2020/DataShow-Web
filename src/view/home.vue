@@ -128,14 +128,15 @@ export default {
           this.loading = true;
           this.$store.dispatch('accountLoginSubmit', this.ruleForm).then((res) => {
             this.loading = false;
-            // console.log(res);
+            console.log(res);
             if (res.status) {
               Msg.success('登录成功');
-              this.$router.push({path: '/show'})
+              this.$router.push({path: '/admin'})
             } else {
               Msg.error('账号或密码错误');
             }
           }).catch(() => {
+            console.log("error");
             this.loading = false
           })
         } else {

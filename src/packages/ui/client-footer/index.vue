@@ -3,12 +3,12 @@
     <div class="mh-client-footer-container">
       <div>
         <a href="http://121.43.68.40/exposure/jiucuo.html?site_code=5000000005&url=http%3A%2F%2Fwww.cqedu.cn%2F">
-          <img src="../../../assets/images/u200.png" alt="">
+<!--          <img src="../../../assets/images/u200.png" alt="">-->
         </a>
       </div>
       <div>
         <a href="http://biaozhi.conac.cn/">
-          <img src="../../../assets/images/u199.png" alt="">
+<!--          <img src="../../../assets/images/u199.png" alt="">-->
         </a>
       </div>
       <div class="mh-client-footer-text">

@@ -28,27 +28,27 @@ export default {
   /** 更改 Vuex 的 store 中的状态的唯一方法是提交 mutation */
   mutations: {
     ACCOUNT_AUTH_STATUS_CHANGED (state, data) {
-      const res = data.data
-      const param = data.params
+      const res = data.data;
+      const param = data.params;
       if (res) {
-        state.token = res.token
-        state.userInfo = param.account
-        state.isLogin = true
-        Auth.setUserInfo(state.userInfo)
-        Auth.setLogin(state.isLogin)
-        Auth.setToken(state.token)
+        state.token = res.token;
+        state.userInfo = param.account;
+        state.isLogin = true;
+        Auth.setUserInfo(state.userInfo);
+        Auth.setLogin(state.isLogin);
+        Auth.setToken(state.token);
       }
     },
     ACCOUNT_LOGOUT_FAILURE (state) {
-      state.isLogin = false
-      Auth.removeUserInfo()
-      Auth.removeLogin()
+      state.isLogin = false;
+      Auth.removeUserInfo();
+      Auth.removeLogin();
       Auth.removeToken()
     },
     handleRemember (state, data) {
-      const userInfo = data.params
+      const userInfo = data.params;
       if (userInfo && userInfo.remember) {
-        this.state.accountPwd = userInfo // 记住用户名和密码
+        this.state.accountPwd = userInfo; // 记住用户名和密码
         Auth.setAccountPwd(this.state.accountPwd)
       } else {
         // Auth.removeAccountPwd();
@@ -83,7 +83,7 @@ export default {
           commit('ACCOUNT_LOGOUT_FAILURE')
         })
       })
-        // .then(
+      //   .then(
       //   function (data) {
       //   return new Promise((resolve, reject) => {
       //     LoginApi.getRole(params.account).then((res) => {
