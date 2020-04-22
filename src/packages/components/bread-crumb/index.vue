@@ -46,8 +46,9 @@
         return val.length ? val[0].label : '首页'
       },
       getBreadcrumb() {
+        let matched = '';
         if(this.$route.matched.length > 0){
-          matched = this.$route.matched[1].path;
+         matched = this.$route.matched[0].path;
         }
         // const first = matched[0]
         // if (first && first.name !== '／') {

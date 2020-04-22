@@ -3,8 +3,8 @@ export default [
     path: '/admin',
     component: () => import('../packages/ui/container'),
     children: [{
-      path: '/ShowIndex',
-      name: 'ShowIndex',
+      path: '/',
+      name: 'admin',
       component: () => import('../view/show/ShowIndex')
 
     }

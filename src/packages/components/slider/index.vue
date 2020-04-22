@@ -19,7 +19,7 @@
       width="220px"
       :collapse="isCollapse"
     >
-      <el-submenu>
+      <el-submenu index="2">
       <template slot="title">
           <span>用户画像可视化</span>
         </template>
