@@ -27,6 +27,11 @@ export default new Router({
       component: () => import('../view/show/ShowIndex')
     },
     {
+      path: '/showModel',
+      name: 'showModel',
+      component: () => import('../view/show/ShowModel')
+    },
+    {
       path: '/404',
       name: '404',
       component: () => import('../packages/ui/errorPage/404.vue')

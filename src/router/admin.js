@@ -6,8 +6,12 @@ export default [
       path: '/',
       name: 'admin',
       component: () => import('../view/show/ShowIndex')
-
-    }
+    },
+      {
+        path: 'ShowModel',
+        name: '模型展示',
+        component: () => import('../view/show/ShowModel')
+      }
     ]
   }
 ]
