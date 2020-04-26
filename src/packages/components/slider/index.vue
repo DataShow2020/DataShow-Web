@@ -2,11 +2,11 @@
   <div width="245px" style="background-color: rgb(238, 241, 246)">
     <div class="topDivStyle" style="height: 70px;">
       <el-row style="height: 100%">
-        <el-col :span="8" style="height: 100%">
-          <img style="margin-top:20%; margin-left: 5%;width: 75px;height: 30px " src="../../../assets/images/edit.png">
-        </el-col>
-        <el-col :span="12" style="height: 100%">
-          <p style="color: white; margin-top: 20%;float: left; margin-left: 4%">用户画像可视化</p>
+        <!--<el-col :span="8" style="height: 100%">-->
+          <!--<img style="margin-top:20%; margin-left: 5%;width: 75px;height: 30px " src="../../../assets/images/edit.png">-->
+        <!--</el-col>-->
+        <el-col  style="height: 100%; text-align: center;">
+          <p style="color: white; float: left; margin-top:8%;margin-left: 9%; font-size: 20px">用户画像可视化系统</p>
         </el-col>
       </el-row>
     </div>
@@ -33,7 +33,6 @@
       </el-submenu>
     </el-menu>
 
-
   </div>
 </template>
 <script>
@@ -53,7 +52,7 @@ export default {
   methods: {
     getData () {
       sliderApi.get(this.$store.getters.userInfo).then(res => {
-        this.menuList = res.data.data;
+        this.menuList = res.data.data
       })
     },
     handSelect: function (key, path) {
@@ -99,7 +98,7 @@ export default {
   }
 
   .el-menu-vertical-demo /deep/.el-submenu__title:hover {
-    background-color: #F2B5A3;
+    background-color: #4a9cd8;
     color: #ffffff;
   }
 
@@ -128,7 +127,7 @@ export default {
   .topDivStyle {
     width: 245px;
     height: 10%;
-    background-color: #DE7A35;
+    background-color: #0c609e;
   }
 
   .el-menu-item {
@@ -143,7 +142,7 @@ export default {
   }
 
   .el-menu-item.is-active > a {
-    color: #F2B5A3;
+    color: #4a9cd8;
   }
 
   .el-menu-item-group a {
@@ -165,7 +164,7 @@ export default {
 
   .el-menu-vertical-demo /deep/ .el-menu-item:hover, .el-menu-item:focus {
     outline: none;
-    background-color: #F2B5A3;
+    background-color: #4a9cd8;
     color: #ffffff;
   }
 

@@ -6,6 +6,10 @@
         {
           "label": "首页",
           "to":"/admin"
+        },
+        {
+          "label": "首页",
+          "to":"/admin/totalCountIndex"
         }
       ]
     }
