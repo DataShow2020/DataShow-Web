@@ -3,9 +3,9 @@
     <div class="topDivStyle" style="height: 70px;">
       <el-row style="height: 100%">
         <!--<el-col :span="8" style="height: 100%">-->
-          <!--<img style="margin-top:20%; margin-left: 5%;width: 75px;height: 30px " src="../../../assets/images/edit.png">-->
+        <!--<img style="margin-top:20%; margin-left: 5%;width: 75px;height: 30px " src="../../../assets/images/edit.png">-->
         <!--</el-col>-->
-        <el-col  style="height: 100%; text-align: center;">
+        <el-col style="height: 100%; text-align: center;">
           <p style="color: white; float: left; margin-top:8%;margin-left: 9%; font-size: 20px">用户画像可视化系统</p>
         </el-col>
       </el-row>
@@ -19,11 +19,20 @@
       width="220px"
       :collapse="isCollapse"
     >
+      <router-link class="head-link" to="/admin/totalCountIndex">
+        <el-menu-item index="2" :router=true>
+          <i class="el-icon-menu"></i>
+          <span slot="title">首页</span>
+        </el-menu-item>
+      </router-link>
+
+
       <el-submenu index="2">
-      <template slot="title">
+        <template slot="title">
           <span>用户画像可视化</span>
         </template>
-        <el-menu-item-group v-for="(menu, v) in menuList" :key="'-' + v" style="background-color: #eaecf5; " >
+
+        <el-menu-item-group v-for="(menu, v) in menuList" :key="'-' + v" style="background-color: #eaecf5; ">
           <router-link class="head-link" :to="menu.to">
             <el-menu-item :index="index+ '-' + v" style="border:1px solid #d7dbec">
               <span slot="title">{{menu.label}}</span>
@@ -36,43 +45,43 @@
   </div>
 </template>
 <script>
-import {sliderApi} from './sliderApi'
+  import {sliderApi} from './sliderApi'
 
-export default {
-  name: 'slider',
-  data () {
-    return {
-      isCollapse: false,
-      menuList: {}
-    }
-  },
-  mounted () {
-    this.getData()
-  },
-  methods: {
-    getData () {
-      sliderApi.get(this.$store.getters.userInfo).then(res => {
-        this.menuList = res.data.data
-      })
+  export default {
+    name: 'slider',
+    data() {
+      return {
+        isCollapse: false,
+        menuList: {}
+      }
     },
-    handSelect: function (key, path) {
+    mounted() {
+      this.getData()
     },
-    iconClass (icon) {
-      return `el-icon-${icon}`
+    methods: {
+      getData() {
+        sliderApi.get(this.$store.getters.userInfo).then(res => {
+          this.menuList = res.data.data
+        })
+      },
+      handSelect: function (key, path) {
+      },
+      iconClass(icon) {
+        return `el-icon-${icon}`
+      },
+      collapse() {
+        this.isCollapse = !this.isCollapse
+      }
     },
-    collapse () {
-      this.isCollapse = !this.isCollapse
-    }
-  },
-  computed: {
-    menuToger: function () {
-      return !this.isCollapse ? 'el-icon-d-arrow-left' : 'el-icon-d-arrow-right'
-    },
-    menuTogerTitle: function () {
-      return this.isCollapse ? '展开' : '收起'
+    computed: {
+      menuToger: function () {
+        return !this.isCollapse ? 'el-icon-d-arrow-left' : 'el-icon-d-arrow-right'
+      },
+      menuTogerTitle: function () {
+        return this.isCollapse ? '展开' : '收起'
+      }
     }
   }
-}
 </script>
 
 <style lang="scss" scoped>
@@ -97,12 +106,12 @@ export default {
     white-space: nowrap;
   }
 
-  .el-menu-vertical-demo /deep/.el-submenu__title:hover {
+  .el-menu-vertical-demo /deep/ .el-submenu__title:hover {
     background-color: #4a9cd8;
     color: #ffffff;
   }
 
-  .el-menu-vertical-demo /deep/.el-submenu .el-menu-item {
+  .el-menu-vertical-demo /deep/ .el-submenu .el-menu-item {
     height: 40px;
     line-height: 40px;
     padding: 0 45px;
@@ -168,8 +177,8 @@ export default {
     color: #ffffff;
   }
 
-  .el-menu-vertical-demo /deep/.el-menu-item-group__title {
-    padding: 0px ;
+  .el-menu-vertical-demo /deep/ .el-menu-item-group__title {
+    padding: 0px;
     font-size: 15px;
   }
 
