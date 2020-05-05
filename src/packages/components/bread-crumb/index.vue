@@ -11,7 +11,7 @@
   <!--</el-breadcrumb>-->
 
   <el-breadcrumb separator="/">
-    <el-breadcrumb-item><i class="el-icon-location-outline"><span>当前位置：</span></i>用户画像可视化</el-breadcrumb-item>
+    <el-breadcrumb-item>用户画像可视化</el-breadcrumb-item>
     <!--<el-breadcrumb-item>{{firstMenuLabel}}</el-breadcrumb-item>-->
     <el-breadcrumb-item><span style="font-weight: bold">{{menuLabel}}</span></el-breadcrumb-item>
 
@@ -47,9 +47,10 @@
       },
       getBreadcrumb() {
         let matched = '';
-        if(this.$route.matched.length > 0){
-         matched = this.$route.matched[0].path;
+        if(this.$route.matched.length > 1){
+         matched = this.$route.matched[1].path;
         }
+        console.log(matched);
         // const first = matched[0]
         // if (first && first.name !== '／') {
         //   matched = [{path: '/', name: '／'}].concat(matched)

@@ -19,22 +19,19 @@
       width="220px"
       :collapse="isCollapse"
     >
-      <router-link class="head-link" to="/admin/totalCountIndex">
-        <el-menu-item index="2" :router=true>
-          <i class="el-icon-menu"></i>
-          <span slot="title">首页</span>
-        </el-menu-item>
-      </router-link>
-
-
       <el-submenu index="2">
         <template slot="title">
           <span>用户画像可视化</span>
         </template>
-
+<!--      <router-link class="head-link" to="/admin/totalCountIndex">-->
+<!--        <el-menu-item index="2" :router=true>-->
+<!--          <i class="el-icon-menu"></i>-->
+<!--          <span slot="title">首页</span>-->
+<!--        </el-menu-item>-->
+<!--      </router-link>-->
         <el-menu-item-group v-for="(menu, v) in menuList" :key="'-' + v" style="background-color: #eaecf5; ">
           <router-link class="head-link" :to="menu.to">
-            <el-menu-item :index="index+ '-' + v" style="border:1px solid #d7dbec">
+            <el-menu-item  style="border:1px solid #d7dbec">
               <span slot="title">{{menu.label}}</span>
             </el-menu-item>
           </router-link>
@@ -60,9 +57,21 @@
     },
     methods: {
       getData() {
-        sliderApi.get(this.$store.getters.userInfo).then(res => {
-          this.menuList = res.data.data
-        })
+        var list = [
+          {
+            "to":'/admin',
+            "label":'首页'
+          },
+        {
+          "to":'/admin/ShowIndex',
+          "label":'模型展示'
+        },
+          {
+            "to":'/admin/GenerateModel',
+            "label":'生成模型'
+          }
+        ];
+        this.menuList = list;
       },
       handSelect: function (key, path) {
       },

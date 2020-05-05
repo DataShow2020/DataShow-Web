@@ -4,7 +4,8 @@ import admin from './admin'
 Vue.use(Router)
 
 export default new Router({
-  mode: 'history',
+  //mode: 'history',
+  // base:env.base_build_path,
   routes: [
     {
       path: '/',

@@ -5,9 +5,9 @@
         <div class="register-box-top">
           <img src="../../assets/images/register_tit.png">
         </div>
-          <a class="register-go-login" href="./home">登录</a>
+          <a class="register-go-login" href="/">登录</a>
         <div class="form">
-        <el-form :model="formData" :rules="rules" ref="formData">
+        <el-form :model="formData" :rules="rules" ref="formData" label-width="auto">
           <el-form-item prop="userName">
             <el-input
               v-model="formData.userName"
@@ -108,10 +108,10 @@ export default {
   },
   /** 方法事件 */
   methods: {
-    returnLogin: function () {
-      this.$router.push({path: '/home'})
-      
-    },
+    // returnLogin: function () {
+    //   this.$router.push({name: '登录'})
+    //
+    // },
     registerAccount: function () {
       this.$refs['formData'].validate((valid) => {
         if (valid) {
@@ -121,7 +121,8 @@ export default {
             this.loading = false
             if (res.data.data) {
               Msg.success('注册成功');
-              this.returnLogin();
+              this.$router.push({path: '/home'})
+              // this.returnLogin();
             } else {
               Msg.error('注册失败')
             }
@@ -168,8 +169,20 @@ export default {
         text-align: center;
         color: #505458;
       }
-
+    .el-input {
+      /*position: relative;*/
+      font-size: 14px;
+      /*width: 64%;*/
+      width: 400px;
+      height: 50px;
+      margin-top: 15px;
+      margin-bottom: 10px;
+    }
+  .el-input__inner {
+    width: 60%;
+  }
       .el-input__inner{
+        font-size: 14px;
           width: 400px;
           height: 50px;
           margin-top: 15px;

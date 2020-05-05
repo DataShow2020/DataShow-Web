@@ -1,27 +1,47 @@
 <template>
   <div class="back">
-  <!-- 标签框 -->
-<!--  <div style="display: flex;  height: 100px;">-->
-<!--    <transition name="el-zoom-in-center">-->
-<!--      <div v-show="show2" class="transition-box-center">.el-zoom-in-center</div>-->
-<!--    </transition>-->
-
-<!--    <transition name="el-zoom-in-top">-->
-<!--      <div v-show="show2" id="box" :style="{margin: left+'px'}">.el-zoom-in-top</div>-->
-<!--    </transition>-->
-
-<!--    <transition name="el-zoom-in-bottom">-->
-<!--      <div v-show="show2" class="transition-box-bottom">.el-zoom-in-bottom</div>-->
-<!--    </transition>-->
-<!--  </div>-->
-    <div class="left">
-      <canvas id="canvas" width="375" height="500" > 
-                </canvas>
-<!--      <button @click="stop()">stop</button>-->
-    </div>
-
   <div id="WordCloud">
   </div>
+    <div id="age">
+      <table border="none" cellpadding="0" cellspacing="0">
+        <tr >
+          <td width="200" height="80" >年龄</td>
+        </tr>
+        <tr >
+          <td width="200" height="118"style="font-size:30px;">{{ModelData.age}}</td>
+        </tr>
+      </table>
+    </div>
+    <div id="gender">
+      <table border="none" cellpadding="0" cellspacing="0">
+        <tr >
+          <td width="200" height="80">性别</td>
+        </tr>
+        <tr >
+          <td width="200" height="118" style="font-size:30px;">{{ModelData.gender}}</td>
+        </tr>
+      </table>
+    </div>
+    <div id="education">
+      <table border="none" cellpadding="0" cellspacing="0">
+        <tr >
+          <td width="200" height="80">学历</td>
+        </tr>
+        <tr >
+          <td width="200" height="118" style="font-size:30px;">{{ModelData.education}}</td>
+        </tr>
+      </table>
+    </div>
+    <div id="region">
+      <table border="none" cellpadding="0" cellspacing="0">
+        <tr >
+          <td width="200" height="80">所在地区</td>
+        </tr>
+        <tr >
+          <td width="200" height="118" style="font-size:30px;">{{region}}</td>
+        </tr>
+      </table>
+    </div>
   </div>
 </template>
 
@@ -29,7 +49,6 @@
     import Js2WordCloud from "js2wordcloud";
     let canvas;
     let ctx;
-    let con;
     let num = 0;
     let timer;
     let flag = true;
@@ -42,10 +61,6 @@
     let glength = 10;
     let ewide = 100;
     let elength = 500;
-    let dlength = 250;
-    let dwide = 0;
-    let d1length = 400;
-    let d1wide = 200;
     export default {
       name: "ShowModel",
       data() {
@@ -59,22 +74,23 @@
             gender: '',
             probs: '',
             topic: ''
-          }
+          },
+          region:'',
+          regionList:['北京新源里','上海浦东','重庆渝北','天津','深圳','福建厦门','贵州','四川成都']
         }
       },
 
       methods: {
         renderCloud(words) {
+          this.region = this.regionList[Math.floor(Math.random()*(this.regionList.length))];    //可均衡获取0到9的随机整数。
           for (let i = 0; i < words.length; i++) {
             let str = words[i][0];
             // str = str.substring(1,str.length - 1);
             let length = str.length;
             var position = str.indexOf(',');
-            var newWord = str.substring(0, position + 1);
+            var newWord = str.substring(2, position-1);
             var number = str.substring(position + 1, length);
             number = (number == 0 ? 1 : parseFloat(number).toFixed(1) * 10 + 5);
-            // console.log(str);
-            /** 去掉后端出来的字符串双引号 */
             words[i][0] = newWord;
             words[i][1] = number;
           }
@@ -87,7 +103,7 @@
             maxFontSize: 20,      // 最大fontSize，用来控制weightFactor，默认60
             minFontSize: 14,      // 最大fontSize，用来控制weightFactor，默认60
             gridSize: 6,          // 密集程度 数字越小越密集
-            weightFactor: 1,      // 字体大小=原始大小*weightFactor
+            weightFactor: 0.5,      // 字体大小=原始大小*weightFactor
             fontWeight: 'normal', //字体粗细
             // fontFamily: '微软雅黑', // 字体
             tooltip: {
@@ -96,7 +112,8 @@
                 console.log(item)
               }
             },
-            backgroundColor: '#eefbff', // 背景颜色
+            color: 'white',
+            backgroundColor: '#0d376599', // 背景颜色
             list: list,
             shape: 'pentagon',
             ellipticity: 1.5,
@@ -134,9 +151,9 @@
           timer = setInterval(function () {
             if (flag) {
               ctx.font = "50px Arial";
-              d1length --;
-              d1wide -= 1;
-              dwide++;
+              // d1length --;
+              // d1wide -= 1;
+              // dwide++;
               elength -= 2;
               gwide--;
               glength += 2;
@@ -152,9 +169,9 @@
             }
             if (!flag) {
               ctx.font = "30px Arial";
-              d1length ++;
-              d1wide += 1;
-              dwide--;
+              // d1length ++;
+              // d1wide += 1;
+              // dwide--;
               elength += 2;
               gwide++;
               glength -= 2;
@@ -169,8 +186,8 @@
             ctx.fillText(age, wide, length);
             ctx.fillText(education, ewide, elength);
             // con.font="20px Georgia";
-            ctx.fillText("233333", dwide, dlength);
-            ctx.fillText("666666666", d1wide, d1length);
+            // ctx.fillText("233333", dwide, dlength);
+            // ctx.fillText("666666666", d1wide, d1length);
           }, 30);
         },
         /** 清除定时器 */
@@ -184,43 +201,91 @@
         this.ModelData = this.$route.params;
         console.log(this.ModelData);
         this.renderCloud(this.ModelData.probs);
-        age = this.ModelData.age;
-        education = this.ModelData.education;
-        gender = this.ModelData.gender;
-        this.initCanvas();
+        // age = this.ModelData.age;
+        // education = this.ModelData.education;
+        // gender = this.ModelData.gender;
+        // this.initCanvas();
         // 当调整窗口大小时重绘canvas
-        window.onresize = () => {
-          this.initCanvas()
-        };
+        // window.onresize = () => {
+        //   this.initCanvas()
+        // };
       },
 
     }
 </script>
 
 <style scoped>
+  #age{
+    height: 200px;
+    width: 200px;
+    background-color:#16eff17a;
+    position: absolute;
+    margin-top: -510px;
+    margin-left: 115px;
+    text-align: center;
+    font-family: 微软雅黑;
+    color:white;
+    font-size: 20px;
+  }
+  #gender{
+    height: 200px;
+    width: 200px;
+    background-color:#16eff17a;
+    position: absolute;
+    margin-top: -210px;
+    margin-left: 115px;
+    text-align: center;
+    font-family: 微软雅黑;
+    color:white;
+    font-size: 20px;
+  }
+  #education{
+    height: 200px;
+    width: 200px;
+    background-color:#16eff17a;
+    position: absolute;
+    margin-top: -210px;
+    margin-left: 935px;
+    text-align: center;
+    font-family: 微软雅黑;
+    color:white;
+    font-size: 20px;
+  }
+  #region{
+    height: 200px;
+    width: 200px;
+    background-color:#16eff17a;
+    position: absolute;
+    margin-top: -510px;
+    margin-left: 935px;
+    text-align: center;
+    font-family: 微软雅黑;
+    color:white;
+    font-size: 20px;
+  }
+
   canvas {
-    width: 600px;
-    height: 600px;
+    width: 400px;
+    height: 500px;
   }
   .back {
     width: 100%;
     height: 100%;
-    background-color: #eefbff;
-    /*background: url("../../assets/images/loginBackground.png");*/
-    /*background-size: cover;*/
-    /*margin-top: -20px;*/
+    /*background-color: #2164bd;*/
+    background: url("../../assets/images/logo6.jpg");
+    background-size: cover;
   }
   #WordCloud{
-    height:600px;
-    width:600px;
+
+    height:500px;
+    width:400px;
+    margin-left: 365px;
+    padding: 30px;
     /*margin-left: 400px;*/
-    float: left;
+    /*float: left;*/
+    /*border:1px solid #BFBFBF;*/
+    /*box-shadow:0px 0px  10px 5px #aaa;*/
   }
-  .left{
-    width: 600px;
-    height: 600px;
-    /*position: absolute;*/
-    float: right;
-    /*background-color: #33a2f7;*/
-  }
+
+
 </style>

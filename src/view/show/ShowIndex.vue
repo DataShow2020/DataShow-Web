@@ -1,6 +1,23 @@
 <template>
   <div>
     <el-card>
+      <div class="left">
+        <el-form :inline="true" >
+
+            <el-form-item>
+              <el-input v-model="userID" placeholder="请输入用户ID" @keyup.enter="getTableData"clearable>
+              </el-input>
+            </el-form-item>
+            <el-form-item>
+              <el-input v-model="words" placeholder="请输入历史搜索关键词" @keyup.enter="getTableData" clearable>
+              </el-input>
+            </el-form-item>
+            <el-form-item>
+              <el-button class="el-button--medium" type="primary" icon="el-icon-search" @click="getTableData()">搜索</el-button>
+            </el-form-item>
+
+        </el-form>
+      </div>
     <comp-table
       v-loading="loading"
       :tableData="tableData"
@@ -43,6 +60,9 @@
           pageSize: 5,
           /** 总数  需要动态获取 */
           totalCount: 20,
+          userID:'',
+          words:'',
+          loading: false,
           tableHeader: [
             {prop: 'id', label: '用户ID'},
             {prop: 'words', label: '用户历史搜索关键词'}
@@ -51,9 +71,8 @@
           tableAttr: {
             noIndex: false,
             other: [
-              {name: '查看模型', type: 'generateModel', color: 'green'},
+              {name: '查看模型', type: 'generateModel', color: '#2164bd'},
             ],
-            loading: false,
             show: false,
             shape: ''
           }
@@ -69,6 +88,8 @@
             this.data = {
               page: this.page,
               pageSize: this.pageSize,
+              id:this.userID,
+              words: this.words
             };
             console.log(this.data);
             NewApi.GetTrainData(this.data).then(res => {
@@ -102,5 +123,10 @@
 </script>
 
 <style scoped>
-
+  .el-button--medium {
+    padding: 10px 20px;
+    font-size: 14px;
+    border-radius: 4px;
+    margin-top: 29px;
+  }
 </style>
