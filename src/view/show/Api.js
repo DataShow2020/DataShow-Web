@@ -7,4 +7,8 @@ export class NewApi {
   static generateModel (id) {
     return server.connection('GET', `/api/generateModel`, id)
   }
+
+  static submit(data){
+    return server.connection('POST', `/api/`, data)
+  }
 }
