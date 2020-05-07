@@ -11,4 +11,9 @@ export class NewApi {
   static submit(data){
     return server.connection('POST', `/api/`, data)
   }
+
+  static getUserId(data){
+    console.info(data)
+    return server.connection('GET', '/api/getUserId',data)
+  }
 }
